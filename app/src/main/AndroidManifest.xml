@@ -26,6 +26,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.tianxing.view.activity.MainActivity"
+                  android:screenOrientation="portrait">
+        </activity>
+
     </application>
 
 </manifest>
