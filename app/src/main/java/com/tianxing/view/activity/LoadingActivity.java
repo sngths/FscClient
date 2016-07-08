@@ -42,7 +42,7 @@ public class LoadingActivity extends BaseActivity {
                         @Override
                         public void run() {
                             //初始化完成 跳转界面
-                            startMainActivity();
+                            startNewActivity();
                         }
                     });
                 }
@@ -62,7 +62,8 @@ public class LoadingActivity extends BaseActivity {
 
 
 
-    private void startMainActivity(){
+    private void startNewActivity(){
+        //根据读取到的配置 进行跳转
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
         this.finish();
     }
