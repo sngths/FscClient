@@ -1,5 +1,6 @@
 package com.tianxing.view.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -36,7 +37,7 @@ public class LoadingActivity extends BaseActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
+                    appInitialize(getApplicationContext());
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -60,6 +61,14 @@ public class LoadingActivity extends BaseActivity {
         return true;
     }
 
+
+
+    /**
+     * 应用初始化
+     * */
+    private void appInitialize(Context context){
+
+    }
 
 
     private void startNewActivity(){
