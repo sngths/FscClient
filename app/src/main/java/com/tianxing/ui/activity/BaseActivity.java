@@ -1,4 +1,4 @@
-package com.tianxing.view.activity;
+package com.tianxing.ui.activity;
 
 import android.support.v4.app.FragmentActivity;
 

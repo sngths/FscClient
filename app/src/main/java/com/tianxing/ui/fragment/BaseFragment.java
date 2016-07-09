@@ -1,4 +1,4 @@
-package com.tianxing.view.fragment;
+package com.tianxing.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

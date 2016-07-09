@@ -1,4 +1,4 @@
-package com.tianxing.view.activity;
+package com.tianxing.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,16 +7,20 @@ import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 
 import com.tianxing.fscteachersedition.R;
+import com.tianxing.presenter.LoadingPresenter;
 
 /**
  * Created by tianxing on 16/7/5.
  */
 public class LoadingActivity extends BaseActivity {
 
+    private LoadingPresenter presenter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
+        presenter = new LoadingPresenter();
     }
 
 
@@ -33,7 +37,7 @@ public class LoadingActivity extends BaseActivity {
 
 
                     try {
-                        Thread.currentThread().sleep(3000);
+                        Thread.currentThread().sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -67,13 +71,19 @@ public class LoadingActivity extends BaseActivity {
      * 应用初始化
      * */
     private void appInitialize(Context context){
-
+        presenter.appInitializ(context);
     }
 
 
     private void startNewActivity(){
         //根据读取到的配置 进行跳转
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        String refreshToken = presenter.getLocalConfig().getRefresh_token();
+        if (refreshToken.equals("")){
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        }else {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        }
+
         this.finish();
     }
 

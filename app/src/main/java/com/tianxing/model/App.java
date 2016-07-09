@@ -1,11 +1,14 @@
 package com.tianxing.model;
 
+import com.tianxing.model.data.Config;
+
 /**
  * Created by tianxing on 16/7/8.
  */
 public class App {
 
     private static App model = null;
+    private Config config;
 
     private App(){}
     /**
@@ -22,9 +25,11 @@ public class App {
     /**
      *
      * */
-    public void Initializ(){
-
+    public void initialize(Config config){
+        this.config = config;
     }
 
-
+    public Config getConfig() {
+        return config;
+    }
 }

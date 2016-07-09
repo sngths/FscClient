@@ -1,4 +1,4 @@
-package com.tianxing.view.fragment;
+package com.tianxing.ui.fragment;
 
 /**
  * Created by tianxing on 16/7/5.
