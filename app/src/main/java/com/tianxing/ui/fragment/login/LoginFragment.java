@@ -1,4 +1,4 @@
-package com.tianxing.ui.fragment;
+package com.tianxing.ui.fragment.login;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tianxing.fscteachersedition.R;
+import com.tianxing.ui.fragment.BaseFragment;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -15,7 +16,7 @@ import butterknife.Unbinder;
 /**
  * Created by tianxing on 16/7/5.
  */
-public class LoginFragment extends BaseFragment{
+public class LoginFragment extends BaseFragment {
     public static final String TAG = "Login";
 
 

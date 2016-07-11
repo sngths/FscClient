@@ -7,7 +7,7 @@ import android.util.Log;
 import android.widget.RelativeLayout;
 
 import com.tianxing.fscteachersedition.R;
-import com.tianxing.ui.fragment.LoginFragment;
+import com.tianxing.ui.fragment.login.LoginFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

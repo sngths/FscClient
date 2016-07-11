@@ -78,7 +78,7 @@ public class LoadingActivity extends BaseActivity {
     private void startNewActivity(){
         //根据读取到的配置 进行跳转
         String refreshToken = presenter.getLocalConfig().getRefresh_token();
-        if (refreshToken.equals("")){
+        if (!refreshToken.equals("")){
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         }else {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
