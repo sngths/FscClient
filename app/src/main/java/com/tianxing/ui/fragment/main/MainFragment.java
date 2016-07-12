@@ -3,6 +3,9 @@ package com.tianxing.ui.fragment.main;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +28,8 @@ public class MainFragment extends BaseFragment {
     private Unbinder unbinder;
     @BindView(R.id.bottomBar)
     BottomBar bottomBar;
+    @BindView(R.id.toolBar)
+    Toolbar toolbar;
 
     private Fragment[] fragments = new Fragment[4];
     @Override
@@ -37,6 +42,9 @@ public class MainFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         unbinder = ButterKnife.bind(this, view);
+        toolbar.setTitle("作业");
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+
         AssignmentFragment assignmentFragment;
         ReviewFragment reviewFragment;
         ContactFragment contactFragment;
@@ -87,18 +95,31 @@ public class MainFragment extends BaseFragment {
                 //显示对应位置的Fragment
                 if (position == prePosition)
                     return;
+                ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
                 switch (position){
                     case 0:
                         getChildFragmentManager().beginTransaction().hide(fragments[1]).hide(fragments[2]).hide(fragments[3]).show(fragments[0]).commit();
+                        if (actionBar != null){
+                            toolbar.setTitle("作业");
+                        }
                         break;
                     case 1:
                         getChildFragmentManager().beginTransaction().hide(fragments[0]).hide(fragments[2]).hide(fragments[3]).show(fragments[1]).commit();
+                        if (actionBar != null){
+                            toolbar.setTitle("批阅");
+                        }
                         break;
                     case 2:
                         getChildFragmentManager().beginTransaction().hide(fragments[0]).hide(fragments[1]).hide(fragments[3]).show(fragments[2]).commit();
+                        if (actionBar != null){
+                            toolbar.setTitle("学生");
+                        }
                         break;
                     case 3:
                         getChildFragmentManager().beginTransaction().hide(fragments[0]).hide(fragments[1]).hide(fragments[2]).show(fragments[3]).commit();
+                        if (actionBar != null){
+                            toolbar.setTitle("设置");
+                        }
                         break;
                 }
             }

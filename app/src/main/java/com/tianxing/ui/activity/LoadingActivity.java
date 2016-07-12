@@ -15,6 +15,7 @@ import com.tianxing.presenter.LoadingPresenter;
 public class LoadingActivity extends BaseActivity {
 
     private LoadingPresenter presenter;
+    private Boolean isActivityStarted = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,15 +77,18 @@ public class LoadingActivity extends BaseActivity {
 
 
     private void startNewActivity(){
-        //根据读取到的配置 进行跳转
-        String refreshToken = presenter.getLocalConfig().getRefresh_token();
-        if (!refreshToken.equals("")){
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-        }else {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        if (!isActivityStarted){
+            //根据读取到的配置 进行跳转
+            String refreshToken = presenter.getLocalConfig().getRefresh_token();
+            if (!refreshToken.equals("")){
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            }else {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+            isActivityStarted = true;
+            this.finish();
         }
 
-        this.finish();
     }
 
 
