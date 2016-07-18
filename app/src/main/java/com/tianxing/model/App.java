@@ -12,7 +12,7 @@ public class App {
 
     private App(){}
     /**
-     * 不支持多线程调用
+     *
      * */
     public static App getInstance(){
         if (model == null){

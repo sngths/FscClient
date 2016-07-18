@@ -60,7 +60,7 @@ public class MainFragment extends BaseFragment {
 
         } else {
             //正常启动 创建新的Fragment
-            assignmentFragment = AssignmentFragment.getInstance();
+            assignmentFragment = AssignmentFragment.newInstance();
             reviewFragment = ReviewFragment.getInstance();
             contactFragment = ContactFragment.getInstance();
             configurationFragment = ConfigurationFragment.getInstance();

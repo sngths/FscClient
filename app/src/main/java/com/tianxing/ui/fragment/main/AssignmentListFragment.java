@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tianxing.fscteachersedition.R;
+import com.tianxing.presenter.main.AssignmentListPresenter;
 import com.tianxing.ui.adapter.AssignmentListAdapter;
 import com.tianxing.ui.fragment.BaseFragment;
 
@@ -19,18 +20,44 @@ import butterknife.Unbinder;
 
 /**
  * Created by tianxing on 16/7/12.
+ *
  */
-public class AssignmentListFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener{
+public class AssignmentListFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, AssignmentListView{
 
+    private AssignmentListAdapter adapter;
     private Unbinder unbinder;
+    private AssignmentListPresenter presenter;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
+
+    /**
+     * 不能再Fragment的构造方法中传递参数 会影响Fragment的销毁重新创建
+     * */
+    public AssignmentListFragment(){
+
+    }
+
+    /**
+     * 创建时传入班级信息
+     * */
+    public static AssignmentListFragment newInstance(String classID){
+        Bundle bundle = new Bundle();
+        bundle.putString("classID", classID);
+        AssignmentListFragment fragment = new AssignmentListFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = ((AssignmentFragment)getParentFragment()).getAssignmentPresenter();//取得父Fragment的presenter引用
+
     }
 
 
@@ -45,17 +72,17 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
 
     private void initView(){
         swipeRefreshLayout.setOnRefreshListener(this);
-        AssignmentListAdapter adapter = new AssignmentListAdapter(getContext());
+        adapter = new AssignmentListAdapter(getContext(), presenter, getArguments().getString("classID"));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
-
-
     }
 
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        //保存Fragment的滑动位置 载入状态等信息 用来恢复Fragment的原先状态
+
     }
 
     @Override
@@ -66,6 +93,7 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
 
     @Override
     public void onRefresh() {
-
+        //通知P层请求数据
+        presenter.requestAssignment(getTag());
     }
 }
