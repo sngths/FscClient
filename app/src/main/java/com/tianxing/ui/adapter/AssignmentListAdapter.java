@@ -10,25 +10,22 @@ import android.view.ViewGroup;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.main.AssignmentListPresenter;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 /**
  * Created by tianxing on 16/7/13.
+ * 作业列表适配器
  */
 public class AssignmentListAdapter extends Adapter<AssignmentListAdapter.mViewHold> {
 
     private LayoutInflater inflater;
-    private AssignmentListPresenter listPresenter;
+    private AssignmentListPresenter presenter;
 
-    private static AtomicInteger a = new AtomicInteger(1);
 
-    private String calssID;
+    private Integer calssID;//班级ID 即班级信息在列表中保存的位置
 
-    public AssignmentListAdapter(Context context, AssignmentListPresenter listPresenter, String classID){
-        a.incrementAndGet();
+    public AssignmentListAdapter(Context context, AssignmentListPresenter presenter, int classID){
         this.calssID = classID;
         inflater = LayoutInflater.from(context);
-        this.listPresenter = listPresenter;
+        this.presenter = presenter;
     }
 
     @Override
@@ -41,15 +38,15 @@ public class AssignmentListAdapter extends Adapter<AssignmentListAdapter.mViewHo
 
     @Override
     public void onBindViewHolder(mViewHold holder, int position) {
-        //修改View视图
-
+        //修改View视图 取得作业数据
+        presenter.getAssignment(calssID, position);
     }
 
 
 
     @Override
     public int getItemCount() {
-        return listPresenter.getAssignemntCount(calssID);
+        return presenter.getAssignemntCount(calssID);
     }
 
 
@@ -58,5 +55,8 @@ public class AssignmentListAdapter extends Adapter<AssignmentListAdapter.mViewHo
         public mViewHold(View itemView) {
             super(itemView);
         }
+
+        //View的修改函数
+
     }
 }

@@ -10,9 +10,11 @@ import java.util.ArrayList;
  */
 public class ClassData {
 
-    private String Title;
 
-    private ArrayList<Assignment> classDatas = new ArrayList<>();
+    private String ClassID = "";
+    private String Title = "";
+
+    private ArrayList<Assignment> assignmentList = new ArrayList<>();
 
 
 
@@ -20,10 +22,31 @@ public class ClassData {
 
     }
 
-    /**
-     * 初始化时放入一些数据
-     * */
-    private void init(){
+    public Integer getAssigmnetsCount(){
+        return assignmentList.size();
+    }
 
+    public String getClassID() {
+        return ClassID;
+    }
+
+    public String getTitle() {
+        return Title;
+    }
+
+    public Assignment getAssignment(int position){
+        return assignmentList.get(position);
+    }
+
+    public void setClassID(String classID) {
+        ClassID = classID;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
+    }
+
+    public void putAssignment(Assignment assignment){
+        assignmentList.add(assignment);
     }
 }

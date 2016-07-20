@@ -1,20 +1,21 @@
 package com.tianxing.presenter.main;
 
+import com.tianxing.entity.assignment.Assignment;
+import com.tianxing.model.App;
+import com.tianxing.model.AssignmentPool;
 import com.tianxing.ui.AssingmentView;
-
-import java.util.ArrayList;
 
 /**
  * Created by tianxing on 16/7/15.
  * 提供作业界面数据请求接口
  */
-public class AssignmentViewPresenter implements AssignmentPresenter{
+public class AssignmentViewPresenter extends AssignmentPresenter {
 
 
     /**
-     * 假定数据
+     * presenter持有model的引用
      * */
-    private ArrayList<String> classIDs = new ArrayList<>(3);
+    private AssignmentPool assignmentPool;
 
 
 
@@ -23,6 +24,7 @@ public class AssignmentViewPresenter implements AssignmentPresenter{
 
     public AssignmentViewPresenter(AssingmentView view){
         this.view = view;
+        assignmentPool = App.getInstance().getAssignmentPool();
     }
 
     /**
@@ -31,10 +33,32 @@ public class AssignmentViewPresenter implements AssignmentPresenter{
      * @param classID
      */
     @Override
-    public Integer getAssignemntCount(String classID) {
+    public Integer getAssignemntCount(int classID) {
+        return assignmentPool.getClassData(classID).getAssigmnetsCount();
+    }
+
+    /**
+     * 取得班级名称
+     *
+     * @param position
+     */
+    @Override
+    public String getClassTitle(int position) {
+        return  assignmentPool.getClassData(position).getTitle();
+    }
+
+    @Override
+    public String getClassTitle(String classID) {
         return null;
     }
 
+    /**
+     * 取得对应位置的一条作业数据
+     */
+    @Override
+    public Assignment getAssignment(int classID, int position) {
+        return assignmentPool.getClassData(classID).getAssignment(position);
+    }
 
 
     /**
@@ -44,26 +68,18 @@ public class AssignmentViewPresenter implements AssignmentPresenter{
      */
     @Override
     public String getClassID(int position) {
-        return null;
+        return assignmentPool.getClassData(position).getClassID();
     }
 
     /**
      * 取得ListFragment数目
      */
     @Override
-    public Integer getAssignmentListFragmentCount() {
-        return null;
+    public Integer getClassCount() {
+        return assignmentPool.getClassCount();
     }
 
-    /**
-     * 取得对应位置页面标题
-     *
-     * @param position
-     */
-    @Override
-    public String getPageTitle(int position) {
-        return null;
-    }
+
 
 
     /**

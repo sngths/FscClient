@@ -41,11 +41,11 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
     }
 
     /**
-     * 创建时传入班级信息
+     * 创建时传入 班级位置信息
      * */
-    public static AssignmentListFragment newInstance(String classID){
+    public static AssignmentListFragment newInstance(int position){
         Bundle bundle = new Bundle();
-        bundle.putString("classID", classID);
+        bundle.putInt("position", position);
         AssignmentListFragment fragment = new AssignmentListFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -72,7 +72,8 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
 
     private void initView(){
         swipeRefreshLayout.setOnRefreshListener(this);
-        adapter = new AssignmentListAdapter(getContext(), presenter, getArguments().getString("classID"));
+        //创建适配器时 传入班级位置
+        adapter = new AssignmentListAdapter(getContext(), presenter, getArguments().getInt("position", -1));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
     }
