@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +73,7 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
 
     private void initView(){
         swipeRefreshLayout.setOnRefreshListener(this);
+        //swipeRefreshLayout.setColorSchemeColors();
         //创建适配器时 传入班级位置
         adapter = new AssignmentListAdapter(getContext(), presenter, getArguments().getInt("position", -1));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -95,6 +97,25 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
     @Override
     public void onRefresh() {
         //通知P层请求数据
-        presenter.requestAssignment(getTag());
+        presenter.requestAssignment(getArguments().getInt("position", -1));
+    }
+
+    /**
+     * 从载数据 撤销下拉载入状态
+     */
+    @Override
+    public void refresh() {
+        Log.e(AssignmentListFragment.class.getName(), "刷新完成");
+
+        if (adapter != null){
+            adapter.notifyDataSetChanged();
+        }
+        if (swipeRefreshLayout != null){
+            if (swipeRefreshLayout.isRefreshing()){
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        }
+
+
     }
 }

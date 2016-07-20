@@ -1,7 +1,10 @@
 package com.tianxing.model.communication;
 
+import com.tianxing.entity.info.PersonalInfo;
+
 /**
  * Created by tianxing on 16/7/19.
+ * 所有接口都是耗时网络操作 不可在主线程下调用
  */
 public interface HttpClient {
 
@@ -16,12 +19,13 @@ public interface HttpClient {
     /**
      * 认证
      * */
-    void authenticate(String accessToken);
+    void authenticate(String refreshToken);
 
 
     /**
-     * 请求用户信息
+     * 请求用户信息 包含班级信息
      * */
+    PersonalInfo getPersonalInfo();
 
 
 

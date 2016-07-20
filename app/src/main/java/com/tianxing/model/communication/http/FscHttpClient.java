@@ -1,5 +1,6 @@
 package com.tianxing.model.communication.http;
 
+import com.tianxing.entity.info.PersonalInfo;
 import com.tianxing.model.communication.HttpClient;
 
 /**
@@ -22,10 +23,18 @@ public class FscHttpClient implements HttpClient{
     /**
      * 认证
      *
-     * @param accessToken
+     * @param refreshToken
      */
     @Override
-    public void authenticate(String accessToken) {
+    public void authenticate(String refreshToken) {
 
+    }
+
+    /**
+     * 请求用户信息 包含班级信息
+     */
+    @Override
+    public PersonalInfo getPersonalInfo() {
+        return null;
     }
 }

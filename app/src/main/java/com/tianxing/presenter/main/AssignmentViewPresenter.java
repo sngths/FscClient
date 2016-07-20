@@ -1,9 +1,17 @@
 package com.tianxing.presenter.main;
 
+import android.util.Log;
+
 import com.tianxing.entity.assignment.Assignment;
 import com.tianxing.model.App;
 import com.tianxing.model.AssignmentPool;
 import com.tianxing.ui.AssingmentView;
+
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by tianxing on 16/7/15.
@@ -14,15 +22,13 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
 
     /**
      * presenter持有model的引用
-     * */
+     */
     private AssignmentPool assignmentPool;
-
-
 
 
     private AssingmentView view;
 
-    public AssignmentViewPresenter(AssingmentView view){
+    public AssignmentViewPresenter(AssingmentView view) {
         this.view = view;
         assignmentPool = App.getInstance().getAssignmentPool();
     }
@@ -44,7 +50,7 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
      */
     @Override
     public String getClassTitle(int position) {
-        return  assignmentPool.getClassData(position).getTitle();
+        return assignmentPool.getClassData(position).getTitle();
     }
 
     @Override
@@ -80,16 +86,53 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
     }
 
 
-
-
     /**
      * 请求刷新作业数据
      *
-     * @param classI
+     * @param classID
      */
     @Override
-    public void requestAssignment(String classI) {
+    public void requestAssignment(final int classID) {
         //开始从网络请求数据
+        Observable.create(new Observable.OnSubscribe<Integer>() {
+            @Override
+            public void call(Subscriber<? super Integer> subscriber) {
+                subscriber.onStart();
+                subscriber.onNext(classID);
+                subscriber.onCompleted();
+            }
+        }).subscribeOn(Schedulers.immediate())//指定 subscribe() 所发生的线程，即 Observable.OnSubscribe 被激活时所处的线程。
+                .observeOn(Schedulers.io())
+                .map(new Func1<Integer, String>() {
+                    @Override
+                    public String call(Integer integer) {
+                        //请求网络数据
+                        try {
+                            Thread.currentThread().sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+                        //请求完成 通知界面更新
+                        view.refreshAssignment(classID);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+
+                    }
+                });
 
     }
 }

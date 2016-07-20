@@ -28,6 +28,7 @@ public interface AssignmentListPresenter {
 
     /**
      * 请求刷新作业数据
+     * @param classID 班级信息在列表中的位置
      * */
-    void requestAssignment(String classID);
+    void requestAssignment(int classID);
 }

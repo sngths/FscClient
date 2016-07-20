@@ -10,5 +10,5 @@ public interface AssingmentView {
     /**
      * 刷新作业数据
      * */
-    void refreshAssignment(String classId);
+    void refreshAssignment(Integer classId);
 }

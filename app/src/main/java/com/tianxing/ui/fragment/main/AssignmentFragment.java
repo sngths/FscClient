@@ -99,7 +99,12 @@ public class AssignmentFragment extends BaseFragment implements AssingmentView{
      * @param classId
      */
     @Override
-    public void refreshAssignment(String classId) {
+    public void refreshAssignment(Integer classId) {
+        //通知相应的Fragment跟新界面
+        AssignmentListView view = (AssignmentListView) adapter.getItem(classId);
+        if (view != null){
+            view.refresh();
+        }
 
     }
 
