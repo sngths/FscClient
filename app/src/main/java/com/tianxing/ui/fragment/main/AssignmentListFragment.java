@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +20,8 @@ import butterknife.Unbinder;
 
 /**
  * Created by tianxing on 16/7/12.
- *
  */
-public class AssignmentListFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, AssignmentListView{
+public class AssignmentListFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, AssignmentListView {
 
     private AssignmentListAdapter adapter;
     private Unbinder unbinder;
@@ -36,15 +34,15 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
 
     /**
      * 不能再Fragment的构造方法中传递参数 会影响Fragment的销毁重新创建
-     * */
-    public AssignmentListFragment(){
+     */
+    public AssignmentListFragment() {
 
     }
 
     /**
      * 创建时传入 班级位置信息
-     * */
-    public static AssignmentListFragment newInstance(int position){
+     */
+    public static AssignmentListFragment newInstance(int position) {
         Bundle bundle = new Bundle();
         bundle.putInt("position", position);
         AssignmentListFragment fragment = new AssignmentListFragment();
@@ -53,11 +51,10 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
     }
 
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = ((AssignmentFragment)getParentFragment()).getAssignmentPresenter();//取得父Fragment的presenter引用
+        presenter = ((AssignmentFragment) getParentFragment()).getAssignmentPresenter();//取得父Fragment的presenter引用
 
     }
 
@@ -71,9 +68,10 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
         return view;
     }
 
-    private void initView(){
+    private void initView() {
+
+        swipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary, R.color.colorPrimaryDark);
         swipeRefreshLayout.setOnRefreshListener(this);
-        //swipeRefreshLayout.setColorSchemeColors();
         //创建适配器时 传入班级位置
         adapter = new AssignmentListAdapter(getContext(), presenter, getArguments().getInt("position", -1));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -105,15 +103,9 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
      */
     @Override
     public void refresh() {
-        Log.e(AssignmentListFragment.class.getName(), "刷新完成");
-
-        if (adapter != null){
-            adapter.notifyDataSetChanged();
-        }
-        if (swipeRefreshLayout != null){
-            if (swipeRefreshLayout.isRefreshing()){
-                swipeRefreshLayout.setRefreshing(false);
-            }
+        adapter.notifyDataSetChanged();
+        if (swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.setRefreshing(false);
         }
 
 

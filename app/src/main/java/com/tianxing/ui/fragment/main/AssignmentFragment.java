@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +28,7 @@ public class AssignmentFragment extends BaseFragment implements AssingmentView{
 
 
     private final AssignmentViewPresenter presenter;
-    private FragmentStatePagerAdapter adapter;
+    private AssignemntViewPagerAdapter adapter;
 
     private Unbinder unbinder;
     @BindView(R.id.appBarLayout)
@@ -101,7 +100,9 @@ public class AssignmentFragment extends BaseFragment implements AssingmentView{
     @Override
     public void refreshAssignment(Integer classId) {
         //通知相应的Fragment跟新界面
-        AssignmentListView view = (AssignmentListView) adapter.getItem(classId);
+
+        AssignmentListView view = adapter.findItem(classId);
+
         if (view != null){
             view.refresh();
         }

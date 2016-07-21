@@ -1,7 +1,5 @@
 package com.tianxing.presenter.main;
 
-import android.util.Log;
-
 import com.tianxing.entity.assignment.Assignment;
 import com.tianxing.model.App;
 import com.tianxing.model.AssignmentPool;
@@ -115,7 +113,7 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
                         return null;
                     }
                 })
-                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<String>() {
                     @Override
                     public void onCompleted() {
