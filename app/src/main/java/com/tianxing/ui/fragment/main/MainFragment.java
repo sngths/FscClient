@@ -47,14 +47,14 @@ public class MainFragment extends BaseFragment {
 
         AssignmentFragment assignmentFragment;
         ReviewFragment reviewFragment;
-        ContactFragment contactFragment;
+        ContactsFragment contactsFragment;
         ConfigurationFragment configurationFragment;
 
         if (savedInstanceState != null) {
             //内存恢复重启 找出并恢复Fragment状态
             assignmentFragment = (AssignmentFragment) getChildFragmentManager().findFragmentByTag(AssignmentFragment.TAG);
             reviewFragment = (ReviewFragment) getChildFragmentManager().findFragmentByTag(ReviewFragment.TAG);
-            contactFragment = (ContactFragment) getChildFragmentManager().findFragmentByTag(ContactFragment.TAG);
+            contactsFragment = (ContactsFragment) getChildFragmentManager().findFragmentByTag(ContactsFragment.TAG);
             configurationFragment = (ConfigurationFragment) getChildFragmentManager().findFragmentByTag(ConfigurationFragment.TAG);
 
 
@@ -62,23 +62,23 @@ public class MainFragment extends BaseFragment {
             //正常启动 创建新的Fragment
             assignmentFragment = AssignmentFragment.newInstance();
             reviewFragment = ReviewFragment.getInstance();
-            contactFragment = ContactFragment.getInstance();
+            contactsFragment = ContactsFragment.getInstance();
             configurationFragment = ConfigurationFragment.getInstance();
             getChildFragmentManager().beginTransaction()
                     .add(R.id.frameLayout_main_container, assignmentFragment, AssignmentFragment.TAG)
                     .add(R.id.frameLayout_main_container, reviewFragment, ReviewFragment.TAG)
-                    .add(R.id.frameLayout_main_container, contactFragment, ContactFragment.TAG)
+                    .add(R.id.frameLayout_main_container, contactsFragment, ContactsFragment.TAG)
                     .add(R.id.frameLayout_main_container, configurationFragment, ConfigurationFragment.TAG)
                     .show(assignmentFragment)
                     .hide(reviewFragment)
-                    .hide(contactFragment)
+                    .hide(contactsFragment)
                     .hide(configurationFragment)
                     .commit();
         }
         initView();
         fragments[0] = assignmentFragment;
         fragments[1] = reviewFragment;
-        fragments[2] = contactFragment;
+        fragments[2] = contactsFragment;
         fragments[3] = configurationFragment;
         return view;
     }

@@ -19,7 +19,6 @@ public class ClassData {
 
 
     public ClassData(){
-
     }
 
     public Integer getAssigmnetsCount(){

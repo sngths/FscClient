@@ -114,7 +114,16 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<String>() {
+                .map(new Func1<String, Integer>() {
+                    @Override
+                    public Integer call(String s) {
+                        //在主线程中将保存请求到的数据
+                        assignmentPool.getClassData(classID).putAssignment(new Assignment());
+                        return null;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Integer>() {
                     @Override
                     public void onCompleted() {
                         //请求完成 通知界面更新
@@ -127,7 +136,7 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
                     }
 
                     @Override
-                    public void onNext(String s) {
+                    public void onNext(Integer s) {
 
                     }
                 });
