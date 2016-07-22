@@ -10,4 +10,9 @@ public interface ContactsView {
     /**
      * 刷新可折叠列表
      * */
+
+
+    /**
+     * 响应列表子项点击
+     * */
 }

@@ -72,11 +72,19 @@ public class ContactsFragment extends BaseFragment implements ExpandableRecycler
      * 通过Presenter获取数据来初始化可折叠列表
      * */
     private void ExpandableViewInitialize(){
+
         ArrayList<ContactsParentItemList> parentItemLists = new ArrayList<>();
-        parentItemLists.add(new ContactsParentItemList());
-        parentItemLists.add(new ContactsParentItemList());
+        //群组列表
+        parentItemLists.add(new ContactsParentItemList<>(presenter.getGroupInfos()));
+        //好友列表
+        parentItemLists.add(new ContactsParentItemList<>(presenter.getFriendsInfo()));
+        //班级学生列表
+        for (int i = 0; i < presenter.getClassCount(); i++) {
+            parentItemLists.add(new ContactsParentItemList<>(presenter.getStudentList(i)));
+        }
         expandableViewAdaper = new ContactsExpandableViewAdaper(getContext(), parentItemLists);
         expandableViewAdaper.setExpandCollapseListener(this);
+
         recyclerView.setAdapter(expandableViewAdaper);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }

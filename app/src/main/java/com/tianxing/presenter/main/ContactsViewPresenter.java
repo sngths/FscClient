@@ -27,7 +27,7 @@ public class ContactsViewPresenter implements ContactsPresenter {
      */
     @Override
     public List<GroupInfo> getGroupInfos() {
-        return null;
+        return contactsPool.getGroupInfoList();
     }
 
     /**
@@ -35,7 +35,8 @@ public class ContactsViewPresenter implements ContactsPresenter {
      */
     @Override
     public List<UserInfo> getFriendsInfo() {
-        return null;
+
+        return contactsPool.getFriendList();
     }
 
     /**
@@ -43,7 +44,7 @@ public class ContactsViewPresenter implements ContactsPresenter {
      */
     @Override
     public Integer getClassCount() {
-        return null;
+        return contactsPool.getClassCount();
     }
 
     /**
@@ -53,6 +54,6 @@ public class ContactsViewPresenter implements ContactsPresenter {
      */
     @Override
     public List<UserInfo> getStudentList(Integer position) {
-        return null;
+        return contactsPool.getStudentList(position);
     }
 }

@@ -10,6 +10,7 @@ import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter
 import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ParentViewHolder;
+import com.tianxing.fscteachersedition.R;
 
 import java.util.List;
 
@@ -28,14 +29,21 @@ public class ContactsExpandableViewAdaper extends ExpandableRecyclerAdapter<Cont
 
     @Override
     public mParentViewHold onCreateParentViewHolder(ViewGroup parentViewGroup) {
+        View view = inflater.inflate(R.layout.expandableview_item_parent, parentViewGroup, false);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        return null;
+            }
+        });
+        return new mParentViewHold(view);
     }
 
 
     @Override
     public mChildViewHold onCreateChildViewHolder(ViewGroup childViewGroup) {
-        return null;
+        View view = inflater.inflate(R.layout.expandableview_item_child, childViewGroup, false);
+        return new mChildViewHold(view);
     }
 
 

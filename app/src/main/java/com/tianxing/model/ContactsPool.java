@@ -1,5 +1,11 @@
 package com.tianxing.model;
 
+import com.tianxing.entity.info.ClassInfo;
+import com.tianxing.entity.info.GroupInfo;
+import com.tianxing.entity.info.UserInfo;
+
+import java.util.List;
+
 /**
  * Created by tianxing on 16/7/22.
  * 联系人操作接口
@@ -10,18 +16,19 @@ public interface ContactsPool {
     /**
      * 取得群组数目
      * */
+    Integer getGroupCount();
 
     /**
      * 取得对应位置的一个群主信息
      * */
+    GroupInfo getGroupInfo(Integer position);
 
     /**
      * 取得群组列表
      * */
+    List<GroupInfo> getGroupInfoList();
 
-    /**
-     * 向群组列表中添加一个群主信息
-     * */
+
 
 
 
@@ -29,16 +36,18 @@ public interface ContactsPool {
     /**
      * 取得好友数目
      * */
-
+    Integer getFriendCount();
 
     /**
      * 取得好友列表
      * */
+    List<UserInfo> getFriendList();
 
 
     /**
      * 取得对应位置的一个好友信息
      * */
+    UserInfo getFriendInfo(Integer position);
 
 
 
@@ -46,24 +55,35 @@ public interface ContactsPool {
     /**
      * 取得班级数目
      * */
+    Integer getClassCount();
 
 
     /**
      * 取得对应位置的班级信息
      * */
+    ClassInfo getClassInfo(Integer position);
 
     /**
      * 取得对应位置班级的学生数目
      * */
+    Integer getStudentCount(Integer classPosition);
 
     /**
      * 取得对应位置的班级中的学生信息
      * */
+    UserInfo getStudentInfo(Integer classPosition, Integer studentPosition);
 
     /**
      * 取得对应位置的班级的学生列表
      * */
+    List<UserInfo> getStudentList(Integer classPosition);
 
 
 
+
+
+    /**
+     * 向群组列表中添加一个群组信息 添加到列队底部
+     * */
+    void putGroupInfo(GroupInfo groupInfo);
 }
