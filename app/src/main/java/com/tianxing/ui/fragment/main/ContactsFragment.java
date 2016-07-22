@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 
 import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter;
 import com.tianxing.fscteachersedition.R;
+import com.tianxing.presenter.main.ContactsPresenter;
+import com.tianxing.presenter.main.ContactsViewPresenter;
 import com.tianxing.ui.adapter.ContactsExpandableViewAdaper;
 import com.tianxing.ui.adapter.ContactsParentItemList;
 import com.tianxing.ui.fragment.BaseFragment;
@@ -23,7 +25,7 @@ import butterknife.Unbinder;
 /**
  * Created by tianxing on 16/7/11.
  */
-public class ContactsFragment extends BaseFragment implements ExpandableRecyclerAdapter.ExpandCollapseListener{
+public class ContactsFragment extends BaseFragment implements ExpandableRecyclerAdapter.ExpandCollapseListener, ContactsView{
     public static final String TAG = "ContactsFragment";
 
     private static ContactsFragment fragment = null;
@@ -31,6 +33,16 @@ public class ContactsFragment extends BaseFragment implements ExpandableRecycler
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     private Unbinder unbinder;
+
+    private ContactsPresenter presenter;
+    private ArrayList<ContactsParentItemList> parentItemLists;//折叠列表数据
+    private ContactsExpandableViewAdaper expandableViewAdaper;
+
+
+    public ContactsFragment(){
+        presenter = new ContactsViewPresenter(this);
+        parentItemLists = new ArrayList<>();
+    }
 
     public static ContactsFragment getInstance(){
         if (fragment == null){
@@ -51,16 +63,22 @@ public class ContactsFragment extends BaseFragment implements ExpandableRecycler
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contects, container, false);
         unbinder = ButterKnife.bind(this, view);
-        //创建可折叠列表
+        ExpandableViewInitialize();
+        return view;
+    }
 
+
+    /**
+     * 通过Presenter获取数据来初始化可折叠列表
+     * */
+    private void ExpandableViewInitialize(){
         ArrayList<ContactsParentItemList> parentItemLists = new ArrayList<>();
         parentItemLists.add(new ContactsParentItemList());
         parentItemLists.add(new ContactsParentItemList());
-        ContactsExpandableViewAdaper expandableViewAdaper = new ContactsExpandableViewAdaper(getContext(), parentItemLists);
+        expandableViewAdaper = new ContactsExpandableViewAdaper(getContext(), parentItemLists);
         expandableViewAdaper.setExpandCollapseListener(this);
         recyclerView.setAdapter(expandableViewAdaper);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        return view;
     }
 
 
