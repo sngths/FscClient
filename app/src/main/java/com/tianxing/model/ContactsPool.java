@@ -86,4 +86,21 @@ public interface ContactsPool {
      * 向群组列表中添加一个群组信息 添加到列队底部
      * */
     void putGroupInfo(GroupInfo groupInfo);
+
+
+    /**
+     * 添加一个好友信息
+     * */
+    void putFriendInfo(UserInfo userInfo);
+
+    /**
+     * 刷新好友列表
+     * */
+    void setFriengList(List<UserInfo> friengList);
+
+    /**
+     * 添加一个班级信息
+     * */
+    void putClassInfo(ClassInfo classInfo);
+
 }

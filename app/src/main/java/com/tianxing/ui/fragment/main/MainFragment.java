@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.ui.fragment.BaseFragment;
 import com.tianxing.ui.view.BottomBar;
+import com.tianxing.ui.view.BottomBarReleaseTab;
 import com.tianxing.ui.view.BottomBarTab;
 
 import butterknife.BindView;
@@ -21,6 +23,7 @@ import butterknife.Unbinder;
 
 /**
  * Created by tianxing on 16/7/11.
+ * 包含整个界面的Fragment
  */
 public class MainFragment extends BaseFragment {
     public static final String TAG = "MainFragment";
@@ -87,6 +90,7 @@ public class MainFragment extends BaseFragment {
     private void initView(){
         bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_icon1_24dp, "作业"));
         bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_icon2_24dp, "批阅"));
+        bottomBar.addItem(new BottomBarReleaseTab(getContext()));//发布按钮
         bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_icon3_24dp, "学生"));
         bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_icon3_24dp, "设置"));
         bottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
@@ -110,12 +114,14 @@ public class MainFragment extends BaseFragment {
                         }
                         break;
                     case 2:
+                        break;
+                    case 3:
                         getChildFragmentManager().beginTransaction().hide(fragments[0]).hide(fragments[1]).hide(fragments[3]).show(fragments[2]).commit();
                         if (actionBar != null){
                             toolbar.setTitle("学生");
                         }
                         break;
-                    case 3:
+                    case 4:
                         getChildFragmentManager().beginTransaction().hide(fragments[0]).hide(fragments[1]).hide(fragments[2]).show(fragments[3]).commit();
                         if (actionBar != null){
                             toolbar.setTitle("设置");
@@ -132,6 +138,11 @@ public class MainFragment extends BaseFragment {
             @Override
             public void onTabReselected(int position) {
                 //Tab点击 执行刷新等操作
+            }
+
+            @Override
+            public void onClick() {
+                Log.e(TAG, "启动发布界面");
             }
         });
     }

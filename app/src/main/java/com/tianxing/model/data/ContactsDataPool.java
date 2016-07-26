@@ -13,9 +13,9 @@ import java.util.List;
  */
 public class ContactsDataPool implements ContactsPool {
 
-    private ArrayList<GroupInfo> Groups;//群会话列表
-    private ArrayList<UserInfo> Friends;//好友列表
-    private ArrayList<ClassInfo> Classes;//班级列表
+    private List<GroupInfo> Groups;//群会话列表
+    private List<UserInfo> Friends;//好友列表
+    private List<ClassInfo> Classes;//班级列表
 
 
 
@@ -67,6 +67,38 @@ public class ContactsDataPool implements ContactsPool {
     public void putGroupInfo(GroupInfo groupInfo) {
         Groups.add(groupInfo);
     }
+
+    /**
+     * 添加一个好友信息
+     *
+     * @param userInfo
+     */
+    @Override
+    public void putFriendInfo(UserInfo userInfo) {
+        Friends.add(userInfo);
+    }
+
+    /**
+     * 刷新好友列表
+     *
+     * @param friengList
+     */
+    @Override
+    public void setFriengList(List<UserInfo> friengList) {
+        this.Friends = friengList;
+    }
+
+    /**
+     * 添加一个班级信息
+     *
+     * @param classInfo
+     */
+    @Override
+    public void putClassInfo(ClassInfo classInfo) {
+        Classes.add(classInfo);
+    }
+
+
 
     /**
      * 取得好友数目

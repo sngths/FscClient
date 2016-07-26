@@ -52,23 +52,36 @@ public class BottomBarTab extends FrameLayout {
         LayoutParams paramsContainer = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         paramsContainer.gravity = Gravity.CENTER;
         lLContainer.setLayoutParams(paramsContainer);
+        if (title == null){
+            //创建作业发布按钮
+            mIcon = new ImageView(context);
+            int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 27, getResources().getDisplayMetrics());
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
+            mIcon.setImageResource(R.mipmap.ic_bottombar_release_button);
+            mIcon.setLayoutParams(params);
+            mIcon.setColorFilter(ContextCompat.getColor(context, R.color.tab_unselected));
+            lLContainer.addView(mIcon);
+        }else {
+            //创建图标
+            mIcon = new ImageView(context);
+            int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 27, getResources().getDisplayMetrics());
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
+            mIcon.setImageResource(icon);
+            mIcon.setLayoutParams(params);
+            mIcon.setColorFilter(ContextCompat.getColor(context, R.color.tab_unselected));
+            lLContainer.addView(mIcon);
 
-        mIcon = new ImageView(context);
-        int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 27, getResources().getDisplayMetrics());
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
-        mIcon.setImageResource(icon);
-        mIcon.setLayoutParams(params);
-        mIcon.setColorFilter(ContextCompat.getColor(context, R.color.tab_unselected));
-        lLContainer.addView(mIcon);
+            //创建标题
+            mTvTitle = new TextView(context);
+            mTvTitle.setText(title);
+            LinearLayout.LayoutParams paramsTv = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            paramsTv.topMargin =  (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics());
+            mTvTitle.setTextSize(10);
+            mTvTitle.setTextColor(ContextCompat.getColor(context, R.color.tab_unselected));
+            mTvTitle.setLayoutParams(paramsTv);
+            lLContainer.addView(mTvTitle);
+        }
 
-        mTvTitle = new TextView(context);
-        mTvTitle.setText(title);
-        LinearLayout.LayoutParams paramsTv = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        paramsTv.topMargin =  (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics());
-        mTvTitle.setTextSize(10);
-        mTvTitle.setTextColor(ContextCompat.getColor(context, R.color.tab_unselected));
-        mTvTitle.setLayoutParams(paramsTv);
-        lLContainer.addView(mTvTitle);
 
         addView(lLContainer);
     }
@@ -76,13 +89,13 @@ public class BottomBarTab extends FrameLayout {
     @Override
     public void setSelected(boolean selected) {
         super.setSelected(selected);
-        if (selected) {
-            mIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.colorPrimary));
-            mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimary));
-        } else {
-            mIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.tab_unselected));
-            mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.tab_unselected));
-        }
+            if (selected) {
+                mIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.colorPrimary));
+                mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimary));
+            } else {
+                mIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.tab_unselected));
+                mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.tab_unselected));
+            }
     }
 
     public void setTabPosition(int position) {
