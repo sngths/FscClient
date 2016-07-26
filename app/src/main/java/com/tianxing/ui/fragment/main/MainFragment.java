@@ -6,12 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.tianxing.fscteachersedition.R;
+import com.tianxing.ui.activity.MainActivity;
 import com.tianxing.ui.fragment.BaseFragment;
 import com.tianxing.ui.view.BottomBar;
 import com.tianxing.ui.view.BottomBarReleaseTab;
@@ -142,9 +142,17 @@ public class MainFragment extends BaseFragment {
 
             @Override
             public void onClick() {
-                Log.e(TAG, "启动发布界面");
+                startAssignmentReleaseFragment();
             }
         });
+    }
+
+
+    /**
+     * 启动作业发布界面
+     * */
+    private void startAssignmentReleaseFragment(){
+        ((MainActivity)getActivity()).startAssignmentReleaseFragment();
     }
 
     @Override
