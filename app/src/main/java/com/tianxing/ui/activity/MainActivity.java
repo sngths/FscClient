@@ -9,6 +9,7 @@ import com.tianxing.ui.fragment.main.MainFragment;
 
 /**
  * Created by tianxing on 16/7/5.
+ *
  */
 public class MainActivity extends BaseActivity {
 
@@ -52,6 +53,11 @@ public class MainActivity extends BaseActivity {
     public void startAssignmentDetailFragment(){
 
     }
+
+
+    /**
+     * Fragment跳转 出栈入栈
+     * */
 
 
 }
