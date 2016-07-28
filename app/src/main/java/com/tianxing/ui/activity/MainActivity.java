@@ -5,21 +5,23 @@ import android.support.annotation.Nullable;
 
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.ui.fragment.child.AssignemntReleaseFragment;
+import com.tianxing.ui.fragment.child.AssignmentDetailFragment;
 import com.tianxing.ui.fragment.main.MainFragment;
 
 /**
  * Created by tianxing on 16/7/5.
  *
  */
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements MainView {
 
 
-
+    private String currentFragmentTag; //当前正在显示的Fragment的Tag
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        currentFragmentTag = MainFragment.TAG;
         getSupportFragmentManager().beginTransaction().add(R.id.frameLayout, new MainFragment(), MainFragment.TAG).commit();
 
     }
@@ -36,9 +38,30 @@ public class MainActivity extends BaseActivity {
 
 
     /**
+     * 启动一个作业详情界面
+     *
+     * @param classID
+     * @param position
+     */
+    @Override
+    public void startAssignmentDetailFragment(Integer classID, Integer position) {
+        AssignmentDetailFragment fragment = new AssignmentDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("classID", classID);
+        bundle.putInt("position", position);
+        fragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.frameLayout, fragment)
+                .hide(getSupportFragmentManager().findFragmentByTag(MainFragment.TAG))
+                .addToBackStack(null)
+                .commit();
+    }
+
+    /**
      * 启动作业发布界面
-     * */
-    public void startAssignmentReleaseFragment(){
+     */
+    @Override
+    public void startAssignmentReleaseFragment() {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.frameLayout, new AssignemntReleaseFragment(), AssignemntReleaseFragment.TAG)
                 .hide(getSupportFragmentManager().findFragmentByTag(MainFragment.TAG))
@@ -46,18 +69,16 @@ public class MainActivity extends BaseActivity {
                 .commit();
     }
 
-
     /**
-     * 启动作业详情界面
-     * */
-    public void startAssignmentDetailFragment(){
-
+     * 返回 操作
+     */
+    @Override
+    public void popBack() {
+        getSupportFragmentManager().popBackStack();
     }
 
 
-    /**
-     * Fragment跳转 出栈入栈
-     * */
+
 
 
 }

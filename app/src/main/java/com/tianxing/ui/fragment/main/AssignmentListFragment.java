@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.main.AssignmentListPresenter;
+import com.tianxing.ui.activity.MainView;
 import com.tianxing.ui.adapter.AssignmentListAdapter;
 import com.tianxing.ui.fragment.BaseFragment;
+import com.tianxing.ui.listener.AssignmentItemOnClickListerner;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,6 +22,7 @@ import butterknife.Unbinder;
 
 /**
  * Created by tianxing on 16/7/12.
+ * 作业列表
  */
 public class AssignmentListFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, AssignmentListView {
 
@@ -76,6 +79,15 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
         adapter = new AssignmentListAdapter(getContext(), presenter, getArguments().getInt("position", -1));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
+        //点击监听
+        adapter.setItemOnClickListener(new AssignmentItemOnClickListerner() {
+            @Override
+            public void OnClick(Integer classID, Integer position) {
+                //启动作业详情界面
+                ((MainView)getActivity()).startAssignmentDetailFragment(classID, position);
+            }
+        });
+
     }
 
 
@@ -97,6 +109,8 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
         //通知P层请求数据
         presenter.requestAssignment(getArguments().getInt("position", -1));
     }
+
+
 
     /**
      * 从载数据 撤销下拉载入状态

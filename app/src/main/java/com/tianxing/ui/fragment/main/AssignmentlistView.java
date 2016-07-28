@@ -6,8 +6,13 @@ package com.tianxing.ui.fragment.main;
  */
 public interface AssignmentListView {
 
+
+
+
     /**
      * 从载数据 撤销下拉载入状态
      * */
     void refresh();
+
+
 }

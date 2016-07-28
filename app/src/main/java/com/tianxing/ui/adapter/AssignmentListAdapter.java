@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.main.AssignmentListPresenter;
+import com.tianxing.ui.listener.AssignmentItemOnClickListerner;
 
 /**
  * Created by tianxing on 16/7/13.
@@ -18,6 +19,8 @@ public class AssignmentListAdapter extends Adapter<AssignmentListAdapter.mViewHo
 
     private LayoutInflater inflater;
     private AssignmentListPresenter presenter;
+
+    private AssignmentItemOnClickListerner listerner;
 
 
     private Integer calssID;//班级ID 即班级信息在列表中保存的位置
@@ -31,7 +34,15 @@ public class AssignmentListAdapter extends Adapter<AssignmentListAdapter.mViewHo
     @Override
     public mViewHold onCreateViewHolder(ViewGroup parent, int viewType) {
         View view  = inflater.inflate(R.layout.cardview_assignment, parent, false);
-        mViewHold hold = new mViewHold(view);
+        final mViewHold hold = new mViewHold(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listerner != null){
+                    listerner.OnClick(calssID, hold.getAdapterPosition());
+                }
+            }
+        });
         return hold;
     }
 
@@ -58,5 +69,13 @@ public class AssignmentListAdapter extends Adapter<AssignmentListAdapter.mViewHo
 
         //View的修改函数
 
+    }
+
+
+    /**
+     * 子项点击监听
+     * */
+    public void setItemOnClickListener(AssignmentItemOnClickListerner listener){
+        this.listerner = listener;
     }
 }
