@@ -89,7 +89,7 @@ public class MainFragment extends BaseFragment {
 
     private void initView(){
         bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_icon1_24dp, "作业"));
-        bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_icon2_24dp, "批阅"));
+        bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_icon2_24dp, "课堂"));
         bottomBar.addItem(new BottomBarReleaseTab(getContext()));//发布按钮
         bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_icon3_24dp, "学生"));
         bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_icon3_24dp, "设置"));
@@ -110,7 +110,7 @@ public class MainFragment extends BaseFragment {
                     case 1:
                         getChildFragmentManager().beginTransaction().hide(fragments[0]).hide(fragments[2]).hide(fragments[3]).show(fragments[1]).commit();
                         if (actionBar != null){
-                            toolbar.setTitle("批阅");
+                            toolbar.setTitle("课堂");
                         }
                         break;
                     case 2:

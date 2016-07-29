@@ -12,11 +12,23 @@ public interface ContactsPresenter {
 
 
 
+    /**
+     * 取得群组数目
+     * */
+    Integer getGroupCount();
+
 
     /**
      * 取得群组列表
      * */
     List<GroupInfo> getGroupInfos();
+
+
+    /**
+     * 取得好友数目
+     * */
+    Integer getFriendsCount();
+
 
     /**
      * 取得好友列表

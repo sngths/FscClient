@@ -15,6 +15,7 @@ import com.tianxing.presenter.main.ContactsViewPresenter;
 import com.tianxing.ui.adapter.ContactsExpandableViewAdaper;
 import com.tianxing.ui.adapter.ContactsParentItemList;
 import com.tianxing.ui.fragment.BaseFragment;
+import com.tianxing.ui.listener.ExpandableViewOnClickListener;
 
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ import butterknife.Unbinder;
 /**
  * Created by tianxing on 16/7/11.
  */
-public class ContactsFragment extends BaseFragment implements ExpandableRecyclerAdapter.ExpandCollapseListener, ContactsView{
+public class ContactsFragment extends BaseFragment implements ExpandableRecyclerAdapter.ExpandCollapseListener, ContactsView, ExpandableViewOnClickListener{
     public static final String TAG = "ContactsFragment";
 
     private static ContactsFragment fragment = null;
@@ -84,7 +85,7 @@ public class ContactsFragment extends BaseFragment implements ExpandableRecycler
         }
         expandableViewAdaper = new ContactsExpandableViewAdaper(getContext(), parentItemLists);
         expandableViewAdaper.setExpandCollapseListener(this);
-
+        expandableViewAdaper.setOnClickListener(this);
         recyclerView.setAdapter(expandableViewAdaper);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
@@ -95,6 +96,7 @@ public class ContactsFragment extends BaseFragment implements ExpandableRecycler
         super.onDestroyView();
         unbinder.unbind();
     }
+
 
 
     /**
@@ -115,5 +117,30 @@ public class ContactsFragment extends BaseFragment implements ExpandableRecycler
     @Override
     public void onListItemCollapsed(int position) {
 
+    }
+
+    /**
+     * 折叠列表点击
+     *
+     * @param position 被点击的子项在折叠列表完全展开时所在的位置
+     */
+    @Override
+    public void OnClick(Integer position) {
+        //presenter层获取数据 返回给主Activity 启动新界面
+        int parentPosition;
+        int childPosition;
+        if (position <= presenter.getGroupCount()){
+            parentPosition = 0;
+            childPosition = position - 1;
+        }else if (position > presenter.getGroupCount() && position <= (presenter.getGroupCount() + presenter.getFriendsCount() + 1)){
+            parentPosition = 1;
+            childPosition = position - presenter.getGroupCount() - 2;
+        }else {
+
+        }
+
+
+
+        //((MainView)getActivity()).startChatFragment(parentPosition, childPosition);
     }
 }

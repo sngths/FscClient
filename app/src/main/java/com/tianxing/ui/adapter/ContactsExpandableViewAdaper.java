@@ -11,6 +11,7 @@ import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ParentViewHolder;
 import com.tianxing.fscteachersedition.R;
+import com.tianxing.ui.listener.ExpandableViewOnClickListener;
 
 import java.util.List;
 
@@ -20,6 +21,11 @@ import java.util.List;
 public class ContactsExpandableViewAdaper extends ExpandableRecyclerAdapter<ContactsExpandableViewAdaper.mParentViewHold, ContactsExpandableViewAdaper.mChildViewHold>{
 
 
+
+    private ExpandableViewOnClickListener listener;
+
+
+
     private LayoutInflater inflater;
     public ContactsExpandableViewAdaper(Context context, @NonNull List<? extends ParentListItem> parentItemList) {
         super(parentItemList);
@@ -27,23 +33,40 @@ public class ContactsExpandableViewAdaper extends ExpandableRecyclerAdapter<Cont
     }
 
 
+    public void setOnClickListener(ExpandableViewOnClickListener listener){
+        this.listener = listener;
+    }
+
+
+
     @Override
     public mParentViewHold onCreateParentViewHolder(ViewGroup parentViewGroup) {
         View view = inflater.inflate(R.layout.expandableview_item_parent, parentViewGroup, false);
+        final mParentViewHold viewHold = new mParentViewHold(view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
-        return new mParentViewHold(view);
+        return viewHold;
     }
 
 
     @Override
     public mChildViewHold onCreateChildViewHolder(ViewGroup childViewGroup) {
         View view = inflater.inflate(R.layout.expandableview_item_child, childViewGroup, false);
-        return new mChildViewHold(view);
+        final mChildViewHold childViewHold = new mChildViewHold(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //子项点击事件
+                if (listener != null){
+                    listener.OnClick(childViewHold.getAdapterPosition());
+                }
+            }
+        });
+        return childViewHold;
     }
 
 

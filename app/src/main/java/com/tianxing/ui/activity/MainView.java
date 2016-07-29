@@ -25,6 +25,10 @@ public interface MainView {
     void startAssignmentReleaseFragment();
 
 
+    /**
+     * 启动聊天界面 包括群聊和一对一聊天界面
+     * */
+    void startChatFragment(Integer parentPosition, Integer childPosition);
 
     /**
      * 返回 操作

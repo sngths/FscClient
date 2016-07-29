@@ -96,6 +96,7 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
         super.onSaveInstanceState(outState);
         //保存Fragment的滑动位置 载入状态等信息 用来恢复Fragment的原先状态
 
+
     }
 
     @Override
@@ -121,7 +122,5 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
         if (swipeRefreshLayout.isRefreshing()) {
             swipeRefreshLayout.setRefreshing(false);
         }
-
-
     }
 }

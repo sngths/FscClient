@@ -1,5 +1,6 @@
 package com.tianxing.presenter.main;
 
+import com.tianxing.entity.info.ClassInfo;
 import com.tianxing.entity.info.GroupInfo;
 import com.tianxing.entity.info.UserInfo;
 import com.tianxing.model.App;
@@ -16,9 +17,22 @@ public class ContactsViewPresenter implements ContactsPresenter {
     private ContactsView view;
     private ContactsPool contactsPool;
 
+
     public ContactsViewPresenter(ContactsView view){
         this.view = view;
         contactsPool = App.getInstance().getContactsPool();
+        //存入一些预设数据
+        contactsPool.putGroupInfo(new GroupInfo());
+        contactsPool.putGroupInfo(new GroupInfo());
+        contactsPool.putGroupInfo(new GroupInfo());
+        contactsPool.putGroupInfo(new GroupInfo());
+        contactsPool.putFriendInfo(new UserInfo());
+        contactsPool.putFriendInfo(new UserInfo());
+        contactsPool.putFriendInfo(new UserInfo());
+        contactsPool.putFriendInfo(new UserInfo());
+        contactsPool.putClassInfo(new ClassInfo());
+        contactsPool.putClassInfo(new ClassInfo());
+
     }
 
 

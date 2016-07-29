@@ -36,6 +36,7 @@ public class AssignmentDetailFragment extends BaseBackFragment {
         View view = inflater.inflate(R.layout.fragment_assignment_detail, container, false);
         unbinder = ButterKnife.bind(this, view);
         toolBarInit(toolbar);
+        toolbar.setTitle("作业详情");
         return view;
     }
 

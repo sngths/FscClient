@@ -70,6 +70,17 @@ public class MainActivity extends BaseActivity implements MainView {
     }
 
     /**
+     * 启动聊天界面 包括群聊和一对一聊天界面
+     *
+     * @param parentPosition
+     * @param childPosition
+     */
+    @Override
+    public void startChatFragment(Integer parentPosition, Integer childPosition) {
+
+    }
+
+    /**
      * 返回 操作
      */
     @Override
