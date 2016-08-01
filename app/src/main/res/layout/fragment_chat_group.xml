@@ -5,5 +5,38 @@
               android:layout_height="match_parent">
 
     <include layout="@layout/toolbar_child"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="1">
+    </android.support.v7.widget.RecyclerView>
+    <!-- 输入框 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/imageButton_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/editText_input"
+            android:layout_width="1dp"
+            android:layout_height="@dimen/chat_editText_height"
+            android:layout_weight="1"/>
+        <ImageButton
+            android:id="@+id/imageButton_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <!-- 输入数据类型选择框 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout_item_select">
+
+    </LinearLayout>
 
 </LinearLayout>
