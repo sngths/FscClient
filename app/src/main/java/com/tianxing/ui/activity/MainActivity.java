@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.ui.fragment.child.AssignemntReleaseFragment;
 import com.tianxing.ui.fragment.child.AssignmentDetailFragment;
+import com.tianxing.ui.fragment.child.ChatFragment;
 import com.tianxing.ui.fragment.main.MainFragment;
 
 /**
@@ -16,6 +17,8 @@ public class MainActivity extends BaseActivity implements MainView {
 
 
     private String currentFragmentTag; //当前正在显示的Fragment的Tag
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,7 +80,12 @@ public class MainActivity extends BaseActivity implements MainView {
      */
     @Override
     public void startChatFragment(Integer parentPosition, Integer childPosition) {
-
+        //启动对应会话界面
+        Bundle bundle = new Bundle();
+        bundle.putInt("parentPosition", parentPosition);
+        bundle.putInt("childPosition", childPosition);
+        ChatFragment chatFragment = new ChatFragment();
+        chatFragment.setArguments(bundle);
     }
 
     /**

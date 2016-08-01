@@ -53,4 +53,10 @@ public interface ContactsPresenter {
 
     List<UserInfo> getStudentList(Integer position);
 
+
+    /**
+     * 取得对应位置的子项数目
+     * */
+    Integer getChildItemCount(Integer parentPosition);
+
 }

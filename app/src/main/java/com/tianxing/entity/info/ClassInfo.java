@@ -12,6 +12,11 @@ public class ClassInfo implements InfoEntity {
 
     public ClassInfo(){
         userInfos = new ArrayList<>();
+        //班级添加学生信息
+        userInfos.add(new UserInfo());
+        userInfos.add(new UserInfo());
+        userInfos.add(new UserInfo());
+        userInfos.add(new UserInfo());
     }
 
 

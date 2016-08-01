@@ -37,11 +37,27 @@ public class ContactsViewPresenter implements ContactsPresenter {
 
 
     /**
+     * 取得群组数目
+     */
+    @Override
+    public Integer getGroupCount() {
+        return contactsPool.getGroupCount();
+    }
+
+    /**
      * 取得群组列表
      */
     @Override
     public List<GroupInfo> getGroupInfos() {
         return contactsPool.getGroupInfoList();
+    }
+
+    /**
+     * 取得好友数目
+     */
+    @Override
+    public Integer getFriendsCount() {
+        return contactsPool.getFriendCount();
     }
 
     /**
@@ -69,5 +85,23 @@ public class ContactsViewPresenter implements ContactsPresenter {
     @Override
     public List<UserInfo> getStudentList(Integer position) {
         return contactsPool.getStudentList(position);
+    }
+
+    /**
+     * 取得对应位置的子项数目
+     *
+     * @param parentPosition
+     */
+    @Override
+    public Integer getChildItemCount(Integer parentPosition) {
+        int count = 0;
+        if (parentPosition == 0){
+            count = contactsPool.getGroupCount();
+        }else if (parentPosition == 1){
+            count = contactsPool.getFriendCount();
+        }else if (parentPosition > 1){
+            count = contactsPool.getStudentCount(parentPosition - 2);
+        }
+        return count;
     }
 }

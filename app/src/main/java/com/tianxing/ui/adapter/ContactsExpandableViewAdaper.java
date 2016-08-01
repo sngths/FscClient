@@ -57,15 +57,6 @@ public class ContactsExpandableViewAdaper extends ExpandableRecyclerAdapter<Cont
     public mChildViewHold onCreateChildViewHolder(ViewGroup childViewGroup) {
         View view = inflater.inflate(R.layout.expandableview_item_child, childViewGroup, false);
         final mChildViewHold childViewHold = new mChildViewHold(view);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //子项点击事件
-                if (listener != null){
-                    listener.OnClick(childViewHold.getAdapterPosition());
-                }
-            }
-        });
         return childViewHold;
     }
 
@@ -77,8 +68,13 @@ public class ContactsExpandableViewAdaper extends ExpandableRecyclerAdapter<Cont
 
 
     @Override
-    public void onBindChildViewHolder(mChildViewHold childViewHolder, int position, Object childListItem) {
-
+    public void onBindChildViewHolder(mChildViewHold childViewHolder, final int position, Object childListItem) {
+        childViewHolder.getView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.OnClick(position);
+            }
+        });
     }
 
 
@@ -86,18 +82,29 @@ public class ContactsExpandableViewAdaper extends ExpandableRecyclerAdapter<Cont
 
     class mChildViewHold extends ChildViewHolder{
 
+        private View view;
 
         public mChildViewHold(View itemView) {
             super(itemView);
+            this.view = itemView;
+        }
+
+        public View getView() {
+            return view;
         }
     }
 
 
     class mParentViewHold extends ParentViewHolder{
-
+        private View view;
 
         public mParentViewHold(View itemView) {
             super(itemView);
+            this.view = itemView;
+        }
+
+        public View getView() {
+            return view;
         }
     }
 }

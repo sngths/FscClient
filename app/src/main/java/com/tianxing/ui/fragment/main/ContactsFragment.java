@@ -12,6 +12,7 @@ import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.main.ContactsPresenter;
 import com.tianxing.presenter.main.ContactsViewPresenter;
+import com.tianxing.ui.activity.MainView;
 import com.tianxing.ui.adapter.ContactsExpandableViewAdaper;
 import com.tianxing.ui.adapter.ContactsParentItemList;
 import com.tianxing.ui.fragment.BaseFragment;
@@ -127,9 +128,9 @@ public class ContactsFragment extends BaseFragment implements ExpandableRecycler
     @Override
     public void OnClick(Integer position) {
         //presenter层获取数据 返回给主Activity 启动新界面
-        int parentPosition;
-        int childPosition;
-        if (position <= presenter.getGroupCount()){
+        int parentPosition = 0;
+        int childPosition = 0;
+        /*if (position <= presenter.getGroupCount()){
             parentPosition = 0;
             childPosition = position - 1;
         }else if (position > presenter.getGroupCount() && position <= (presenter.getGroupCount() + presenter.getFriendsCount() + 1)){
@@ -137,10 +138,19 @@ public class ContactsFragment extends BaseFragment implements ExpandableRecycler
             childPosition = position - presenter.getGroupCount() - 2;
         }else {
 
+        }*/
+
+        int itemCount = 0;
+        for (int i = 0; i < presenter.getClassCount() + 2; i++) {
+            if (position > itemCount + presenter.getChildItemCount(i) + i){
+
+            } else {
+                parentPosition = i ;
+                childPosition = position - itemCount - i - 1;
+                break;
+            }
+            itemCount = itemCount + presenter.getChildItemCount(i);
         }
-
-
-
-        //((MainView)getActivity()).startChatFragment(parentPosition, childPosition);
+        ((MainView)getActivity()).startChatFragment(parentPosition, childPosition);
     }
 }
