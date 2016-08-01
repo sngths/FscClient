@@ -2,23 +2,18 @@ package com.tianxing.ui.fragment.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
 
-import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.main.ContactsPresenter;
 import com.tianxing.presenter.main.ContactsViewPresenter;
 import com.tianxing.ui.activity.MainView;
-import com.tianxing.ui.adapter.ContactsExpandableViewAdaper;
-import com.tianxing.ui.adapter.ContactsParentItemList;
+import com.tianxing.ui.adapter.ContactsExpandableListAdapter;
 import com.tianxing.ui.fragment.BaseFragment;
-import com.tianxing.ui.listener.ExpandableViewOnClickListener;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,23 +22,25 @@ import butterknife.Unbinder;
 /**
  * Created by tianxing on 16/7/11.
  */
-public class ContactsFragment extends BaseFragment implements ExpandableRecyclerAdapter.ExpandCollapseListener, ContactsView, ExpandableViewOnClickListener{
+public class ContactsFragment extends BaseFragment implements ContactsView, ExpandableListView.OnChildClickListener{
     public static final String TAG = "ContactsFragment";
 
     private static ContactsFragment fragment = null;
 
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
+    //@BindView(R.id.recyclerView)
+    //RecyclerView recyclerView;
+    @BindView(R.id.expandableListView)
+    ExpandableListView expandableListView;
     private Unbinder unbinder;
 
     private ContactsPresenter presenter;
-    private ArrayList<ContactsParentItemList> parentItemLists;//折叠列表数据
-    private ContactsExpandableViewAdaper expandableViewAdaper;
+    //private ArrayList<ContactsParentItemList> parentItemLists;//折叠列表数据
+    //private ContactsExpandableViewAdaper expandableViewAdaper;
 
 
     public ContactsFragment(){
         presenter = new ContactsViewPresenter(this);
-        parentItemLists = new ArrayList<>();
+        //parentItemLists = new ArrayList<>();
     }
 
     public static ContactsFragment getInstance(){
@@ -65,14 +62,16 @@ public class ContactsFragment extends BaseFragment implements ExpandableRecycler
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contects, container, false);
         unbinder = ButterKnife.bind(this, view);
-        ExpandableViewInitialize();
+        //ExpandableViewInitialize();
+        expandableListView.setAdapter(new ContactsExpandableListAdapter(getContext(), presenter));
+        expandableListView.setOnChildClickListener(this);
         return view;
     }
 
 
     /**
      * 通过Presenter获取数据来初始化可折叠列表
-     * */
+     *
     private void ExpandableViewInitialize(){
 
         ArrayList<ContactsParentItemList> parentItemLists = new ArrayList<>();
@@ -89,7 +88,7 @@ public class ContactsFragment extends BaseFragment implements ExpandableRecycler
         expandableViewAdaper.setOnClickListener(this);
         recyclerView.setAdapter(expandableViewAdaper);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-    }
+    }*/
 
 
     @Override
@@ -98,48 +97,36 @@ public class ContactsFragment extends BaseFragment implements ExpandableRecycler
         unbinder.unbind();
     }
 
-
-
     /**
-     * Called when a list item is expanded.
+     * Callback method to be invoked when a child in this expandable list has
+     * been clicked.
      *
-     * @param position The index of the item in the list being expanded
+     * @param parent        The ExpandableListView where the click happened
+     * @param v             The view within the expandable list/ListView that was clicked
+     * @param groupPosition The group position that contains the child that
+     *                      was clicked
+     * @param childPosition The child position within the group
+     * @param id            The row id of the child that was clicked
+     * @return True if the click was handled
      */
     @Override
-    public void onListItemExpanded(int position) {
-
+    public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+        Log.e(String.valueOf(groupPosition), String.valueOf(childPosition));
+        ((MainView)getActivity()).startChatFragment(groupPosition, childPosition);
+        return true;
     }
 
-    /**
-     * Called when a list item is collapsed.
-     *
-     * @param position The index of the item in the list being collapsed
-     */
-    @Override
-    public void onListItemCollapsed(int position) {
-
-    }
 
     /**
      * 折叠列表点击
      *
      * @param position 被点击的子项在折叠列表完全展开时所在的位置
      */
-    @Override
+    /*@Override
     public void OnClick(Integer position) {
         //presenter层获取数据 返回给主Activity 启动新界面
         int parentPosition = 0;
         int childPosition = 0;
-        /*if (position <= presenter.getGroupCount()){
-            parentPosition = 0;
-            childPosition = position - 1;
-        }else if (position > presenter.getGroupCount() && position <= (presenter.getGroupCount() + presenter.getFriendsCount() + 1)){
-            parentPosition = 1;
-            childPosition = position - presenter.getGroupCount() - 2;
-        }else {
-
-        }*/
-
         int itemCount = 0;
         for (int i = 0; i < presenter.getClassCount() + 2; i++) {
             if (position > itemCount + presenter.getChildItemCount(i) + i){
@@ -151,6 +138,7 @@ public class ContactsFragment extends BaseFragment implements ExpandableRecycler
             }
             itemCount = itemCount + presenter.getChildItemCount(i);
         }
+        Log.e(String.valueOf(parentPosition), String.valueOf(childPosition) + String.valueOf(position));
         ((MainView)getActivity()).startChatFragment(parentPosition, childPosition);
-    }
+    }*/
 }

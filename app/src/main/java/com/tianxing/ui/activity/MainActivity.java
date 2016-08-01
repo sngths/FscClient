@@ -108,7 +108,6 @@ public class MainActivity extends BaseActivity implements MainView {
                 .hide(currentFragment)
                 .addToBackStack(null)
                 .commit();
-
     }
 
     /**
