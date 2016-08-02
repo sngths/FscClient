@@ -11,5 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/textView_toolBar_title"/>
+        <!--  右侧按键 -->
+        <ImageButton
+            android:id="@+id/imageButton_toolBar_right"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="right"
+            android:background="@android:color/transparent"/>
+    </android.support.v7.widget.Toolbar>
 </android.support.design.widget.AppBarLayout>

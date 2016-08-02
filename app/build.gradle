@@ -34,8 +34,9 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.jakewharton:butterknife:8.1.0'
-    compile 'com.bignerdranch.android:expandablerecyclerview:2.1.1'
+    //compile 'com.bignerdranch.android:expandablerecyclerview:2.1.1'
     compile 'tv.danmaku.ijk.media:ijkplayer-java:0.6.0'
     compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.6.0'
+    //compile 'com.github.chrisbanes:PhotoView:1.2.7'
     apt 'com.jakewharton:butterknife-compiler:8.1.0'
 }

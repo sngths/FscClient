@@ -37,7 +37,7 @@ public class AssignemntReleaseFragment extends BaseBackFragment {
         View view = inflater.inflate(R.layout.fragment_assignment_release, container, false);
         unbinder = ButterKnife.bind(this, view);
         toolBarInit(toolbar);
-        toolbar.setTitle("发布作业");
+        setToolBarTitle("发布作业");
         return view;
     }
 
