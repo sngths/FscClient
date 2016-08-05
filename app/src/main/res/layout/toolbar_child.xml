@@ -9,20 +9,21 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_child_Fragment"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="@dimen/ToolBar_height"
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textSize="@dimen/Title_TextSize"
             android:id="@+id/textView_toolBar_title"/>
         <!--  右侧按键 -->
         <ImageButton
             android:id="@+id/imageButton_toolBar_right"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="right"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="end"
             android:background="@android:color/transparent"/>
     </android.support.v7.widget.Toolbar>
 </android.support.design.widget.AppBarLayout>

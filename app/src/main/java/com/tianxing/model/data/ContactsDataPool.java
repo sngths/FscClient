@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * Created by tianxing on 16/7/22.
+ *
  */
 public class ContactsDataPool implements ContactsPool {
 
@@ -41,7 +42,7 @@ public class ContactsDataPool implements ContactsPool {
     }
 
     /**
-     * 取得对应位置的一个群主信息
+     * 取得对应位置的一个群组信息
      *
      * @param position
      */

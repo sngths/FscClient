@@ -39,4 +39,8 @@ dependencies {
     compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.6.0'
     //compile 'com.github.chrisbanes:PhotoView:1.2.7'
     apt 'com.jakewharton:butterknife-compiler:8.1.0'
+
+    compile 'jp.wasabeef:picasso-transformations:2.1.0'
+    // If you want to use the GPU Filters
+    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
 }

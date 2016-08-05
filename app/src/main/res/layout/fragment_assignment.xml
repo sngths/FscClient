@@ -15,8 +15,8 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             app:tabIndicatorColor="@android:color/white"
             app:tabSelectedTextColor="@android:color/white"
-            app:tabTextColor="#EF9A9A"
-            android:layout_height="56dp"/>
+            app:tabTextColor="@android:color/darker_gray"
+            android:layout_height="32dp"/>
 
     </android.support.design.widget.AppBarLayout>
 

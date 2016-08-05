@@ -23,7 +23,10 @@
 
     <com.tianxing.ui.view.BottomBar
         android:id="@+id/bottomBar"
+        android:elevation="4dp"
+        android:translationZ="6dp"
         android:layout_width="match_parent"
+        android:background="@drawable/myrect"
         android:layout_height="@dimen/bottom_bar_height">
 
     </com.tianxing.ui.view.BottomBar>

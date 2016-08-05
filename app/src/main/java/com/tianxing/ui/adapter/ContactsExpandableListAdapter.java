@@ -6,9 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
+import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.main.ContactsPresenter;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 
 /**
@@ -182,6 +186,8 @@ public class ContactsExpandableListAdapter implements ExpandableListAdapter {
         ChildViewHold viewHold;
         if (convertView == null){
             convertView = inflater.inflate(R.layout.expandableview_item_child, parent, false);
+            ImageView icon = (ImageView) convertView.findViewById(R.id.imageView_icon);
+            Picasso.with(inflater.getContext()).load(R.mipmap.user_icon).transform(new CropCircleTransformation()).into(icon);
             viewHold = new ChildViewHold(convertView);
             convertView.setTag(viewHold);
         }else {

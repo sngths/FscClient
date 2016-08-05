@@ -92,7 +92,7 @@ public class MainFragment extends BaseFragment {
         bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_icon2_24dp, "课堂"));
         bottomBar.addItem(new BottomBarReleaseTab(getContext()));//发布按钮
         bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_icon3_24dp, "学生"));
-        bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_icon3_24dp, "设置"));
+        bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_icon3_24dp, "我的"));
         bottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position, int prePosition) {

@@ -2,7 +2,6 @@ package com.tianxing.ui.fragment.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -111,7 +110,6 @@ public class ContactsFragment extends BaseFragment implements ContactsView, Expa
      */
     @Override
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-        Log.e(String.valueOf(groupPosition), String.valueOf(childPosition));
         ((MainView)getActivity()).startChatFragment(groupPosition, childPosition);
         return true;
     }

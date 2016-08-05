@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+    <ImageButton
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:id="@+id/imageButton_icon"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"/>
+
+    <ImageButton
+        android:layout_width="96dp"
+        android:layout_height="32dp"
+        android:id="@+id/imageView_audio"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="16dp"
+        android:layout_alignTop="@id/imageButton_icon"
+        android:layout_toEndOf="@+id/imageButton_icon"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="30s"
+        android:id="@+id/textView_time"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:layout_alignTop="@+id/imageView_audio"
+        android:layout_toEndOf="@+id/imageView_audio"/>
+
+</RelativeLayout>

@@ -1,4 +1,5 @@
 <resources>
+    <!-- 文字参数 -->
     <string name="app_name">家校通教师版</string>
     <string name="assignment_title">标题</string>
 </resources>

@@ -2,6 +2,7 @@ package com.tianxing.ui.fragment.child;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -14,6 +15,9 @@ import android.widget.LinearLayout;
 
 import com.squareup.picasso.Picasso;
 import com.tianxing.fscteachersedition.R;
+import com.tianxing.presenter.child.ChatPresenter;
+import com.tianxing.presenter.child.ChatViewPresenter;
+import com.tianxing.ui.adapter.ChatListAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,9 +52,13 @@ public class ChatFragment extends BaseBackFragment{
     @BindView(R.id.imageButton_record)
     ImageButton buttonRecord;
 
+    private ChatPresenter presenter;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = new ChatViewPresenter();
+
     }
 
 
@@ -62,6 +70,9 @@ public class ChatFragment extends BaseBackFragment{
         toolBarInit(toolbar);
         setToolBarTitle("联系人");
         linearLayoutItemSelect.setVisibility(View.GONE);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(new ChatListAdapter(getContext(), presenter));
+
         //设置图标
         Picasso.with(getContext()).load(R.mipmap.chatview_button_send).into(buttonSend);
         Picasso.with(getContext()).load(R.mipmap.chatview_button_picture).into(buttonPicture);

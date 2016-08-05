@@ -103,4 +103,28 @@ public interface ContactsPool {
      * */
     void putClassInfo(ClassInfo classInfo);
 
+
+
+
+
+
+
+
+    /**
+     * 取得消息条数
+     * */
+
+
+
+    /**
+     * 取得对应位置的一条消息
+     * */
+
+
+    /**
+     * 存入一条消息
+     * */
+
+
+
 }

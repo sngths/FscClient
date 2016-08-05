@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- 尺寸参数 -->
     <dimen name="bottom_bar_height">52dp</dimen>
     <dimen name="chat_editText_height">52dp</dimen>
+    <!-- 基准间距 -->
+    <dimen name="base_component_gap">8dp</dimen>
+    <dimen name="base_Iconography_gap">4dp</dimen>
+    <!-- 文字尺寸 -->
+    <dimen name="Title_TextSize">20sp</dimen>
+    <dimen name="Button_TextSize">15sp</dimen>
+    <dimen name="Subheading_TextSize">17sp</dimen>
+    <dimen name="Body_TextSize">15sp</dimen>
+    <!--  图形尺寸 -->
+    <dimen name="StatusBar_height">24dp</dimen>
+    <dimen name="ToolBar_height">56dp</dimen>
+    <dimen name="Subtitle_height">48dp</dimen>
+    <dimen name="ListItem_height">72dp</dimen>
+
+
 </resources>
