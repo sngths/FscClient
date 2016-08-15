@@ -8,10 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import com.squareup.picasso.Picasso;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.child.ChatGroupPresenter;
 
 import java.util.List;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
  * Created by tianxing on 16/8/3.
@@ -105,7 +108,7 @@ public class ChatGroupListAdapter extends RecyclerView.Adapter<ChatGroupListAdap
      */
     @Override
     public int getItemCount() {
-        return 6;
+        return 15;
     }
 
     class mViewHold extends RecyclerView.ViewHolder{
@@ -115,14 +118,14 @@ public class ChatGroupListAdapter extends RecyclerView.Adapter<ChatGroupListAdap
         public mViewHold(View itemView) {
             super(itemView);
             this.view = itemView;
-            icon = (ImageButton) view.findViewById(R.id.imageButton_icon);
+            icon = (ImageButton) view.findViewById(R.id.imageView_icon);
         }
 
         /**
          * 设置头像
          * */
         void setUserIcon(){
-            //Picasso.with(inflater.getContext()).load(R.mipmap.user_icon).transform(new CropCircleTransformation()).into(icon);
+            Picasso.with(inflater.getContext()).load(R.mipmap.user_icon_40dp).transform(new CropCircleTransformation()).into(icon);
         }
     }
 }

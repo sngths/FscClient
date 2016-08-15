@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -35,7 +36,7 @@ public class ChatFragment extends BaseBackFragment{
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.imageButton_send)
-    ImageButton buttonSend;
+    Button buttonSend;
     @BindView(R.id.imageButton_more)
     ImageButton buttonMore;
     @BindView(R.id.editText_input)
@@ -74,7 +75,6 @@ public class ChatFragment extends BaseBackFragment{
         recyclerView.setAdapter(new ChatListAdapter(getContext(), presenter));
 
         //设置图标
-        Picasso.with(getContext()).load(R.mipmap.chatview_button_send).into(buttonSend);
         Picasso.with(getContext()).load(R.mipmap.chatview_button_picture).into(buttonPicture);
         Picasso.with(getContext()).load(R.mipmap.chatview_button_capture).into(buttonCapture);
         Picasso.with(getContext()).load(R.mipmap.chatview_button_recording).into(buttonRecord);

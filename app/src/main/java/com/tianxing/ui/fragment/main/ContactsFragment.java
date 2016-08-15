@@ -2,17 +2,19 @@ package com.tianxing.ui.fragment.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
+import android.widget.AdapterView;
 
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.main.ContactsPresenter;
 import com.tianxing.presenter.main.ContactsViewPresenter;
-import com.tianxing.ui.activity.MainView;
-import com.tianxing.ui.adapter.ContactsExpandableListAdapter;
+import com.tianxing.ui.activity.MainActivity;
+import com.tianxing.ui.adapter.ContactsListAdapter;
 import com.tianxing.ui.fragment.BaseFragment;
+import com.tianxing.ui.view.PinnedSectionListView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,20 +23,20 @@ import butterknife.Unbinder;
 /**
  * Created by tianxing on 16/7/11.
  */
-public class ContactsFragment extends BaseFragment implements ContactsView, ExpandableListView.OnChildClickListener{
+public class ContactsFragment extends BaseFragment implements ContactsView, AdapterView.OnItemClickListener{
     public static final String TAG = "ContactsFragment";
 
     private static ContactsFragment fragment = null;
 
-    //@BindView(R.id.recyclerView)
-    //RecyclerView recyclerView;
-    @BindView(R.id.expandableListView)
-    ExpandableListView expandableListView;
+
+    //@BindView(R.id.expandableListView)
+    //ExpandableListView expandableListView;
+    @BindView(R.id.pinnedSectionListView_contacts)
+    PinnedSectionListView listView;
     private Unbinder unbinder;
 
     private ContactsPresenter presenter;
-    //private ArrayList<ContactsParentItemList> parentItemLists;//折叠列表数据
-    //private ContactsExpandableViewAdaper expandableViewAdaper;
+
 
 
     public ContactsFragment(){
@@ -59,11 +61,13 @@ public class ContactsFragment extends BaseFragment implements ContactsView, Expa
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_contects, container, false);
+        View view = inflater.inflate(R.layout.fragment_contacts, container, false);
         unbinder = ButterKnife.bind(this, view);
         //ExpandableViewInitialize();
-        expandableListView.setAdapter(new ContactsExpandableListAdapter(getContext(), presenter));
-        expandableListView.setOnChildClickListener(this);
+        //expandableListView.setAdapter(new ContactsExpandableListAdapter(getContext(), presenter));
+        //expandableListView.setOnChildClickListener(this);
+        listView.setAdapter(new ContactsListAdapter(getContext(), presenter));
+        listView.setOnItemClickListener(this);
         return view;
     }
 
@@ -96,22 +100,27 @@ public class ContactsFragment extends BaseFragment implements ContactsView, Expa
         unbinder.unbind();
     }
 
+
+
     /**
-     * Callback method to be invoked when a child in this expandable list has
+     * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
+     * <p/>
+     * Implementers can call getItemAtPosition(position) if they need
+     * to access the data associated with the selected item.
      *
-     * @param parent        The ExpandableListView where the click happened
-     * @param v             The view within the expandable list/ListView that was clicked
-     * @param groupPosition The group position that contains the child that
-     *                      was clicked
-     * @param childPosition The child position within the group
-     * @param id            The row id of the child that was clicked
-     * @return True if the click was handled
+     * @param parent   The AdapterView where the click happened.
+     * @param view     The view within the AdapterView that was clicked (this
+     *                 will be a view provided by the adapter)
+     * @param position The position of the view in the adapter.
+     * @param id       The row id of the item that was clicked.
      */
     @Override
-    public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-        ((MainView)getActivity()).startChatFragment(groupPosition, childPosition);
-        return true;
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.e(TAG, String.valueOf(presenter.getItemTitle(position)));
+        //启动聊天界面
+        ((MainActivity)getActivity()).startChatFragment(presenter.getParentPosition(position), presenter.getChildPosition(position));
+
     }
 
 

@@ -13,6 +13,15 @@ import java.util.List;
 public interface ContactsPool {
 
 
+
+
+    /**
+     * 取得对应位置标题
+     * */
+    String getTitle(int parentPosition, int childPosition);
+
+
+
     /**
      * 取得群组数目
      * */

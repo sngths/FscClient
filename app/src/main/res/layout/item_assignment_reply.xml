@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+    android:background="@color/background_primary_white">
+
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@null"
+        android:id="@+id/imageView_icon"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="用户名"
+        android:textSize="@dimen/Subheading_TextSize"
+        android:layout_marginTop="4dp"
+        android:padding="4dp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/textView_username"
+        android:layout_alignTop="@+id/imageView_icon"
+        android:layout_toEndOf="@+id/imageView_icon"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/Micro_TextSize"
+        android:text="8-25"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/textView_date"
+        android:paddingStart="4dp"
+        android:layout_below="@+id/textView_username"
+        android:layout_alignStart="@+id/textView_username"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="17:20"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/Micro_TextSize"
+        android:id="@+id/textView_time"
+        android:layout_alignTop="@+id/textView_date"
+        android:layout_toEndOf="@+id/textView_date"
+        android:layout_marginStart="12dp"/>
+    <!-- 分割线 -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginStart="72dp"
+        android:background="@color/background_primary"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="12dp">
+    </FrameLayout>
+</RelativeLayout>

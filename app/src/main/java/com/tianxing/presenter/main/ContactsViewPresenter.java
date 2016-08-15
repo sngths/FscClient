@@ -7,8 +7,6 @@ import com.tianxing.model.App;
 import com.tianxing.model.ContactsPool;
 import com.tianxing.ui.fragment.main.ContactsView;
 
-import java.util.List;
-
 /**
  * Created by tianxing on 16/7/21.
  */
@@ -37,71 +35,119 @@ public class ContactsViewPresenter implements ContactsPresenter {
 
 
     /**
-     * 取得群组数目
-     */
-    @Override
-    public Integer getGroupCount() {
-        return contactsPool.getGroupCount();
+     * 取子项组数
+     * */
+    private int getItemGroupCount(){
+        return contactsPool.getClassCount() + 2;
+    }
+
+
+    /**
+     * 取得每组子项数目
+     * */
+    private int getItemCount(int groupPosition){
+        if (groupPosition == 0){
+            return contactsPool.getGroupCount();
+        }else if (groupPosition == 1){
+            return contactsPool.getFriendCount();
+        }else {
+            return contactsPool.getStudentCount(groupPosition -2);
+        }
     }
 
     /**
-     * 取得群组列表
+     * 取得列表项数 包括标题项
      */
     @Override
-    public List<GroupInfo> getGroupInfos() {
-        return contactsPool.getGroupInfoList();
+    public int getItemCount() {
+        int groupItemCount = contactsPool.getGroupCount() + 1;
+        int friendItemCount = contactsPool.getFriendCount() + 1;
+        int studendItemCount = 0;
+        for (int i = 0; i < contactsPool.getClassCount(); i++) {
+            studendItemCount += contactsPool.getStudentCount(i);
+            studendItemCount += 1;
+        }
+        return groupItemCount + friendItemCount + studendItemCount;
     }
 
     /**
-     * 取得好友数目
-     */
-    @Override
-    public Integer getFriendsCount() {
-        return contactsPool.getFriendCount();
-    }
-
-    /**
-     * 取得好友列表
-     */
-    @Override
-    public List<UserInfo> getFriendsInfo() {
-
-        return contactsPool.getFriendList();
-    }
-
-    /**
-     * 取得班级数目
-     */
-    @Override
-    public Integer getClassCount() {
-        return contactsPool.getClassCount();
-    }
-
-    /**
-     * 取得对应位置的班级学生列表
+     * 取得父项位置
      *
      * @param position
      */
     @Override
-    public List<UserInfo> getStudentList(Integer position) {
-        return contactsPool.getStudentList(position);
+    public int getParentPosition(int position) {
+        int parentPosition = -1;
+        //计算出组和子项的位置
+        int itemCount = position + 1;
+        for (int i = 0; i <getItemGroupCount() ; i++) {
+            if (itemCount - getItemCount(i) - 1 <= 0){
+                parentPosition = i;
+                break;
+            }else {
+                itemCount -= getItemCount(i) + 1;
+            }
+        }
+        return parentPosition;
     }
 
     /**
-     * 取得对应位置的子项数目
+     * 取得子项位置
      *
-     * @param parentPosition
+     * @param position
      */
     @Override
-    public Integer getChildItemCount(Integer parentPosition) {
-        int count = 0;
-        if (parentPosition == 0){
-            count = contactsPool.getGroupCount();
-        }else if (parentPosition == 1){
-            count = contactsPool.getFriendCount();
-        }else if (parentPosition > 1){
-            count = contactsPool.getStudentCount(parentPosition - 2);
+    public int getChildPosition(int position) {
+        int childPosition = -1;
+        //计算出组和子项的位置
+        int itemCount = position + 1;
+        for (int i = 0; i <getItemGroupCount() ; i++) {
+            if (itemCount - getItemCount(i) - 1 <= 0){
+                if (itemCount - getItemCount(i) -1 == - getItemCount(i)){
+                    childPosition = -1;//表示为标题
+                }else {
+                    childPosition = itemCount - 2;
+                }
+                break;
+            }else {
+                itemCount -= getItemCount(i) + 1;
+            }
         }
-        return count;
+        return childPosition;
+    }
+
+    /**
+     * 取得对应位置的视图类型
+     *
+     * @param position
+     * @return 返回VIEW_TYPE_Header = 0 或 VIEW_TYPE_ITEM = 1
+     */
+    @Override
+    public int getItemType(int position) {
+
+        int itemCount = position + 1;
+        for (int i = 0; i < getItemGroupCount(); i++) {
+            if (itemCount - getItemCount(i) - 1 <= 0){
+                if (itemCount - getItemCount(i) - 1 == - getItemCount(i)){
+                    return VIEW_TYPE_HEADER;
+                }else {
+                    return VIEW_TYPE_ITEM;
+                }
+            }else {
+                itemCount -= getItemCount(i) + 1;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 取得对应位置的视图标题
+     *
+     * @param position
+     */
+    @Override
+    public String getItemTitle(int position) {
+        //取得标题
+        return contactsPool.getTitle(getParentPosition(position), getChildPosition(position));
     }
 }

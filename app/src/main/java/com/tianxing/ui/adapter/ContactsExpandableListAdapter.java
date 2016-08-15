@@ -52,7 +52,7 @@ public class ContactsExpandableListAdapter implements ExpandableListAdapter {
      */
     @Override
     public int getGroupCount() {
-        return presenter.getClassCount() + 2;
+        return 0;
     }
 
     /**
@@ -64,7 +64,7 @@ public class ContactsExpandableListAdapter implements ExpandableListAdapter {
      */
     @Override
     public int getChildrenCount(int groupPosition) {
-        return presenter.getChildItemCount(groupPosition);
+        return 0;
     }
 
     /**
@@ -154,7 +154,7 @@ public class ContactsExpandableListAdapter implements ExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         GroupViewHold viewHold;
         if (convertView == null){
-            convertView= inflater.inflate(R.layout.expandableview_item_parent, parent, false);
+            convertView= inflater.inflate(R.layout.listview_contects_header, parent, false);
             viewHold = new GroupViewHold(convertView);
             convertView.setTag(viewHold);
         }else {
@@ -185,7 +185,7 @@ public class ContactsExpandableListAdapter implements ExpandableListAdapter {
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         ChildViewHold viewHold;
         if (convertView == null){
-            convertView = inflater.inflate(R.layout.expandableview_item_child, parent, false);
+            convertView = inflater.inflate(R.layout.listview_contects_item, parent, false);
             ImageView icon = (ImageView) convertView.findViewById(R.id.imageView_icon);
             Picasso.with(inflater.getContext()).load(R.mipmap.user_icon).transform(new CropCircleTransformation()).into(icon);
             viewHold = new ChildViewHold(convertView);

@@ -7,7 +7,8 @@
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
         android:layout_marginLeft="12dp"
-        android:id="@+id/imageButton_icon"
+        android:id="@+id/imageView_icon"
+        android:background="@null"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"/>
     <TextView
@@ -15,17 +16,17 @@
         android:layout_height="wrap_content"
         android:text="用户名"
         android:id="@+id/textView_username"
-        android:layout_alignTop="@id/imageButton_icon"
+        android:layout_alignTop="@id/imageView_icon"
         android:layout_marginLeft="12dp"
         android:padding="4dp"
-        android:layout_toEndOf="@+id/imageButton_icon"
-        android:textSize="12sp"/>
+        android:layout_toEndOf="@+id/imageView_icon"
+        android:textSize="@dimen/Small_TextSize"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="文本内容"
-        android:textSize="16sp"
+        android:textSize="@dimen/Medium_TextSize"
         android:gravity="center"
         android:paddingStart="16dp"
         android:paddingTop="8dp"
@@ -35,6 +36,6 @@
         android:layout_marginLeft="4dp"
         android:layout_marginBottom="16dp"
         android:layout_below="@+id/textView_username"
-        android:layout_toEndOf="@+id/imageButton_icon"/>
+        android:layout_toEndOf="@+id/imageView_icon"/>
 
 </RelativeLayout>

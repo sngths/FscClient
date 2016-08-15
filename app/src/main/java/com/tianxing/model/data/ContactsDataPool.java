@@ -34,6 +34,33 @@ public class ContactsDataPool implements ContactsPool {
 
 
     /**
+     * 取得对应位置标题
+     *
+     * @param parentPosition
+     * @param childPosition
+     */
+    @Override
+    public String getTitle(int parentPosition, int childPosition) {
+        if (childPosition == -1){
+            if (parentPosition == 0){
+                return "班级群";
+            }else if (parentPosition == 1){
+                return "好友";
+            }else {
+                return "班级" + String.valueOf(parentPosition - 1);
+            }
+        }else {
+            if (parentPosition == 0){
+                return "班级群" + String.valueOf(childPosition + 1);
+            }else if (parentPosition == 1){
+                return "好友" + String.valueOf(childPosition + 1);
+            }else {
+                return "学生" + String.valueOf(childPosition + 1);
+            }
+        }
+    }
+
+    /**
      * 取得群组数目
      */
     @Override

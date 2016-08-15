@@ -11,6 +11,10 @@
     <dimen name="Button_TextSize">15sp</dimen>
     <dimen name="Subheading_TextSize">17sp</dimen>
     <dimen name="Body_TextSize">15sp</dimen>
+    <dimen name="Micro_TextSize">12sp</dimen>
+    <dimen name="Small_TextSize">14sp</dimen>
+    <dimen name="Medium_TextSize">16sp</dimen>
+    <dimen name="Large_TextSize">16sp</dimen>
     <!--  图形尺寸 -->
     <dimen name="StatusBar_height">24dp</dimen>
     <dimen name="ToolBar_height">56dp</dimen>

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.ui.fragment.child.AssignemntReleaseFragment;
 import com.tianxing.ui.fragment.child.AssignmentDetailFragment;
+import com.tianxing.ui.fragment.child.AssignmentReplyFragment;
 import com.tianxing.ui.fragment.child.BaseBackFragment;
 import com.tianxing.ui.fragment.child.ChatFragment;
 import com.tianxing.ui.fragment.child.ChatGroupFragment;
@@ -61,6 +62,17 @@ public class MainActivity extends BaseActivity implements MainView {
     }
 
     /**
+     * 启动回复详情界面
+     */
+    @Override
+    public void startAssignmentReplyFragment() {
+        AssignmentReplyFragment fragment = new AssignmentReplyFragment();
+        Bundle bundle = new Bundle();
+        fragment.setArguments(bundle);
+        startFragment(fragment);
+    }
+
+    /**
      * 启动作业发布界面
      */
     @Override
@@ -89,6 +101,8 @@ public class MainActivity extends BaseActivity implements MainView {
         fragment.setArguments(bundle);
         startFragment(fragment);
     }
+
+
 
 
 

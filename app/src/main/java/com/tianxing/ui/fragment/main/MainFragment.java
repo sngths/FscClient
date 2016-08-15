@@ -88,11 +88,11 @@ public class MainFragment extends BaseFragment {
 
 
     private void initView(){
-        bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_icon1_24dp, "作业"));
-        bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_icon2_24dp, "课堂"));
+        bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_assignment_24dp, "作业"));
+        bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_class_24dp, "课堂"));
         bottomBar.addItem(new BottomBarReleaseTab(getContext()));//发布按钮
-        bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_icon3_24dp, "学生"));
-        bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_icon3_24dp, "我的"));
+        bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_contects_24dp, "学生"));
+        bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_config, "我的"));
         bottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position, int prePosition) {

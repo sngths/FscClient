@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/background_primary_white"
+                android:layout_marginTop="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="一年级二班(15/30)"
+        android:layout_marginStart="16dp"
+        android:id="@+id/textView5"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"/>
+    <!--  分割线 -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/background_primary">
+    </FrameLayout>
+</RelativeLayout>

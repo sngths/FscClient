@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@color/background_primary_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="标题"
+        android:textSize="@dimen/Title_TextSize"
+        android:id="@+id/textView_title"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:padding="4dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8-10"
+        android:padding="4dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/Micro_TextSize"
+        android:id="@+id/textView_date"
+
+        android:layout_alignBottom="@+id/textView_title"
+        android:layout_toEndOf="@+id/textView_title"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="14:30"
+        android:textSize="@dimen/Micro_TextSize"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/textView_time"
+        android:padding="4dp"
+        android:layout_alignBottom="@+id/textView_date"
+        android:layout_toEndOf="@+id/textView_date"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/Medium_TextSize"
+        android:padding="4dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginStart="12dp"
+        android:text="5人已提交"
+        android:id="@+id/textView_submit"
+        android:layout_toEndOf="@+id/textView_time"
+        android:layout_alignBottom="@+id/textView_title"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/Medium_TextSize"
+        android:text="1.阅读第一单元第三课 \n2.完成课后习题"
+        android:id="@+id/textView_content"
+        android:padding="4dp"
+        android:layout_alignStart="@+id/textView_title"
+        android:layout_below="@+id/textView_title"/>
+
+    <ImageButton
+        android:layout_width="160dp"
+        android:layout_height="120dp"
+        android:id="@+id/imageButton_image"
+        android:background="@color/background_primary"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_below="@+id/textView_content"/>
+
+    <RelativeLayout
+        android:layout_width="72dp"
+        android:layout_height="32dp"
+        android:layout_below="@+id/imageButton_image"
+        android:background="@color/background_primary"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp">
+    </RelativeLayout>
+</RelativeLayout>

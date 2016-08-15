@@ -33,7 +33,7 @@ public class AssignmentListAdapter extends Adapter<AssignmentListAdapter.mViewHo
 
     @Override
     public mViewHold onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view  = inflater.inflate(R.layout.cardview_assignment, parent, false);
+        View view  = inflater.inflate(R.layout.item_assignment, parent, false);
         final mViewHold hold = new mViewHold(view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override

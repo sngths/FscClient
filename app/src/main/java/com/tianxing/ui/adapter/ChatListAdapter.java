@@ -5,12 +5,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
+import com.squareup.picasso.Picasso;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.child.ChatPresenter;
 
 import java.util.List;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
  * Created by tianxing on 16/8/3.
@@ -96,7 +100,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.mViewH
      */
     @Override
     public void onBindViewHolder(mViewHold holder, int position) {
-
+        holder.setUserIcon();
     }
 
     /**
@@ -106,13 +110,23 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.mViewH
      */
     @Override
     public int getItemCount() {
-        return 6;
+        return 15;
     }
 
     class mViewHold extends RecyclerView.ViewHolder{
 
+        private ImageButton icon;
+
         public mViewHold(View itemView) {
             super(itemView);
+            icon = (ImageButton) itemView.findViewById(R.id.imageView_icon);
+        }
+
+        /**
+         * 设置头像
+         * */
+        void setUserIcon(){
+            Picasso.with(inflater.getContext()).load(R.mipmap.user_icon_40dp).transform(new CropCircleTransformation()).into(icon);
         }
     }
 }

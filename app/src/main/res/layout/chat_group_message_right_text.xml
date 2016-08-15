@@ -5,9 +5,10 @@
     <ImageButton
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:id="@+id/imageButton_icon"
+        android:id="@+id/imageView_icon"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
+        android:background="@null"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="12dp"
         android:layout_alignParentRight="true"
@@ -19,9 +20,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView_message"
         android:text="文本内容"
-        android:textSize="16dp"
+        android:textSize="@dimen/Medium_TextSize"
         android:padding="8dp"
-        android:layout_toStartOf="@+id/imageButton_icon"
+        android:layout_toStartOf="@+id/imageView_icon"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="8dp"/>
 
