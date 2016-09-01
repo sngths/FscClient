@@ -27,9 +27,15 @@ public interface MainView {
 
 
     /**
-     * 启动聊天界面 包括群聊和一对一聊天界面
+     * 启动聊天界面
      * */
-    void startChatFragment(Integer parentPosition, Integer childPosition);
+    void startChatFragment(String username);
+
+
+    /**
+     * 驱动群聊天界面
+     * */
+    void startGroupChatFragment(String roomName);
 
     /**
      * 返回 操作

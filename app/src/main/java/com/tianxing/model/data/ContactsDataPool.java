@@ -20,15 +20,30 @@ public class ContactsDataPool implements ContactsPool {
 
 
 
-
-
-
-
-
     public ContactsDataPool(){
         Groups = new ArrayList<>();
         Friends = new ArrayList<>();
         Classes = new ArrayList<>();
+
+        //存入一些联系人数据  这些数据在登录完成后 从服务器获取
+        //群
+        GroupInfo groupInfo = new GroupInfo();
+        groupInfo.setRoomName("c1d1");
+        putGroupInfo(groupInfo);
+        //好友
+        putFriendInfo(new UserInfo("user1"));
+        putFriendInfo(new UserInfo("user2"));
+        putFriendInfo(new UserInfo("user3"));
+        putFriendInfo(new UserInfo("user4"));
+        putFriendInfo(new UserInfo("user5"));
+        //学生
+        ClassInfo classInfo = new ClassInfo();
+        classInfo.putUserInfo(new UserInfo("user6"));
+        classInfo.putUserInfo(new UserInfo("user7"));
+        classInfo.putUserInfo(new UserInfo("user8"));
+        classInfo.putUserInfo(new UserInfo("user9"));
+        classInfo.putUserInfo(new UserInfo("user10"));
+        putClassInfo(classInfo);
 
     }
 

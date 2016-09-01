@@ -1,8 +1,5 @@
 package com.tianxing.presenter.main;
 
-import com.tianxing.entity.info.ClassInfo;
-import com.tianxing.entity.info.GroupInfo;
-import com.tianxing.entity.info.UserInfo;
 import com.tianxing.model.App;
 import com.tianxing.model.ContactsPool;
 import com.tianxing.ui.fragment.main.ContactsView;
@@ -19,17 +16,7 @@ public class ContactsViewPresenter implements ContactsPresenter {
     public ContactsViewPresenter(ContactsView view){
         this.view = view;
         contactsPool = App.getInstance().getContactsPool();
-        //存入一些预设数据
-        contactsPool.putGroupInfo(new GroupInfo());
-        contactsPool.putGroupInfo(new GroupInfo());
-        contactsPool.putGroupInfo(new GroupInfo());
-        contactsPool.putGroupInfo(new GroupInfo());
-        contactsPool.putFriendInfo(new UserInfo());
-        contactsPool.putFriendInfo(new UserInfo());
-        contactsPool.putFriendInfo(new UserInfo());
-        contactsPool.putFriendInfo(new UserInfo());
-        contactsPool.putClassInfo(new ClassInfo());
-        contactsPool.putClassInfo(new ClassInfo());
+
 
     }
 
@@ -149,5 +136,32 @@ public class ContactsViewPresenter implements ContactsPresenter {
     public String getItemTitle(int position) {
         //取得标题
         return contactsPool.getTitle(getParentPosition(position), getChildPosition(position));
+    }
+
+    /**
+     * 取得群组名称
+     *
+     * @param position
+     */
+    @Override
+    public String getRoomName(int position) {
+        return contactsPool.getGroupInfo(position).getRoomName();
+    }
+
+    /**
+     * 取得会话用户名称
+     *
+     * @param parentPosition
+     * @param childPosition
+     */
+    @Override
+    public String getUsername(int parentPosition, int childPosition) {
+        String userName;
+        if (parentPosition == 1){
+            userName = contactsPool.getFriendInfo(childPosition).getUsername();
+        }else {
+            userName = contactsPool.getStudentInfo(parentPosition - 2, childPosition).getUsername();
+        }
+        return userName;
     }
 }

@@ -28,7 +28,7 @@ public interface ContactsPool {
     Integer getGroupCount();
 
     /**
-     * 取得对应位置的一个群主信息
+     * 取得对应位置的一个群组信息
      * */
     GroupInfo getGroupInfo(Integer position);
 

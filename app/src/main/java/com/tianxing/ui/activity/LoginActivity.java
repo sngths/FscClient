@@ -1,9 +1,8 @@
 package com.tianxing.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.widget.RelativeLayout;
 
 import com.tianxing.fscteachersedition.R;
@@ -16,11 +15,13 @@ import butterknife.ButterKnife;
  * Created by tianxing on 16/7/7.
  *
  */
-public class LoginActivity extends FragmentActivity {
+public class LoginActivity extends BaseActivity {
     private static final String TAG = "LoginActivity";
 
     @BindView(R.id.relativeLayout_activity_login)
     RelativeLayout relativeLayout;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,7 +29,6 @@ public class LoginActivity extends FragmentActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         getSupportFragmentManager().beginTransaction().add(R.id.relativeLayout_activity_login, new LoginFragment(), LoginFragment.TAG).commit();
-        Log.e(TAG, "onCreate");
     }
 
 
@@ -36,5 +36,21 @@ public class LoginActivity extends FragmentActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+    }
+
+
+
+    /**
+     * 跳转到主界面
+     */
+    public void startMainActivity() {
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+    }
+
+    /**
+     * 跳转注册界面
+     * */
+    public void startRegisterFragment(){
+
     }
 }

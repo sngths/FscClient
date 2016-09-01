@@ -2,7 +2,6 @@ package com.tianxing.ui.fragment.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,28 +71,6 @@ public class ContactsFragment extends BaseFragment implements ContactsView, Adap
     }
 
 
-    /**
-     * 通过Presenter获取数据来初始化可折叠列表
-     *
-    private void ExpandableViewInitialize(){
-
-        ArrayList<ContactsParentItemList> parentItemLists = new ArrayList<>();
-        //群组列表
-        parentItemLists.add(new ContactsParentItemList<>(presenter.getGroupInfos()));
-        //好友列表
-        parentItemLists.add(new ContactsParentItemList<>(presenter.getFriendsInfo()));
-        //班级学生列表
-        for (int i = 0; i < presenter.getClassCount(); i++) {
-            parentItemLists.add(new ContactsParentItemList<>(presenter.getStudentList(i)));
-        }
-        expandableViewAdaper = new ContactsExpandableViewAdaper(getContext(), parentItemLists);
-        expandableViewAdaper.setExpandCollapseListener(this);
-        expandableViewAdaper.setOnClickListener(this);
-        recyclerView.setAdapter(expandableViewAdaper);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-    }*/
-
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -102,24 +79,18 @@ public class ContactsFragment extends BaseFragment implements ContactsView, Adap
 
 
 
-    /**
-     * Callback method to be invoked when an item in this AdapterView has
-     * been clicked.
-     * <p/>
-     * Implementers can call getItemAtPosition(position) if they need
-     * to access the data associated with the selected item.
-     *
-     * @param parent   The AdapterView where the click happened.
-     * @param view     The view within the AdapterView that was clicked (this
-     *                 will be a view provided by the adapter)
-     * @param position The position of the view in the adapter.
-     * @param id       The row id of the item that was clicked.
-     */
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.e(TAG, String.valueOf(presenter.getItemTitle(position)));
         //启动聊天界面
-        ((MainActivity)getActivity()).startChatFragment(presenter.getParentPosition(position), presenter.getChildPosition(position));
+        int parentPosition = presenter.getParentPosition(position);
+        int childPosition = presenter.getChildPosition(position);
+        if (parentPosition == 0){
+            //启动多人聊天窗口
+            ((MainActivity)getActivity()).startGroupChatFragment(presenter.getRoomName(childPosition));
+        }else {
+            ((MainActivity)getActivity()).startChatFragment(presenter.getUsername(parentPosition, childPosition));
+        }
 
     }
 

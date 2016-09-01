@@ -12,7 +12,7 @@ import com.tianxing.presenter.LoadingPresenter;
 /**
  * Created by tianxing on 16/7/5.
  */
-public class LoadingActivity extends BaseActivity {
+public class LoadingActivity extends BaseActivity implements LoadingView{
 
     private LoadingPresenter presenter;
     private Boolean isActivityStarted = false;
@@ -38,7 +38,7 @@ public class LoadingActivity extends BaseActivity {
 
 
                     try {
-                        Thread.currentThread().sleep(1000);
+                        Thread.currentThread().sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -83,7 +83,8 @@ public class LoadingActivity extends BaseActivity {
             if (!refreshToken.equals("")){
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             }else {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                //startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
             isActivityStarted = true;
             this.finish();

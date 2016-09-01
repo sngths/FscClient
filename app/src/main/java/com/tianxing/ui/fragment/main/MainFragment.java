@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tianxing.fscteachersedition.R;
+import com.tianxing.presenter.MainPresenter;
+import com.tianxing.presenter.main.MainViewPresenter;
 import com.tianxing.ui.activity.MainActivity;
 import com.tianxing.ui.fragment.BaseFragment;
 import com.tianxing.ui.view.BottomBar;
@@ -34,10 +36,13 @@ public class MainFragment extends BaseFragment {
     @BindView(R.id.toolBar)
     Toolbar toolbar;
 
+    private MainPresenter presenter;
+
     private Fragment[] fragments = new Fragment[4];
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = new MainViewPresenter();
     }
 
     @Nullable

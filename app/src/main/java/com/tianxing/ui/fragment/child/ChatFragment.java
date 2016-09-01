@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +28,11 @@ import butterknife.Unbinder;
  * Created by tianxing on 16/7/26.
  * 单人会话窗口
  */
-public class ChatFragment extends BaseBackFragment{
+public class ChatFragment extends BaseBackFragment implements ChatView {
+    private static final String TAG = "ChatFragment";
+    private String userName; //联系人姓名
     private Unbinder unbinder;
+
     @BindView(R.id.toolbar_child_Fragment)
     Toolbar toolbar;
     @BindView(R.id.recyclerView)
@@ -54,12 +56,18 @@ public class ChatFragment extends BaseBackFragment{
     ImageButton buttonRecord;
 
     private ChatPresenter presenter;
+    private ChatListAdapter adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new ChatViewPresenter();
 
+        //当前用户联系人
+        if (savedInstanceState != null) {
+            userName = savedInstanceState.getString("userName");
+        }
+        userName = getArguments().getString("userName");
+        presenter = new ChatViewPresenter(this, userName);
     }
 
 
@@ -72,7 +80,8 @@ public class ChatFragment extends BaseBackFragment{
         setToolBarTitle("联系人");
         linearLayoutItemSelect.setVisibility(View.GONE);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(new ChatListAdapter(getContext(), presenter));
+        adapter = new ChatListAdapter(getContext(), presenter);
+        recyclerView.setAdapter(adapter);
 
         //设置图标
         Picasso.with(getContext()).load(R.mipmap.chatview_button_picture).into(buttonPicture);
@@ -84,7 +93,14 @@ public class ChatFragment extends BaseBackFragment{
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        presenter.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("userName", userName);
     }
 
     @Override
@@ -93,37 +109,53 @@ public class ChatFragment extends BaseBackFragment{
     }
 
 
-
     /**
      * 各个按钮添加点击监听
-     * */
+     */
     @OnClick(R.id.imageButton_send)
-    public void send(){
-        if (!editTextInput.getText().toString().equals("")){
-            Log.e("Chat", "send message: " + editTextInput.getText().toString());
+    public void send() {
+        if (!editTextInput.getText().toString().equals("")) {
+            //发送消息
+            presenter.sendTextMessage(editTextInput.getText().toString());
             editTextInput.setText("");
         }
-
     }
+
     @OnClick(R.id.imageButton_more)
-    public void more(){
-        if (linearLayoutItemSelect.getVisibility() == View.VISIBLE){
+    public void more() {
+        if (linearLayoutItemSelect.getVisibility() == View.VISIBLE) {
             linearLayoutItemSelect.setVisibility(View.GONE);
-        }else {
+        } else {
             linearLayoutItemSelect.setVisibility(View.VISIBLE);
         }
         hideKeyboard();
     }
+
     @OnClick(R.id.imageButton_picture)
-    public void picture(){
+    public void picture() {
+        //选择图片
 
     }
+
     @OnClick(R.id.imageButton_capture)
-    public void capture(){
+    public void capture() {
+        //启动拍照
 
     }
-    @OnClick(R.id.imageButton_record)
-    public void record(){
 
+    @OnClick(R.id.imageButton_record)
+    public void record() {
+        //开始录音
+
+    }
+
+    /**
+     * 消息列表数据更新
+     */
+    @Override
+    public void onMessageListUpdate() {
+        adapter.notifyDataSetChanged();
+        //滚动到底部
+        recyclerView.scrollToPosition(presenter.getMessageCount() - 1);
     }
 }

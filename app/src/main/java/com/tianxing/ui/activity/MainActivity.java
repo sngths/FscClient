@@ -20,7 +20,7 @@ import java.util.Stack;
  *
  */
 public class MainActivity extends BaseActivity implements MainView {
-
+    private static final String TAG = "MainActivity";
 
     private String currentFragmentTag; //当前正在显示的Fragment的Tag
     Stack<BaseBackFragment> fragmentStack = new Stack<>();//Fragment栈
@@ -80,18 +80,46 @@ public class MainActivity extends BaseActivity implements MainView {
         startFragment(new AssignemntReleaseFragment());
     }
 
+
+
+    @Override
+    public void startChatFragment(String username) {
+        Bundle bundle = new Bundle();
+        bundle.putString("userName", username);
+        ChatFragment fragment = new ChatFragment();
+        fragment.setArguments(bundle);
+        startFragment(fragment);
+    }
+
+
+
+    @Override
+    public void startGroupChatFragment(String roomName) {
+        Bundle bundle = new Bundle();
+        bundle.putString("roomName", roomName);
+        ChatGroupFragment fragment = new ChatGroupFragment();
+        fragment.setArguments(bundle);
+        startFragment(fragment);
+    }
+
     /**
      * 启动聊天界面 包括群聊和一对一聊天界面
      *
      * @param parentPosition
      * @param childPosition
-     */
-    @Override
+*/    /*@Override
     public void startChatFragment(Integer parentPosition, Integer childPosition) {
         //启动对应会话界面
+
+        //取得用户名
+
         Bundle bundle = new Bundle();
-        bundle.putInt("parentPosition", parentPosition);
-        bundle.putInt("childPosition", childPosition);
+        if (parentPosition == 1){//好友组
+            bundle.putString("userName", App.getInstance().getContactsPool().getFriendInfo(childPosition).getUsername());
+        }else if (parentPosition > 1){//学生组
+            bundle.putString("userName", App.getInstance().getContactsPool().getStudentInfo(parentPosition - 2 , childPosition).getUsername());
+        }
+
         BaseBackFragment fragment;
         if (parentPosition == 0){
             fragment = new ChatGroupFragment();
@@ -100,7 +128,7 @@ public class MainActivity extends BaseActivity implements MainView {
         }
         fragment.setArguments(bundle);
         startFragment(fragment);
-    }
+    }*/
 
 
 

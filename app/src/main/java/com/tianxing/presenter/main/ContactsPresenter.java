@@ -9,53 +9,6 @@ public interface ContactsPresenter {
     int VIEW_TYPE_ITEM = 1;
 
 
-    /**
-     * 取得群组数目
-     * */
-    //Integer getGroupCount();
-
-
-    /**
-     * 取得群组列表
-     * */
-    //List<GroupInfo> getGroupInfos();
-
-
-    /**
-     * 取得好友数目
-     * */
-    //Integer getFriendsCount();
-
-
-    /**
-     * 取得好友列表
-     * */
-    //List<UserInfo> getFriendsInfo();
-
-
-    /**
-     * 取得班级数目
-     * */
-    //Integer getClassCount();
-
-
-    /**
-     * 取得对应位置的班级信息
-     * */
-
-
-    /**
-     * 取得对应位置的班级学生列表
-     * */
-
-    //List<UserInfo> getStudentList(Integer position);
-
-
-    /**
-     * 取得对应位置的子项数目
-     * */
-    //Integer getChildItemCount(Integer parentPosition);
-
 
 
 
@@ -66,7 +19,7 @@ public interface ContactsPresenter {
 
 
     /**
-     * 取得父项位置
+     * 取得父项位置 标题栏位置
      * */
     int getParentPosition(int position);
 
@@ -85,5 +38,33 @@ public interface ContactsPresenter {
      * 取得对应位置的视图标题
      * */
     String getItemTitle(int position);
+
+
+    /**
+     * 取得群组名称
+     * */
+    String getRoomName(int position);
+
+
+    /**
+     * 取得会话用户名称
+     * */
+    String getUsername(int parentPosition, int childPosition);
+
+
+    /**
+     * 取得用户名称
+     * */
+
+
+
+    /**
+     * 取得当前连接状态
+     * */
+
+
+    /**
+     * 添加连接状态监听
+     * */
 
 }

@@ -29,7 +29,9 @@ import butterknife.Unbinder;
  * Created by tianxing on 16/7/26.
  * 
  */
-public class ChatGroupFragment extends BaseBackFragment{
+public class ChatGroupFragment extends BaseBackFragment implements ChatGroupView{
+
+    private String roomName;
 
     private Unbinder unbinder;
     @BindView(R.id.toolbar_child_Fragment)
@@ -55,12 +57,19 @@ public class ChatGroupFragment extends BaseBackFragment{
     ImageButton buttonRecord;
 
     private ChatGroupPresenter presenter;
+    private ChatGroupListAdapter adapter;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new ChatGroupViewPresenter();
+        //当前房间名称
+        if (savedInstanceState != null){
+            roomName = savedInstanceState.getString("roomName");
+        }else {
+            roomName = getArguments().getString("roomName");
+        }
+        presenter = new ChatGroupViewPresenter(this, roomName);
     }
 
     @Nullable
@@ -73,7 +82,8 @@ public class ChatGroupFragment extends BaseBackFragment{
         linearLayoutItemSelect.setVisibility(View.GONE);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(new ChatGroupListAdapter(getContext(), presenter));
+        adapter = new ChatGroupListAdapter(getContext(), presenter);
+        recyclerView.setAdapter(adapter);
         //设置图标
 
         Picasso.with(getContext()).load(R.mipmap.chatview_button_picture).into(buttonPicture);
@@ -86,7 +96,15 @@ public class ChatGroupFragment extends BaseBackFragment{
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        presenter.onDestroyView();
         unbinder.unbind();
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("roomName", roomName);
     }
 
     @Override
@@ -102,6 +120,7 @@ public class ChatGroupFragment extends BaseBackFragment{
     public void send(){
         if (!editTextInput.getText().toString().equals("")){
             Log.e("groupChat", "send message: " + editTextInput.getText().toString());
+            presenter.sendTextMessage(editTextInput.getText().toString());
             editTextInput.setText("");
         }
 
@@ -128,4 +147,12 @@ public class ChatGroupFragment extends BaseBackFragment{
 
     }
 
+    /**
+     * 刷新消息列表
+     */
+    @Override
+    public void onMessageListUpdate() {
+        adapter.notifyDataSetChanged();
+        recyclerView.scrollToPosition(presenter.getMessageCount() - 1);
+    }
 }

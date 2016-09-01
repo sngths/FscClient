@@ -12,11 +12,6 @@ public class ClassInfo implements InfoEntity {
 
     public ClassInfo(){
         userInfos = new ArrayList<>();
-        //班级添加学生信息
-        userInfos.add(new UserInfo());
-        userInfos.add(new UserInfo());
-        userInfos.add(new UserInfo());
-        userInfos.add(new UserInfo());
     }
 
 
@@ -39,5 +34,13 @@ public class ClassInfo implements InfoEntity {
      * */
     public UserInfo getStudentInfo(Integer position){
         return userInfos.get(position);
+    }
+
+
+    /**
+     * 添加一个学生信息
+     * */
+    public void putUserInfo(UserInfo userInfo){
+        userInfos.add(userInfo);
     }
 }

@@ -7,4 +7,13 @@ public interface MainPresenter {
 
 
 
+    /**
+     * 连接
+     * */
+
+
+    /**
+     * 登录
+     * */
+
 }
