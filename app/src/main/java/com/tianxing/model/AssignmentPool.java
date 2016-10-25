@@ -16,6 +16,12 @@ public interface AssignmentPool <T extends ClassData>{
     Integer getClassCount();
 
 
+    /**
+     * 创建一个班级数据
+     * */
+    void createClassData(String title);
+
+
 
     /**
      * 取得对应位置的一个班级数据组

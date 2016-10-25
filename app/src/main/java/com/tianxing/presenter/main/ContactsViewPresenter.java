@@ -158,9 +158,9 @@ public class ContactsViewPresenter implements ContactsPresenter {
     public String getUsername(int parentPosition, int childPosition) {
         String userName;
         if (parentPosition == 1){
-            userName = contactsPool.getFriendInfo(childPosition).getUsername();
+            userName = contactsPool.getFriendInfo(childPosition).getUserName();
         }else {
-            userName = contactsPool.getStudentInfo(parentPosition - 2, childPosition).getUsername();
+            userName = contactsPool.getStudentInfo(parentPosition - 2, childPosition).getUserName();
         }
         return userName;
     }

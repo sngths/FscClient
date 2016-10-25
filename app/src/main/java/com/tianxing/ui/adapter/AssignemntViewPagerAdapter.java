@@ -16,7 +16,6 @@ import java.util.HashMap;
  */
 public class AssignemntViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    private String tabTitle[] = {"一年级", "二年级", "三年级"};
     private AssignmentPresenter presenter;//获取ViewPager相关数据信息
     private HashMap<Integer, AssignmentListFragment> fragments = new HashMap<>();//保存Fragment引用
     public AssignemntViewPagerAdapter(FragmentManager fm, AssignmentPresenter presenter) {

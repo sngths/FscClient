@@ -4,6 +4,7 @@ import com.tianxing.model.communication.HttpClient;
 import com.tianxing.model.communication.XmppClient;
 import com.tianxing.model.communication.http.FscHttpClient;
 import com.tianxing.model.communication.xmpp.FscXmppClient;
+import com.tianxing.model.communication.xmpp.XmppServerInfo;
 import com.tianxing.model.data.AssignmentDataPool;
 import com.tianxing.model.data.Config;
 import com.tianxing.model.data.ContactsDataPool;
@@ -25,14 +26,15 @@ public class App {
     private HttpClient httpClient;
     private XmppClient xmppClient;
 
-    private App(){}
+    private App() {
+    }
 
 
     /**
      *
      * */
-    public static App getInstance(){
-        if (model == null){
+    public static App getInstance() {
+        if (model == null) {
             model = new App();
         }
         return model;
@@ -41,15 +43,30 @@ public class App {
 
     /**
      * 全局初始化
-     * */
-    public void initialize(Config config){
+     */
+    public void initialize(Config config) {
         this.config = config;
-        assignmentPool = new AssignmentDataPool();//初始化作业查看数据池
+        assignmentPool = new AssignmentDataPool();//初始化作业数据池
         contactsPool = new ContactsDataPool();
         messagePool = new MessageDataPool();
         httpClient = new FscHttpClient();
-        xmppClient = new FscXmppClient(new ReceivedMessageProcess(messagePool));
     }
+
+
+    /**
+     * 设置xmpp服务器配置信息
+     */
+    public void setXmppServerInfo(XmppServerInfo xmppServerInfo) {
+        config.setXmppServerInfo(xmppServerInfo);
+    }
+
+    /**
+     * 取得xmpp服务器配置信息
+     */
+    public XmppServerInfo getXmppServerInfo() {
+        return config.getXmppServerInfo();
+    }
+
 
     public Config getConfig() {
         return config;
@@ -72,6 +89,9 @@ public class App {
     }
 
     public XmppClient getXmppClient() {
+        if (xmppClient == null) {
+            xmppClient = new FscXmppClient(new ReceivedMessageProcess(messagePool), getXmppServerInfo());
+        }
         return xmppClient;
     }
 }

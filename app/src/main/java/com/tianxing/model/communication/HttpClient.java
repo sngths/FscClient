@@ -1,10 +1,18 @@
 package com.tianxing.model.communication;
 
+import com.tianxing.entity.assignment.Assignment;
+import com.tianxing.entity.http.json.ImageFile;
+import com.tianxing.entity.http.json.LoginInfo;
 import com.tianxing.entity.info.PersonalInfo;
+
+import java.util.List;
+
+import retrofit2.Response;
+import rx.Observable;
 
 /**
  * Created by tianxing on 16/7/19.
- * 所有接口都是耗时网络操作 不可在主线程下调用
+ *
  */
 public interface HttpClient {
 
@@ -13,13 +21,17 @@ public interface HttpClient {
     /**
      * 登录
      * */
-    void Login(String username, String password);
+    Observable<LoginInfo> Login(String username, String password);
 
 
     /**
      * 认证
      * */
     void authenticate(String refreshToken);
+
+    String getToken();
+
+    String getRefreshToken();
 
 
     /**
@@ -29,16 +41,28 @@ public interface HttpClient {
 
 
 
-    /**
-     * ...
-     * */
-
-
 
 
     /**
-     * 请求班级作业数据
+     * 请求单个班级作业数据
      * */
+    Observable<Response<List<Assignment>>> requestAssignmentList(String classID, Long serialNumber);
+
+
+
+    /**
+     * 上传一个作业
+     * */
+    Observable<Response<Void>> uploadAssignment(Assignment assignment);
+
+
+
+    /**
+     * 上传图像
+     * */
+    Observable<Response<ImageFile>> uploadFile(String filePath);
+
+
 
 
 }

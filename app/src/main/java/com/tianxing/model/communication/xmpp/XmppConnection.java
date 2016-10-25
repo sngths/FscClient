@@ -20,7 +20,7 @@ interface XmppConnection extends ConnectionListener{
     /**
      * 连接初始化 从服务端获取Xmpp连接参数 初始化时添加消息监听
      * */
-    void Initialize(XmppConfiguration configuration);
+    void Initialize(XmppServerInfo serverInfo);
 
 
 

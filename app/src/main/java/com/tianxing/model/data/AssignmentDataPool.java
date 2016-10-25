@@ -19,7 +19,7 @@ public class AssignmentDataPool implements AssignmentPool<ClassData> {
 
     public AssignmentDataPool(){
         classDatas = new ArrayList<>();
-        init();
+        //init();
     }
 
 
@@ -29,6 +29,17 @@ public class AssignmentDataPool implements AssignmentPool<ClassData> {
     @Override
     public Integer getClassCount() {
         return classDatas.size();
+    }
+
+    /**
+     * 创建一个班级数据
+     *
+     * @param title
+     */
+    @Override
+    public void createClassData(String title) {
+
+        classDatas.add(ClassDataFactory.getNewClassData(title));
     }
 
     /**
@@ -46,8 +57,8 @@ public class AssignmentDataPool implements AssignmentPool<ClassData> {
      * 存入一些固定数据
      * */
     private void init(){
-        classDatas.add(ClassDataFactory.getNewClassData("一年级一班"));
-        classDatas.add(ClassDataFactory.getNewClassData("一年级二班"));
-        classDatas.add(ClassDataFactory.getNewClassData("一年级三班"));
+
+        //classDatas.add(ClassDataFactory.getNewClassData("一年级二班"));
+        //classDatas.add(ClassDataFactory.getNewClassData("一年级三班"));
     }
 }

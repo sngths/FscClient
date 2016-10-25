@@ -2,6 +2,9 @@ package com.tianxing.model.communication.xmpp;
 
 import android.util.Log;
 
+import com.tianxing.entity.info.GroupInfo;
+import com.tianxing.model.App;
+
 import org.jivesoftware.smack.AbstractXMPPConnection;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.MessageListener;
@@ -33,7 +36,7 @@ abstract class XmppAbstractConnection implements XmppConnection {
     private AbstractXMPPConnection connection;
     private ChatManager chatManager;
     private MultiUserChatManager multiUserChatManager;
-    private XmppConfiguration configuration;
+    private XmppServerInfo serverInfo;
 
 
     private WeakHashMap<String, Chat> chatWeakHashMap = new WeakHashMap<>();
@@ -43,18 +46,18 @@ abstract class XmppAbstractConnection implements XmppConnection {
 
 
     @Override
-    public void Initialize(XmppConfiguration configuration) {
-        this.configuration = configuration;
+    public void Initialize(XmppServerInfo serverInfo) {
+        this.serverInfo = serverInfo;
         XMPPTCPConnectionConfiguration connectionConfiguration = XMPPTCPConnectionConfiguration.builder()
                 .setCompressionEnabled(true)
                 .setSecurityMode(ConnectionConfiguration.SecurityMode.disabled)
                 .setSendPresence(true)
                 .setConnectTimeout(15000)
                 .setDebuggerEnabled(true)
-                .setServiceName(configuration.getServiceName())
-                .setHost(configuration.getHost())
-                .setPort(configuration.getPort())
-                .setResource(configuration.getResource())
+                .setServiceName(serverInfo.getServiceName())
+                .setHost(serverInfo.getHost())
+                .setPort(serverInfo.getPort())
+                .setResource(serverInfo.getResource())
                 .build();
         connection = new XMPPTCPConnection(connectionConfiguration);
         ReconnectionManager reconnectionManager = ReconnectionManager.getInstanceFor(connection);
@@ -68,13 +71,13 @@ abstract class XmppAbstractConnection implements XmppConnection {
 
     @Override
     public String getServiceName() {
-        return configuration.getServiceName();
+        return serverInfo.getServiceName();
     }
 
 
     @Override
     public String getRoomServiceName() {
-        return configuration.getRoomServiceName();
+        return serverInfo.getRoomServiceName();
     }
 
     protected void syncConnect() throws IOException, XMPPException, SmackException {
@@ -109,13 +112,14 @@ abstract class XmppAbstractConnection implements XmppConnection {
             }
         });
 
+
         //所有房间添加多消息监听
-        for (final String roomName : configuration.getRoomNameList()) {
-            MultiUserChat multiUserChat = multiUserChatManager.getMultiUserChat(roomName + "@" + configuration.getRoomServiceName());
+        for (final GroupInfo groupInfo: App.getInstance().getContactsPool().getGroupInfoList()) {
+            MultiUserChat multiUserChat = multiUserChatManager.getMultiUserChat(groupInfo.getRoomName() + "@" + serverInfo.getRoomServiceName());
             multiUserChat.addMessageListener(new MessageListener() {
                 @Override
                 public void processMessage(Message message) {
-                    onMultiUserMessageReceived(roomName, message);
+                    onMultiUserMessageReceived(groupInfo.getRoomName(), message);
                 }
             });
         }
@@ -131,8 +135,8 @@ abstract class XmppAbstractConnection implements XmppConnection {
         //清空房间数据
 
 
-        for (String roomName : configuration.getRoomNameList()) {
-            MultiUserChat chat = multiUserChatManager.getMultiUserChat(roomName + "@" + configuration.getRoomServiceName());
+        for (GroupInfo groupInfo: App.getInstance().getContactsPool().getGroupInfoList()) {
+            MultiUserChat chat = multiUserChatManager.getMultiUserChat(groupInfo.getRoomName() + "@" + serverInfo.getRoomServiceName());
             DiscussionHistory history = new DiscussionHistory();
             history.setMaxStanzas(30);
             chat.join("群昵称", "", history, 5000);
@@ -171,7 +175,7 @@ abstract class XmppAbstractConnection implements XmppConnection {
         if (chat != null) {
             return chat;
         }
-        chat = multiUserChatManager.getMultiUserChat(roomName + "@" + configuration.getRoomServiceName());
+        chat = multiUserChatManager.getMultiUserChat(roomName + "@" + serverInfo.getRoomServiceName());
         multiUserChatWeakHashMap.put(roomName, chat);
         if (!chat.isJoined()) {
             //加入房间

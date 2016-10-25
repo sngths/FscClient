@@ -2,6 +2,7 @@ package com.tianxing.model.data;
 
 import com.tianxing.entity.info.ClassInfo;
 import com.tianxing.entity.info.GroupInfo;
+import com.tianxing.entity.info.StudentInfo;
 import com.tianxing.entity.info.UserInfo;
 import com.tianxing.model.ContactsPool;
 
@@ -24,27 +25,6 @@ public class ContactsDataPool implements ContactsPool {
         Groups = new ArrayList<>();
         Friends = new ArrayList<>();
         Classes = new ArrayList<>();
-
-        //存入一些联系人数据  这些数据在登录完成后 从服务器获取
-        //群
-        GroupInfo groupInfo = new GroupInfo();
-        groupInfo.setRoomName("c1d1");
-        putGroupInfo(groupInfo);
-        //好友
-        putFriendInfo(new UserInfo("user1"));
-        putFriendInfo(new UserInfo("user2"));
-        putFriendInfo(new UserInfo("user3"));
-        putFriendInfo(new UserInfo("user4"));
-        putFriendInfo(new UserInfo("user5"));
-        //学生
-        ClassInfo classInfo = new ClassInfo();
-        classInfo.putUserInfo(new UserInfo("user6"));
-        classInfo.putUserInfo(new UserInfo("user7"));
-        classInfo.putUserInfo(new UserInfo("user8"));
-        classInfo.putUserInfo(new UserInfo("user9"));
-        classInfo.putUserInfo(new UserInfo("user10"));
-        putClassInfo(classInfo);
-
     }
 
 
@@ -57,20 +37,22 @@ public class ContactsDataPool implements ContactsPool {
     @Override
     public String getTitle(int parentPosition, int childPosition) {
         if (childPosition == -1){
+            //父项标题
             if (parentPosition == 0){
                 return "班级群";
             }else if (parentPosition == 1){
                 return "好友";
             }else {
-                return "班级" + String.valueOf(parentPosition - 1);
+                return Classes.get(parentPosition - 2).getTitle();
             }
         }else {
+            //子项标题
             if (parentPosition == 0){
-                return "班级群" + String.valueOf(childPosition + 1);
+                return Groups.get(childPosition).getRoomTitle();
             }else if (parentPosition == 1){
-                return "好友" + String.valueOf(childPosition + 1);
+                return Friends.get(childPosition).getNickName();
             }else {
-                return "学生" + String.valueOf(childPosition + 1);
+                return Classes.get(parentPosition - 2).getStudentInfo(childPosition).getNickName();
             }
         }
     }
@@ -214,7 +196,7 @@ public class ContactsDataPool implements ContactsPool {
      * @param classPosition
      */
     @Override
-    public List<UserInfo> getStudentList(Integer classPosition) {
-        return Classes.get(classPosition).getStudentList();
+    public List<StudentInfo> getStudentList(Integer classPosition) {
+        return Classes.get(classPosition).getStudents();
     }
 }

@@ -5,17 +5,21 @@ package com.tianxing.entity.info;
  * 用户信息类
  */
 public class UserInfo implements InfoEntity{
-    private String Username = "";
+    private String userName;
+    private String nickName;
+    private String userIconUrl;
 
-    public UserInfo(String username){
-        this.Username = username;
+
+    public String getUserName() {
+        return userName;
     }
 
-    public String getUsername() {
-        return Username;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setUsername(String username) {
-        Username = username;
+    public String getUserIconUrl() {
+        return userIconUrl;
     }
+
 }

@@ -13,15 +13,16 @@ import rx.schedulers.Schedulers;
 
 /**
  * Created by tianxing on 16/8/15.
+ * 创建之前要先通过Http 登陆获取 xmpp相关的配置信息
  */
 public class FscXmppClient implements XmppClient {
 
 
     private XmppConnection connection;
 
-    public FscXmppClient(MessageListener listener) {
+    public FscXmppClient(MessageListener listener, XmppServerInfo serverInfo) {
         connection = new FscXmppConnection(listener);
-        connection.Initialize(XmppConfiguration.getInstance());
+        connection.Initialize(serverInfo);
 
     }
 

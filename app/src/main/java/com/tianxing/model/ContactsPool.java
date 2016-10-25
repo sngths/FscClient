@@ -2,6 +2,7 @@ package com.tianxing.model;
 
 import com.tianxing.entity.info.ClassInfo;
 import com.tianxing.entity.info.GroupInfo;
+import com.tianxing.entity.info.StudentInfo;
 import com.tianxing.entity.info.UserInfo;
 
 import java.util.List;
@@ -85,7 +86,7 @@ public interface ContactsPool {
     /**
      * 取得对应位置的班级的学生列表
      * */
-    List<UserInfo> getStudentList(Integer classPosition);
+    List<StudentInfo> getStudentList(Integer classPosition);
 
 
 

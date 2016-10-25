@@ -63,13 +63,13 @@ public class AssignmentFragment extends BaseFragment implements AssingmentView{
     }
 
     /**
-     *
+     * 初始化作业主界面
      * */
     private void initView(){
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        tabLayout.addTab(tabLayout.newTab());
-        tabLayout.addTab(tabLayout.newTab());
-        tabLayout.addTab(tabLayout.newTab());
+        //tabLayout.addTab(tabLayout.newTab());
+        //tabLayout.addTab(tabLayout.newTab());
+        //tabLayout.addTab(tabLayout.newTab());
         adapter = new AssignemntViewPagerAdapter(getChildFragmentManager(), presenter);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
