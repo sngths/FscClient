@@ -125,6 +125,7 @@ public class HttpClientUnitTest {
     @Test
     public void fileUpload(){
         HttpClient client = new FscHttpClient();
+
         client.uploadFile("/Users/tianxing/Desktop/generic-avatar.png")
                 .observeOn(Schedulers.io())
                 .subscribe(new Subscriber<Response<ImageFile>>() {
@@ -140,7 +141,7 @@ public class HttpClientUnitTest {
 
             @Override
             public void onNext(Response<ImageFile> imageFileResponse) {
-                System.out.println("收到返回数据");
+                System.out.println("收到返回数据" + imageFileResponse.body().getName());
 
             }
         });
@@ -151,5 +152,43 @@ public class HttpClientUnitTest {
             e.printStackTrace();
         }
 
+    }
+
+    /**
+     * 图片上传
+     * */
+    @Test
+    public void imageUpload(){
+        HttpClient client = new FscHttpClient();
+
+        client.uploadImage("/Users/tianxing/Desktop/generic-avatar.png")
+                .observeOn(Schedulers.io())
+                .subscribe(new Subscriber<Response<ImageFile>>() {
+                    @Override
+                    public void onCompleted() {
+                        System.out.println("上传成功");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(Response<ImageFile> imageFileResponse) {
+                        System.out.println("收到返回数据 " + imageFileResponse.body().getName());
+                        System.out.println("原始名称 " + imageFileResponse.body().getOriginalFilename());
+                        System.out.println("地址 " + imageFileResponse.body().getUrl());
+                        System.out.println("日期 " + imageFileResponse.body().getDate());
+                        System.out.println("大小 " + imageFileResponse.body().getFileSize());
+
+                    }
+                });
+
+        try {
+            Thread.currentThread().sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

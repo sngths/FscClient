@@ -3,6 +3,8 @@ package com.tianxing.fscteachersedition;
 import android.app.Application;
 import android.content.res.Configuration;
 
+import com.tianxing.util.ScreenSize;
+
 /**
  * Created by tianxing on 16/7/5.
  */
@@ -11,7 +13,7 @@ public class FscApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        ScreenSize.initialize(getApplicationContext());
     }
 
 

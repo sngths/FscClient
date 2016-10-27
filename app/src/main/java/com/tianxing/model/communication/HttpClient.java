@@ -1,6 +1,7 @@
 package com.tianxing.model.communication;
 
 import com.tianxing.entity.assignment.Assignment;
+import com.tianxing.entity.assignment.AssignmentUpload;
 import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.entity.http.json.LoginInfo;
 import com.tianxing.entity.info.PersonalInfo;
@@ -53,16 +54,25 @@ public interface HttpClient {
     /**
      * 上传一个作业
      * */
-    Observable<Response<Void>> uploadAssignment(Assignment assignment);
+    Observable<Response<Void>> uploadAssignment(AssignmentUpload assignment);
 
 
 
     /**
-     * 上传图像
+     * 上传文件
      * */
     Observable<Response<ImageFile>> uploadFile(String filePath);
 
 
+    /**
+     * 上传一张图片
+     * */
+    Observable<Response<ImageFile>> uploadImage(String imagePath);
 
+
+    /***
+     * 上传一组图片
+     * */
+    Observable<Response<ImageFile>> uploadImageSet(List<String> imagePath);
 
 }
