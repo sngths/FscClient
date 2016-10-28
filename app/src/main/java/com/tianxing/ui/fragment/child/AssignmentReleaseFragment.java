@@ -142,6 +142,7 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
      */
     @OnClick(R.id.button_release)
     public void release() {
+
         String title = editTextTitle.getText().toString();
         String content = editTextContent.getText().toString();
         final List<ImageFile> images = new ArrayList<>();

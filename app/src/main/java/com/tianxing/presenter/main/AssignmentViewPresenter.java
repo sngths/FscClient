@@ -98,7 +98,7 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
      */
     @Override
     public void requestAssignment(final int classID, int sid) {
-        httpClient.requestAssignmentList(String.valueOf("s1g1"), String.valueOf(sid))
+        httpClient.requestAssignmentList(String.valueOf("c1g1"), String.valueOf(sid))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Response<List<AssignmentDownload>>>() {
@@ -115,7 +115,7 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
 
                     @Override
                     public void onNext(Response<List<AssignmentDownload>> listResponse) {
-                        Log.e("AssignmentViewPresenter", "取得秦秋的作业数据");
+                        Log.e("AssignmentViewPresenter", "取得请求的作业数据 条数：" + String.valueOf(listResponse.body().size()));
                         for (AssignmentDownload assignment : listResponse.body()) {
                             assignmentPool.getClassData(classID).putAssignment(new AssignmentDownload());
                         }
