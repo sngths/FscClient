@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -49,6 +51,9 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
     @BindView(R.id.toolbar_child_Fragment)
     Toolbar toolbar;
 
+    @BindView(R.id.radioGroup_class)
+    RadioGroup radioGroup;
+
     @BindView(R.id.editText_title)
     EditText editTextTitle;
     @BindView(R.id.editText_content)
@@ -72,7 +77,34 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
         unbinder = ButterKnife.bind(this, view);
         toolBarInit(toolbar);
         setToolBarTitle("发布作业");
+        //添加班级选择
+        setClassSelect();
         return view;
+    }
+
+
+    /**
+     * 添加班级选择 处理单选监听
+     * */
+    private void setClassSelect(){
+        RadioButton button1 = new RadioButton(getContext());
+        button1.setId(R.id.radioButton1);
+        RadioButton button2 = new RadioButton(getContext());
+        RadioButton button3 = new RadioButton(getContext());
+        button1.setText("一年级");
+        button2.setText("二年级");
+        button3.setText("三年级");
+        radioGroup.addView(button1);
+        radioGroup.addView(button2);
+        radioGroup.addView(button3);
+
+        //处理点击
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+            }
+        });
     }
 
 
@@ -147,6 +179,8 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
         String content = editTextContent.getText().toString();
         final List<ImageFile> images = new ArrayList<>();
         final AssignmentUpload assignmentUpload = new AssignmentUpload();
+        //判断是否选择了班级
+
         //判断上传内容是否为空
         if (title.replace(" ", "").equals("") || content.replace(" ", "").equals("") || imageFiles.size() == 0){
             Toast.makeText(getContext(), "请输入作业内容", Toast.LENGTH_SHORT).show();

@@ -10,6 +10,7 @@ import com.tianxing.model.data.Config;
 import com.tianxing.model.data.ContactsDataPool;
 import com.tianxing.model.data.MessageDataPool;
 import com.tianxing.model.data.ReceivedMessageProcess;
+import com.tianxing.model.user.User;
 
 /**
  * Created by tianxing on 16/7/8.
@@ -17,6 +18,8 @@ import com.tianxing.model.data.ReceivedMessageProcess;
 public class App {
 
     private static App model = null;
+
+    private User currentUser;
     private Config config;
 
     private AssignmentPool assignmentPool;
@@ -52,6 +55,14 @@ public class App {
         httpClient = new FscHttpClient();
     }
 
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
 
     /**
      * 设置xmpp服务器配置信息

@@ -1,86 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
     <include layout="@layout/toolbar_child"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <EditText
+            <!--班级选择框-->
+            <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText_title"
-                android:hint="@string/assignment_title"
-                android:maxLines="1"
-                android:padding="10dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="4dp"
-                android:layout_marginStart="16dp"
+                android:orientation="horizontal"
+                android:id="@+id/radioGroup_class">
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/editText_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
                 android:layout_marginEnd="16dp"
-                android:lines="1"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/assignment_release_title_background"
+                android:hint="@string/assignment_title"
+                android:lines="1"
+                android:maxLines="1"
+                android:padding="10dp"
                 android:textSize="@dimen/Title_TextSize"/>
 
             <EditText
+                android:id="@+id/editText_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText_content"
-                android:layout_marginTop="4dp"
                 android:layout_marginBottom="8dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:gravity="top"
-                android:minLines="8"
-                android:textSize="@dimen/Body_TextSize"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
                 android:background="@drawable/assignment_release_title_background"
+                android:gravity="top"
+                android:hint="正文"
+                android:minLines="8"
                 android:padding="10dp"
-                android:hint="正文"/>
+                android:textSize="@dimen/Body_TextSize"/>
             <!--图片选取-->
             <LinearLayout
                 android:id="@+id/linearLayout_image_frame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
                 android:orientation="horizontal">
 
                 <ImageButton
+                    android:id="@+id/imageButton"
                     android:layout_width="96dp"
                     android:layout_height="96dp"
                     android:layout_marginEnd="8dp"
-                    app:srcCompat="@android:drawable/ic_input_add"
-                    android:id="@+id/imageButton"/>
+                    app:srcCompat="@android:drawable/ic_input_add"/>
 
 
             </LinearLayout>
 
             <Button
-                android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_height="48dp"
-                android:text="发布"
                 android:id="@+id/button_release"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/assignment_release_button_background"
-                android:layout_gravity="center_horizontal"/>
+                android:text="发布"/>
 
 
         </LinearLayout>
 
     </ScrollView>
     <!-- 输入框 -->
-
-
 
 
 </LinearLayout>
