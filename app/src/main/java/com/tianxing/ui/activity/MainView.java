@@ -1,5 +1,7 @@
 package com.tianxing.ui.activity;
 
+import java.io.File;
+
 /**
  * Created by tianxing on 16/7/14.
  * 主Activity提供的操作接口  Fragment的启动返回
@@ -41,4 +43,18 @@ public interface MainView {
      * 返回 操作
      * */
     void popBack();
+
+    /**
+     * 启动拍照Activity
+     * */
+    void startCapture(CaptureResult result);
+
+    /**
+     * 拍照结果
+     * */
+    interface CaptureResult{
+        void Successed(File imageFile);
+        void Cancelled();
+        void Failed();
+    }
 }

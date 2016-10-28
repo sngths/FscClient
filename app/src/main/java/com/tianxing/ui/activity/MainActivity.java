@@ -1,11 +1,17 @@
 package com.tianxing.ui.activity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import com.tianxing.fscteachersedition.R;
-import com.tianxing.ui.fragment.child.AssignemntReleaseFragment;
+import com.tianxing.ui.fragment.child.AssignmentReleaseFragment;
 import com.tianxing.ui.fragment.child.AssignmentDetailFragment;
 import com.tianxing.ui.fragment.child.AssignmentReplyFragment;
 import com.tianxing.ui.fragment.child.BaseBackFragment;
@@ -13,6 +19,9 @@ import com.tianxing.ui.fragment.child.ChatFragment;
 import com.tianxing.ui.fragment.child.ChatGroupFragment;
 import com.tianxing.ui.fragment.main.MainFragment;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Stack;
 
 /**
@@ -21,6 +30,9 @@ import java.util.Stack;
  */
 public class MainActivity extends BaseActivity implements MainView {
     private static final String TAG = "MainActivity";
+    public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1;
+    private File imageFile;
+    private CaptureResult result;
 
     private String currentFragmentTag; //当前正在显示的Fragment的Tag
     Stack<BaseBackFragment> fragmentStack = new Stack<>();//Fragment栈
@@ -77,7 +89,7 @@ public class MainActivity extends BaseActivity implements MainView {
      */
     @Override
     public void startAssignmentReleaseFragment() {
-        startFragment(new AssignemntReleaseFragment());
+        startFragment(new AssignmentReleaseFragment());
     }
 
 
@@ -163,6 +175,56 @@ public class MainActivity extends BaseActivity implements MainView {
         }
     }
 
+    /**
+     * 启动拍照Activity
+     */
+    @Override
+    public void startCapture(CaptureResult result) {
+        this.result = result;
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "FscImage");
+        if (!mediaStorageDir.exists()){
+            mediaStorageDir.mkdir();
+        }
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        imageFile = new File(mediaStorageDir.getPath(),"IMG"+timeStamp+".jpg");
+        Uri fileUri = Uri.fromFile(imageFile);
+        Log.e("照片保存地址", fileUri.getPath());
+
+        //getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
+
+        // start the image capture Intent
+        startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null){
+                    data.getData().toString();
+                    Log.e(TAG, "拍照完成" + data.getData());
+                }
+
+                Log.e(TAG, "拍照成功");
+                //Log.e("拍照完成", fileUri.toString());
+                //FileTransfer.upload(fileUri);
+                // Image captured and saved to fileUri specified in the Intent
+                //Toast.makeText(this, "Image saved to:\n" +data.getData(), Toast.LENGTH_LONG).show();
+
+                result.Successed(imageFile);
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                // User cancelled the image capture
+                result.Cancelled();
+            } else {
+                result.Failed();
+                // Image capture failed, advise user
+            }
+        }
+    }
 
     @Override
     public void onBackPressed() {

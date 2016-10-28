@@ -1,6 +1,7 @@
 package com.tianxing.model.communication.http;
 
-import com.tianxing.entity.assignment.Assignment;
+import com.tianxing.entity.assignment.AssignmentDownload;
+import com.tianxing.entity.assignment.AssignmentUpload;
 import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.entity.http.json.LoginInfo;
 import com.tianxing.entity.http.json.UsernameAndPassword;
@@ -8,7 +9,9 @@ import com.tianxing.entity.info.PersonalInfo;
 import com.tianxing.model.communication.HttpClient;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -18,7 +21,10 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 import rx.Observable;
 import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
+
+import static java.io.File.separator;
 
 /**
  * Created by tianxing on 16/7/5.
@@ -56,10 +62,10 @@ public class FscHttpClient implements HttpClient {
     }
 
 
-
     /**
      * 登录
-     *  @param username
+     *
+     * @param username
      * @param password
      */
     @Override
@@ -92,7 +98,6 @@ public class FscHttpClient implements HttpClient {
     }
 
 
-
     /**
      * 请求用户信息 包含班级信息
      */
@@ -108,7 +113,7 @@ public class FscHttpClient implements HttpClient {
      * @param serialNumber
      */
     @Override
-    public Observable<Response<List<Assignment>>> requestAssignmentList(String classID, Long serialNumber) {
+    public Observable<Response<List<AssignmentDownload>>> requestAssignmentList(String classID, String serialNumber) {
         return service.reqestAssignmentList(token, classID, serialNumber).subscribeOn(Schedulers.io());
     }
 
@@ -116,12 +121,12 @@ public class FscHttpClient implements HttpClient {
      * 上传一个作业
      */
     @Override
-    public Observable<Response<Void>> uploadAssignment(Assignment assignment) {
+    public Observable<Response<Void>> uploadAssignment(AssignmentUpload assignment) {
         return service.uploadAssignment(token, assignment).subscribeOn(Schedulers.io());
     }
 
     /**
-     * 上传图像
+     * 上传文件
      *
      * @param filePath
      */
@@ -129,8 +134,42 @@ public class FscHttpClient implements HttpClient {
     public Observable<Response<ImageFile>> uploadFile(String filePath) {
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), new File(filePath));
-         return service.uploadFile(requestBody);
+        return service.uploadFile(requestBody);
 
+    }
+
+    /**
+     * 上传一张图片
+     *
+     * @param imagePath
+     */
+    @Override
+    public Observable<Response<ImageFile>> uploadImage(String imagePath) {
+        int separatorIndex = imagePath.lastIndexOf(separator);
+        String imageName = (separatorIndex < 0) ? imagePath : imagePath.substring(separatorIndex + 1, imagePath.length());
+        String name = "image\"; filename=\"" + imageName + "\"";
+        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), new File(imagePath));
+        Map<String, RequestBody> requestBodyMap = new HashMap<>();
+        requestBodyMap.put(name, requestBody);
+        return service.uploadImage(requestBodyMap);
+    }
+
+    /***
+     * 上传一组图片
+     *
+     * @param imagePath
+     */
+    @Override
+    public Observable<Response<ImageFile>> uploadImageSet(final List<String> imagePath) {
+
+        return Observable.from(imagePath)
+                .observeOn(Schedulers.io())
+                .flatMap(new Func1<String, Observable<Response<ImageFile>>>() {
+                    @Override
+                    public Observable<Response<ImageFile>> call(String s) {
+                        return uploadImage(s).subscribeOn(Schedulers.io());
+                    }
+                });
     }
 
 

@@ -1,6 +1,6 @@
 package com.tianxing.entity;
 
-import com.tianxing.entity.assignment.Assignment;
+import com.tianxing.entity.assignment.AssignmentDownload;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ public class ClassData {
     private String ClassID = "";
     private String Title = "";
 
-    private ArrayList<Assignment> assignmentList = new ArrayList<>();
+    private ArrayList<AssignmentDownload> assignmentDownloadList = new ArrayList<>();
 
 
 
@@ -22,7 +22,7 @@ public class ClassData {
     }
 
     public Integer getAssigmnetsCount(){
-        return assignmentList.size();
+        return assignmentDownloadList.size();
     }
 
     public String getClassID() {
@@ -33,8 +33,8 @@ public class ClassData {
         return Title;
     }
 
-    public Assignment getAssignment(int position){
-        return assignmentList.get(position);
+    public AssignmentDownload getAssignment(int position){
+        return assignmentDownloadList.get(position);
     }
 
     public void setClassID(String classID) {
@@ -45,7 +45,7 @@ public class ClassData {
         Title = title;
     }
 
-    public void putAssignment(Assignment assignment){
-        assignmentList.add(assignment);
+    public void putAssignment(AssignmentDownload assignmentDownload){
+        assignmentDownloadList.add(assignmentDownload);
     }
 }

@@ -1,6 +1,6 @@
 package com.tianxing.fscteachersedition;
 
-import com.tianxing.entity.assignment.Assignment;
+import com.tianxing.entity.assignment.AssignmentDownload;
 import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.entity.http.json.LoginInfo;
 import com.tianxing.model.communication.HttpClient;
@@ -61,7 +61,7 @@ public class HttpClientUnitTest {
             e.printStackTrace();
         }
 
-        client.requestAssignmentList("classID", 8768760098L).subscribe(new Subscriber<Response<List<Assignment>>>() {
+        client.requestAssignmentList("classID", 8768760098L).subscribe(new Subscriber<Response<List<AssignmentDownload>>>() {
             @Override
             public void onCompleted() {
                 System.out.println("获取完成");
@@ -73,7 +73,7 @@ public class HttpClientUnitTest {
             }
 
             @Override
-            public void onNext(Response<List<Assignment>> listResponse) {
+            public void onNext(Response<List<AssignmentDownload>> listResponse) {
                 System.out.println(listResponse.code());
                 if (listResponse.code() == 400){
                     try {
@@ -94,7 +94,7 @@ public class HttpClientUnitTest {
             e.printStackTrace();
         }
 
-        client.uploadAssignment(new Assignment()).subscribe(new Subscriber<Response>() {
+        client.uploadAssignment(new AssignmentDownload()).subscribe(new Subscriber<Response>() {
             @Override
             public void onCompleted() {
 
@@ -125,6 +125,7 @@ public class HttpClientUnitTest {
     @Test
     public void fileUpload(){
         HttpClient client = new FscHttpClient();
+
         client.uploadFile("/Users/tianxing/Desktop/generic-avatar.png")
                 .observeOn(Schedulers.io())
                 .subscribe(new Subscriber<Response<ImageFile>>() {
@@ -140,7 +141,7 @@ public class HttpClientUnitTest {
 
             @Override
             public void onNext(Response<ImageFile> imageFileResponse) {
-                System.out.println("收到返回数据");
+                System.out.println("收到返回数据" + imageFileResponse.body().getName());
 
             }
         });
@@ -151,5 +152,43 @@ public class HttpClientUnitTest {
             e.printStackTrace();
         }
 
+    }
+
+    /**
+     * 图片上传
+     * */
+    @Test
+    public void imageUpload(){
+        HttpClient client = new FscHttpClient();
+
+        client.uploadImage("/Users/tianxing/Desktop/generic-avatar.png")
+                .observeOn(Schedulers.io())
+                .subscribe(new Subscriber<Response<ImageFile>>() {
+                    @Override
+                    public void onCompleted() {
+                        System.out.println("上传成功");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(Response<ImageFile> imageFileResponse) {
+                        System.out.println("收到返回数据 " + imageFileResponse.body().getName());
+                        System.out.println("原始名称 " + imageFileResponse.body().getOriginalFilename());
+                        System.out.println("地址 " + imageFileResponse.body().getUrl());
+                        System.out.println("日期 " + imageFileResponse.body().getDate());
+                        System.out.println("大小 " + imageFileResponse.body().getFileSize());
+
+                    }
+                });
+
+        try {
+            Thread.currentThread().sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

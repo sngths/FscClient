@@ -7,8 +7,8 @@ public class HttpConfiguration {
 
     private static HttpConfiguration configuration;
 
-    //private String BaseUrl = "http://172.24.1.1:8080/";
-    private String BaseUrl = "http://localhost:8080/";
+    private String BaseUrl = "http://172.24.1.1:8080/";
+    //private String BaseUrl = "http://localhost:8080/";
 
 
     private HttpConfiguration(){}
