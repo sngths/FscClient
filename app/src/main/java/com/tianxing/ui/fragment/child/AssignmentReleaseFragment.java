@@ -50,13 +50,13 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
     Toolbar toolbar;
 
     @BindView(R.id.editText_title)
-    private EditText editTextTitle;
+    EditText editTextTitle;
     @BindView(R.id.editText_content)
-    private EditText editTextContent;
+    EditText editTextContent;
     @BindView(R.id.linearLayout_image_frame)//图片框
-    private LinearLayout imageFrame;
+    LinearLayout imageFrame;
     @BindView(R.id.imageButton)//拍照按钮
-    private ImageButton captureButton;
+    ImageButton captureButton;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -164,24 +164,7 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
                 public void onCompleted() {
                     //完成后开始上传作业
                     assignmentUpload.setImages(images);
-                    presenter.uploadAssignment(assignmentUpload).subscribe(new Subscriber<Response<Void>>() {
-                        @Override
-                        public void onCompleted() {
-
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-
-                        }
-
-                        @Override
-                        public void onNext(Response<Void> voidResponse) {
-                            if (voidResponse.code() == 200){
-                                //上传完成 关闭当前窗口
-                            }
-                        }
-                    });;
+                    uploadAssignment(assignmentUpload);
                 }
 
                 @Override
@@ -203,24 +186,7 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
                     //完成后开始上传作业
                     Log.e(TAG, "一组图片上传完成");
                     assignmentUpload.setImages(images);
-                    presenter.uploadAssignment(assignmentUpload).subscribe(new Subscriber<Response<Void>>() {
-                        @Override
-                        public void onCompleted() {
-
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-
-                        }
-
-                        @Override
-                        public void onNext(Response<Void> voidResponse) {
-                            if (voidResponse.code() == 200){
-                                //上传完成 关闭当前窗口
-                            }
-                        }
-                    });
+                    uploadAssignment(assignmentUpload);
                 }
 
                 @Override
@@ -237,6 +203,34 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
             });
         }
 
+    }
+
+
+
+    /**
+     * 上传作业
+     * */
+    private void uploadAssignment(AssignmentUpload assignment){
+        presenter.uploadAssignment(assignment).subscribe(new Subscriber<Response<Void>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Response<Void> voidResponse) {
+                if (voidResponse.code() == 200){
+                    //上传完成 关闭当前窗口
+                    Log.e(TAG, "作业上传成功");
+                    ((MainView)getActivity()).popBack();
+                }
+            }
+        });
     }
 
 

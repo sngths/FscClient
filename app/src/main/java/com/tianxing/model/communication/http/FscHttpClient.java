@@ -1,6 +1,6 @@
 package com.tianxing.model.communication.http;
 
-import com.tianxing.entity.assignment.Assignment;
+import com.tianxing.entity.assignment.AssignmentDownload;
 import com.tianxing.entity.assignment.AssignmentUpload;
 import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.entity.http.json.LoginInfo;
@@ -113,7 +113,7 @@ public class FscHttpClient implements HttpClient {
      * @param serialNumber
      */
     @Override
-    public Observable<Response<List<Assignment>>> requestAssignmentList(String classID, Long serialNumber) {
+    public Observable<Response<List<AssignmentDownload>>> requestAssignmentList(String classID, String serialNumber) {
         return service.reqestAssignmentList(token, classID, serialNumber).subscribeOn(Schedulers.io());
     }
 

@@ -10,7 +10,7 @@ public class ClassDataFactory {
         classData.setTitle(title);
         /*int a = 5;
         for (int i = 0; i < a; i++) {
-            classData.putAssignment(new Assignment());
+            classData.putAssignment(new AssignmentDownload());
         }*/
         return classData;
     }

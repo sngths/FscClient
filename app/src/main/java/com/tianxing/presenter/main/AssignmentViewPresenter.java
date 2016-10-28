@@ -1,14 +1,18 @@
 package com.tianxing.presenter.main;
 
-import com.tianxing.entity.assignment.Assignment;
+import android.util.Log;
+
+import com.tianxing.entity.assignment.AssignmentDownload;
 import com.tianxing.model.App;
 import com.tianxing.model.AssignmentPool;
+import com.tianxing.model.communication.HttpClient;
 import com.tianxing.ui.AssingmentView;
 
-import rx.Observable;
+import java.util.List;
+
+import retrofit2.Response;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -25,10 +29,12 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
 
 
     private AssingmentView view;
+    private HttpClient httpClient;
 
     public AssignmentViewPresenter(AssingmentView view) {
         this.view = view;
         assignmentPool = App.getInstance().getAssignmentPool();
+        httpClient = App.getInstance().getHttpClient();
     }
 
     /**
@@ -60,7 +66,7 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
      * 取得对应位置的一条作业数据
      */
     @Override
-    public Assignment getAssignment(int classID, int position) {
+    public AssignmentDownload getAssignment(int classID, int position) {
         return assignmentPool.getClassData(classID).getAssignment(position);
     }
 
@@ -88,11 +94,37 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
      * 请求刷新作业数据
      *
      * @param classID
+     * @param sid     作业中的最大id
      */
     @Override
-    public void requestAssignment(final int classID) {
+    public void requestAssignment(final int classID, int sid) {
+        httpClient.requestAssignmentList(String.valueOf("s1g1"), String.valueOf(sid))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Response<List<AssignmentDownload>>>() {
+                    @Override
+                    public void onCompleted() {
+                        //请求数据完成 通知界面刷新
+                        view.refreshAssignment(classID);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(Response<List<AssignmentDownload>> listResponse) {
+                        Log.e("AssignmentViewPresenter", "取得秦秋的作业数据");
+                        for (AssignmentDownload assignment : listResponse.body()) {
+                            assignmentPool.getClassData(classID).putAssignment(new AssignmentDownload());
+                        }
+                    }
+                });
+
+
         //开始从网络请求数据
-        Observable.create(new Observable.OnSubscribe<Integer>() {
+        /*Observable.create(new Observable.OnSubscribe<Integer>() {
             @Override
             public void call(Subscriber<? super Integer> subscriber) {
                 subscriber.onStart();
@@ -118,7 +150,7 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
                     @Override
                     public Integer call(String s) {
                         //在主线程中将保存请求到的数据
-                        assignmentPool.getClassData(classID).putAssignment(new Assignment());
+                        assignmentPool.getClassData(classID).putAssignment(new AssignmentDownload());
                         return null;
                     }
                 })
@@ -139,7 +171,7 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
                     public void onNext(Integer s) {
 
                     }
-                });
+                });*/
 
     }
 }

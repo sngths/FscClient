@@ -1,6 +1,6 @@
 package com.tianxing.model.communication;
 
-import com.tianxing.entity.assignment.Assignment;
+import com.tianxing.entity.assignment.AssignmentDownload;
 import com.tianxing.entity.assignment.AssignmentUpload;
 import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.entity.http.json.LoginInfo;
@@ -47,7 +47,7 @@ public interface HttpClient {
     /**
      * 请求单个班级作业数据
      * */
-    Observable<Response<List<Assignment>>> requestAssignmentList(String classID, Long serialNumber);
+    Observable<Response<List<AssignmentDownload>>> requestAssignmentList(String classID, String serialNumber);
 
 
 

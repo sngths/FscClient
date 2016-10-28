@@ -1,6 +1,6 @@
 package com.tianxing.presenter.main;
 
-import com.tianxing.entity.assignment.Assignment;
+import com.tianxing.entity.assignment.AssignmentDownload;
 
 /**
  * Created by tianxing on 16/7/18.
@@ -24,11 +24,12 @@ public interface AssignmentListPresenter {
     /**
      * 取得对应位置的一条作业数据
      * */
-    Assignment getAssignment(int classID, int position);
+    AssignmentDownload getAssignment(int classID, int position);
 
     /**
      * 请求刷新作业数据
      * @param classID 班级信息在列表中的位置
+     * @param sid 作业中的最大id
      * */
-    void requestAssignment(int classID);
+    void requestAssignment(int classID , int sid);
 }

@@ -108,7 +108,7 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
     @Override
     public void onRefresh() {
         //通知P层请求数据
-        presenter.requestAssignment(getArguments().getInt("position", -1));
+        presenter.requestAssignment(getArguments().getInt("position", -1), presenter.getAssignemntCount(getArguments().getInt("position", -1)));
     }
 
 

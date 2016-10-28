@@ -1,6 +1,6 @@
 package com.tianxing.model.communication.http;
 
-import com.tianxing.entity.assignment.Assignment;
+import com.tianxing.entity.assignment.AssignmentDownload;
 import com.tianxing.entity.assignment.AssignmentUpload;
 import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.entity.http.json.LoginInfo;
@@ -39,7 +39,7 @@ public interface HttpService {
      */
     @GET("assignment/list")
     @Headers("Content-Type: application/json")
-    Observable<Response<List<Assignment>>> reqestAssignmentList(@Header("token") String token, @Query("classID") String classID, @Query("serialNumber") Long serialNumber);
+    Observable<Response<List<AssignmentDownload>>> reqestAssignmentList(@Header("token") String token, @Query("classID") String classID, @Query("serialNumber") String serialNumber);
 
 
 
