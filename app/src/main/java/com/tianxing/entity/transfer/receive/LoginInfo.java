@@ -1,4 +1,4 @@
-package com.tianxing.entity.http.json;
+package com.tianxing.entity.transfer.receive;
 
 import com.tianxing.entity.info.ClassInfo;
 import com.tianxing.entity.info.GroupInfo;

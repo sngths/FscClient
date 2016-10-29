@@ -3,8 +3,11 @@ package com.tianxing.model.communication.http;
 import com.tianxing.entity.assignment.AssignmentDownload;
 import com.tianxing.entity.assignment.AssignmentUpload;
 import com.tianxing.entity.http.json.ImageFile;
-import com.tianxing.entity.http.json.LoginInfo;
-import com.tianxing.entity.http.json.UsernameAndPassword;
+import com.tianxing.entity.transfer.receive.LoginInfo;
+import com.tianxing.entity.transfer.receive.LoginResponse;
+import com.tianxing.entity.transfer.receive.StudentInfoResponse;
+import com.tianxing.entity.transfer.receive.TeacherInfoResponse;
+import com.tianxing.entity.transfer.send.UsernameAndPassword;
 
 import java.util.List;
 import java.util.Map;
@@ -29,11 +32,34 @@ import rx.Observable;
 public interface HttpService {
 
 
+    /**
+     * 登录
+     * */
     @POST("login")
     @Headers("Content-Type: application/json")
-    Observable<LoginInfo> login(@Body UsernameAndPassword usernameAndPassword);
+    Observable<LoginInfo> login(@Body UsernameAndPassword usernamendPassword);
 
 
+
+    /**
+     * 用户登录
+     * */
+    @POST("mlogin")
+    @Headers("Content-Type: application/json")
+    Observable<LoginResponse> userLogin(@Body UsernameAndPassword usernamendPassword);
+
+    /**
+     * 请求学生信息
+     * */
+    @GET("student/info")
+    @Headers("Content-Type: application/json")
+    Observable<StudentInfoResponse> studentInfoRequest(@Header("token") String token);
+    /**
+     * 请求老师信息
+     * */
+    @GET("student/info")
+    @Headers("Content-Type: application/json")
+    Observable<TeacherInfoResponse> teacherInfoRequest(@Header("token") String token);
     /**
      * 请求单个班级的作业列表
      */

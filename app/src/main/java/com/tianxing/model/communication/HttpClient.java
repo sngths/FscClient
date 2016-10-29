@@ -3,8 +3,11 @@ package com.tianxing.model.communication;
 import com.tianxing.entity.assignment.AssignmentDownload;
 import com.tianxing.entity.assignment.AssignmentUpload;
 import com.tianxing.entity.http.json.ImageFile;
-import com.tianxing.entity.http.json.LoginInfo;
+import com.tianxing.entity.transfer.receive.LoginInfo;
 import com.tianxing.entity.info.PersonalInfo;
+import com.tianxing.entity.transfer.receive.LoginResponse;
+import com.tianxing.entity.transfer.receive.StudentInfoResponse;
+import com.tianxing.entity.transfer.receive.TeacherInfoResponse;
 
 import java.util.List;
 
@@ -23,6 +26,23 @@ public interface HttpClient {
      * 登录
      * */
     Observable<LoginInfo> Login(String username, String password);
+
+
+    /**
+     * 用户登录
+     * */
+    Observable<LoginResponse> userLogin(String username, String password);
+
+
+    /**
+     * 请求学生信息
+     * */
+    Observable<StudentInfoResponse> requestStudentInfo();
+
+    /**
+     * 请求老师信息
+     * */
+    Observable<TeacherInfoResponse> requestTeacherInfo();
 
 
     /**

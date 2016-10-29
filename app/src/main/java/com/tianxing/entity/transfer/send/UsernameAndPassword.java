@@ -1,4 +1,4 @@
-package com.tianxing.entity.http.json;
+package com.tianxing.entity.transfer.send;
 
 /**
  * Created by tianxing on 16/9/7.

@@ -2,7 +2,7 @@ package com.tianxing.presenter.login;
 
 import android.util.Log;
 
-import com.tianxing.entity.http.json.LoginInfo;
+import com.tianxing.entity.transfer.receive.LoginInfo;
 import com.tianxing.entity.info.ClassInfo;
 import com.tianxing.entity.info.GroupInfo;
 import com.tianxing.entity.info.UserInfo;

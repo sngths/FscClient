@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item type="id" name="radioButton1"/>
-    <item type="id" name="radioButton2"/>
-    <item type="id" name="radioButton3"/>
-    <item type="id" name="radioButton4"/>
-    <item type="id" name="radioButton5"/>
-    <item type="id" name="radioButton6"/>
-    <item type="id" name="radioButton7"/>
-    <item type="id" name="radioButton8"/>
-    <item type="id" name="radioButton9"/>
-    <item type="id" name="radioButton10"/>
+    <item type="id" name="radioButton_class1"/>
+    <item type="id" name="radioButton_class2"/>
+    <item type="id" name="radioButton_class3"/>
+    <item type="id" name="radioButton_class4"/>
+    <item type="id" name="radioButton_class5"/>
+    <item type="id" name="radioButton_class6"/>
+    <item type="id" name="radioButton_class7"/>
+    <item type="id" name="radioButton_class8"/>
+    <item type="id" name="radioButton_class9"/>
+    <item type="id" name="radioButton_class10"/>
 </resources>

@@ -1,8 +1,9 @@
 package com.tianxing.fscteachersedition;
 
 import com.tianxing.entity.assignment.AssignmentDownload;
+import com.tianxing.entity.assignment.AssignmentUpload;
 import com.tianxing.entity.http.json.ImageFile;
-import com.tianxing.entity.http.json.LoginInfo;
+import com.tianxing.entity.transfer.receive.LoginInfo;
 import com.tianxing.model.communication.HttpClient;
 import com.tianxing.model.communication.http.FscHttpClient;
 
@@ -61,7 +62,7 @@ public class HttpClientUnitTest {
             e.printStackTrace();
         }
 
-        client.requestAssignmentList("classID", 8768760098L).subscribe(new Subscriber<Response<List<AssignmentDownload>>>() {
+        client.requestAssignmentList("classID", "8768760098L").subscribe(new Subscriber<Response<List<AssignmentDownload>>>() {
             @Override
             public void onCompleted() {
                 System.out.println("获取完成");
@@ -94,7 +95,7 @@ public class HttpClientUnitTest {
             e.printStackTrace();
         }
 
-        client.uploadAssignment(new AssignmentDownload()).subscribe(new Subscriber<Response>() {
+        client.uploadAssignment(new AssignmentUpload()).subscribe(new Subscriber<Response>() {
             @Override
             public void onCompleted() {
 

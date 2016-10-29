@@ -3,8 +3,11 @@ package com.tianxing.model.communication.http;
 import com.tianxing.entity.assignment.AssignmentDownload;
 import com.tianxing.entity.assignment.AssignmentUpload;
 import com.tianxing.entity.http.json.ImageFile;
-import com.tianxing.entity.http.json.LoginInfo;
-import com.tianxing.entity.http.json.UsernameAndPassword;
+import com.tianxing.entity.transfer.receive.LoginInfo;
+import com.tianxing.entity.transfer.receive.LoginResponse;
+import com.tianxing.entity.transfer.receive.StudentInfoResponse;
+import com.tianxing.entity.transfer.receive.TeacherInfoResponse;
+import com.tianxing.entity.transfer.send.UsernameAndPassword;
 import com.tianxing.entity.info.PersonalInfo;
 import com.tianxing.model.communication.HttpClient;
 
@@ -36,7 +39,7 @@ public class FscHttpClient implements HttpClient {
     private HttpService service;
 
 
-    private String token = "000000";
+    private String token;
     private String refreshToken;
 
 
@@ -84,6 +87,44 @@ public class FscHttpClient implements HttpClient {
                     }
                 });
 
+    }
+
+    /**
+     * 用户登录
+     *
+     * @param username
+     * @param password
+     */
+    @Override
+    public Observable<LoginResponse> userLogin(String username, String password) {
+        UsernameAndPassword usernameAndPassword = new UsernameAndPassword();
+        usernameAndPassword.setUsername(username);
+        usernameAndPassword.setPassword(password);
+        return service.userLogin(usernameAndPassword)
+                .subscribeOn(Schedulers.io())
+                .doOnNext(new Action1<LoginResponse>() {
+                    @Override
+                    public void call(LoginResponse loginResponse) {
+                        //保存token
+                        token = loginResponse.getToken();
+                    }
+                });
+    }
+
+    /**
+     * 请求学生信息
+     */
+    @Override
+    public Observable<StudentInfoResponse> requestStudentInfo() {
+        return service.studentInfoRequest(token).subscribeOn(Schedulers.io());
+    }
+
+    /**
+     * 请求老师信息
+     */
+    @Override
+    public Observable<TeacherInfoResponse> requestTeacherInfo() {
+        return service.teacherInfoRequest(token).subscribeOn(Schedulers.io());
     }
 
 
