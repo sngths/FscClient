@@ -20,6 +20,11 @@ public abstract class AssignmentPresenter implements AssignmentListPresenter{
     public abstract Integer getClassCount();
 
     /**
+     * 根据classID取得position
+     * */
+    public abstract Integer getPosition(String classID);
+
+    /**
      * 取得对应位置页面标题
      * */
     public String getPageTitle(int position){

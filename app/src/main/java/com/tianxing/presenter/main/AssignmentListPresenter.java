@@ -28,8 +28,8 @@ public interface AssignmentListPresenter {
 
     /**
      * 请求刷新作业数据
-     * @param classID 班级信息在列表中的位置
+     * @param classID 班级ID
      * @param sid 作业中的最大id
      * */
-    void requestAssignment(int classID , int sid);
+    void requestAssignment(String classID , int sid);
 }

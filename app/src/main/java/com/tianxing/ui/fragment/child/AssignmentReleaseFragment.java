@@ -1,6 +1,7 @@
 package com.tianxing.ui.fragment.child;
 
 import android.os.Bundle;
+import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import com.tianxing.entity.assignment.AssignmentUpload;
 import com.tianxing.entity.http.json.ImageFile;
+import com.tianxing.entity.info.ClassInfo;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.child.AssignemntReleaseViewPresenter;
 import com.tianxing.presenter.child.AssignmentReleasePresenter;
@@ -26,7 +28,9 @@ import com.tianxing.util.ScreenSize;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,6 +47,11 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
 
     private int imageCount = 0;
     private List<String> imageFiles = new ArrayList<>(3);
+
+    private List<Integer> radioButtonIdList = new ArrayList<>();//id列表
+    private Map<Integer, String> radioButtonIdMap = new HashMap<>();//RadioButtonID对应的 classID
+
+    private String classID;//选择的classID
 
     private AssignmentReleasePresenter presenter;
 
@@ -87,22 +96,41 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
      * 添加班级选择 处理单选监听
      * */
     private void setClassSelect(){
-        RadioButton button1 = new RadioButton(getContext());
-        button1.setId(R.id.radioButton_class1);
-        RadioButton button2 = new RadioButton(getContext());
-        RadioButton button3 = new RadioButton(getContext());
-        button1.setText("一年级");
-        button2.setText("二年级");
-        button3.setText("三年级");
-        radioGroup.addView(button1);
-        radioGroup.addView(button2);
-        radioGroup.addView(button3);
+        List<ClassInfo> classList = presenter.getClassList();
+        radioButtonIdList.add(R.id.radioButton_class1);
+        radioButtonIdList.add(R.id.radioButton_class2);
+        radioButtonIdList.add(R.id.radioButton_class3);
+        radioButtonIdList.add(R.id.radioButton_class4);
+        radioButtonIdList.add(R.id.radioButton_class5);
+        radioButtonIdList.add(R.id.radioButton_class6);
+        radioButtonIdList.add(R.id.radioButton_class7);
+        radioButtonIdList.add(R.id.radioButton_class8);
+        radioButtonIdList.add(R.id.radioButton_class9);
+        radioButtonIdList.add(R.id.radioButton_class10);
+        //最多包含10个班级
+        if (classList.size() <= 10){
+            for (int i = 0; i < classList.size(); i++) {
+                RadioButton button = new RadioButton(getContext());
+                button.setId(radioButtonIdList.get(i));
+                button.setText(classList.get(i).getName());
+                radioButtonIdMap.put(radioButtonIdList.get(i), classList.get(i).getId());
+                radioGroup.addView(button);
+            }
+        }else {
+            for (int i = 0; i < 10; i++) {
+                RadioButton button = new RadioButton(getContext());
+                button.setId(radioButtonIdList.get(i));
+                button.setText(classList.get(i).getName());
+                radioButtonIdMap.put(radioButtonIdList.get(i), classList.get(i).getId());
+                radioGroup.addView(button);
+            }
+        }
 
         //处理点击
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-
+                classID = radioButtonIdMap.get(checkedId);
             }
         });
     }
@@ -180,18 +208,22 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
         final List<ImageFile> images = new ArrayList<>();
         final AssignmentUpload assignmentUpload = new AssignmentUpload();
         //判断是否选择了班级
-
+        if (classID == null){
+            Toast.makeText(getContext(), "请选择班级", Toast.LENGTH_SHORT).show();
+            return;
+        }
         //判断上传内容是否为空
-        if (title.replace(" ", "").equals("") || content.replace(" ", "").equals("") || imageFiles.size() == 0){
+        if (title.replace(" ", "").equals("") && content.replace(" ", "").equals("") && imageFiles.size() == 0){
             Toast.makeText(getContext(), "请输入作业内容", Toast.LENGTH_SHORT).show();
             return;
         }
-        assignmentUpload.setClassID("c1g1");
+        assignmentUpload.setClassID(classID);
         assignmentUpload.setContent(content);
         assignmentUpload.setTitle(title);
         //上传图片
         if (imageFiles.size() == 0) {
-
+            //不包含图片直接上传
+            uploadAssignment(assignmentUpload);
         } else if (imageFiles.size() == 1) {
             //上传单个图片
             presenter.uploadImage(imageFiles.get(0)).subscribe(new Subscriber<Response<ImageFile>>() {

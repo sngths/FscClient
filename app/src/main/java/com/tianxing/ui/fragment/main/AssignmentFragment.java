@@ -13,7 +13,7 @@ import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.main.AssignmentPresenter;
 import com.tianxing.presenter.main.AssignmentViewPresenter;
 import com.tianxing.ui.AssingmentView;
-import com.tianxing.ui.adapter.AssignemntViewPagerAdapter;
+import com.tianxing.ui.adapter.AssignmentViewPagerAdapter;
 import com.tianxing.ui.fragment.BaseFragment;
 
 import butterknife.BindView;
@@ -28,7 +28,7 @@ public class AssignmentFragment extends BaseFragment implements AssingmentView{
 
 
     private final AssignmentViewPresenter presenter;
-    private AssignemntViewPagerAdapter adapter;
+    private AssignmentViewPagerAdapter adapter;
 
     private Unbinder unbinder;
     @BindView(R.id.appBarLayout)
@@ -70,7 +70,7 @@ public class AssignmentFragment extends BaseFragment implements AssingmentView{
         //tabLayout.addTab(tabLayout.newTab());
         //tabLayout.addTab(tabLayout.newTab());
         //tabLayout.addTab(tabLayout.newTab());
-        adapter = new AssignemntViewPagerAdapter(getChildFragmentManager(), presenter);
+        adapter = new AssignmentViewPagerAdapter(getChildFragmentManager(), presenter);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }
@@ -98,9 +98,8 @@ public class AssignmentFragment extends BaseFragment implements AssingmentView{
      * @param classId
      */
     @Override
-    public void refreshAssignment(Integer classId) {
+    public void refreshAssignment(String classId) {
         //通知相应的Fragment跟新界面
-
         AssignmentListView view = adapter.findItem(classId);
 
         if (view != null){

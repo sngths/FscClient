@@ -57,7 +57,7 @@ public interface HttpService {
     /**
      * 请求老师信息
      * */
-    @GET("student/info")
+    @GET("teacher/info")
     @Headers("Content-Type: application/json")
     Observable<TeacherInfoResponse> teacherInfoRequest(@Header("token") String token);
     /**

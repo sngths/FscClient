@@ -2,9 +2,12 @@ package com.tianxing.model.data;
 
 import com.tianxing.entity.ClassData;
 import com.tianxing.entity.ClassDataFactory;
+import com.tianxing.entity.info.ClassInfo;
 import com.tianxing.model.AssignmentPool;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by tianxing on 16/7/19.
@@ -12,14 +15,15 @@ import java.util.ArrayList;
  */
 public class AssignmentDataPool implements AssignmentPool<ClassData> {
 
-    private ArrayList<ClassData> classDatas;
+    private ArrayList<ClassData> classDataList;//班级数据列表
+    private Map<String, Integer> classDataMap;//classID 对应的班级数据位置
 
 
 
 
     public AssignmentDataPool(){
-        classDatas = new ArrayList<>();
-        //init();
+        classDataList = new ArrayList<>();
+        classDataMap = new HashMap<>();
     }
 
 
@@ -28,18 +32,20 @@ public class AssignmentDataPool implements AssignmentPool<ClassData> {
      */
     @Override
     public Integer getClassCount() {
-        return classDatas.size();
+        return classDataList.size();
     }
 
     /**
      * 创建一个班级数据
      *
-     * @param title
+     * @param classInfo
      */
     @Override
-    public void createClassData(String title) {
+    public void createClassData(ClassInfo classInfo) {
+        ClassData data = ClassDataFactory.getNewClassData(classInfo);
+        classDataList.add(data);
+        classDataMap.put(classInfo.getId(), classDataList.size() -1);
 
-        classDatas.add(ClassDataFactory.getNewClassData(title));
     }
 
     /**
@@ -49,16 +55,18 @@ public class AssignmentDataPool implements AssignmentPool<ClassData> {
      */
     @Override
     public ClassData getClassData(int position) {
-        return classDatas.get(position);
+        return classDataList.get(position);
+    }
+
+    @Override
+    public ClassData getClassData(String classID) {
+        return classDataList.get(classDataMap.get(classID));
+    }
+
+    @Override
+    public Integer getClassDataPosition(String classID) {
+        return classDataMap.get(classID);
     }
 
 
-    /**
-     * 存入一些固定数据
-     * */
-    private void init(){
-
-        //classDatas.add(ClassDataFactory.getNewClassData("一年级二班"));
-        //classDatas.add(ClassDataFactory.getNewClassData("一年级三班"));
-    }
 }

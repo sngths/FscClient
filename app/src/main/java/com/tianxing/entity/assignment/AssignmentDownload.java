@@ -57,4 +57,6 @@ public class AssignmentDownload {
     public List<ImageFile> getImages() {
         return images;
     }
+
+
 }

@@ -24,7 +24,7 @@ public class MessageDataPool extends Observable implements MessagePool {
         //启动时存入一些好友数据 好友关系列表在登录完成后 从服务器获取
 
 
-        putUser("user1");
+        /*putUser("user1");
         putUser("user2");
         putUser("user3");
         putUser("user4");
@@ -35,7 +35,7 @@ public class MessageDataPool extends Observable implements MessagePool {
         putUser("user9");
         putUser("user10");
 
-        putRoom("c1d1");
+        putRoom("c1d1");*/
 
     }
 

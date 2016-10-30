@@ -22,9 +22,6 @@ import rx.schedulers.Schedulers;
 public class AssignmentViewPresenter extends AssignmentPresenter {
 
 
-    /**
-     * presenter持有model的引用
-     */
     private AssignmentPool assignmentPool;
 
 
@@ -66,8 +63,8 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
      * 取得对应位置的一条作业数据
      */
     @Override
-    public AssignmentDownload getAssignment(int classID, int position) {
-        return assignmentPool.getClassData(classID).getAssignment(position);
+    public AssignmentDownload getAssignment(int classPosition, int position) {
+        return assignmentPool.getClassData(classPosition).getAssignment(position);
     }
 
 
@@ -89,6 +86,11 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
         return assignmentPool.getClassCount();
     }
 
+    @Override
+    public Integer getPosition(String classID) {
+        return assignmentPool.getClassDataPosition(classID);
+    }
+
 
     /**
      * 请求刷新作业数据
@@ -97,8 +99,8 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
      * @param sid     作业中的最大id
      */
     @Override
-    public void requestAssignment(final int classID, int sid) {
-        httpClient.requestAssignmentList(String.valueOf("c1g1"), String.valueOf(sid))
+    public void requestAssignment(final String classID, int sid) {
+        httpClient.requestAssignmentList(String.valueOf(classID), String.valueOf(sid))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Response<List<AssignmentDownload>>>() {
@@ -117,7 +119,7 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
                     public void onNext(Response<List<AssignmentDownload>> listResponse) {
                         Log.e("AssignmentViewPresenter", "取得请求的作业数据 条数：" + String.valueOf(listResponse.body().size()));
                         for (AssignmentDownload assignment : listResponse.body()) {
-                            assignmentPool.getClassData(classID).putAssignment(new AssignmentDownload());
+                            assignmentPool.getClassData(classID).putAssignment(assignment);
                         }
                     }
                 });

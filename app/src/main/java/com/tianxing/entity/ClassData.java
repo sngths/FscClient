@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class ClassData {
 
 
-    private String ClassID = "";
-    private String Title = "";
+    private String ClassID;
+    private String Title;
 
     private ArrayList<AssignmentDownload> assignmentDownloadList = new ArrayList<>();
 

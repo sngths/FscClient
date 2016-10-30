@@ -45,9 +45,10 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
     /**
      * 创建时传入 班级位置信息
      */
-    public static AssignmentListFragment newInstance(int position) {
+    public static AssignmentListFragment newInstance(int position, String classID) {
         Bundle bundle = new Bundle();
         bundle.putInt("position", position);
+        bundle.putString("classID", classID);
         AssignmentListFragment fragment = new AssignmentListFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -108,7 +109,7 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
     @Override
     public void onRefresh() {
         //通知P层请求数据
-        presenter.requestAssignment(getArguments().getInt("position", -1), presenter.getAssignemntCount(getArguments().getInt("position", -1)));
+        presenter.requestAssignment(getArguments().getString("classID"), presenter.getAssignemntCount(getArguments().getInt("position", -1)));
     }
 
 

@@ -3,6 +3,7 @@ package com.tianxing.ui.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ import java.util.List;
  * 作业列表适配器
  */
 public class AssignmentListAdapter extends Adapter<AssignmentListAdapter.mViewHold> {
-
+    private static final String TAG = "AssignmentListAdp";
     private LayoutInflater inflater;
     private AssignmentListPresenter presenter;
 
@@ -56,6 +57,7 @@ public class AssignmentListAdapter extends Adapter<AssignmentListAdapter.mViewHo
     public void onBindViewHolder(mViewHold holder, int position) {
         // 取得作业数据 修改View视图
         AssignmentDownload assignment = presenter.getAssignment(calssID, position);
+        //打印作业信息
         holder.setTitle(assignment.getTitle());
         holder.setDate(assignment.getDate());
         holder.setContent(assignment.getContent());
@@ -124,6 +126,7 @@ public class AssignmentListAdapter extends Adapter<AssignmentListAdapter.mViewHo
          * @param date  格式为： 星期日 2016.10.30 10:13:49 上午 CST
          * */
         public void setDate(String date){
+            Log.e(TAG, "日期：" + date);
             String[] dateArray = date.split(" ");
             this.date.setText(dateArray[0].concat(dateArray[3]));
             this.time.setText(dateArray[2]);

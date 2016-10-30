@@ -14,11 +14,11 @@ import java.util.HashMap;
  * Created by tianxing on 16/7/12.
  * 作业查看界面ViewPager适配器  处理Fragment的销毁
  */
-public class AssignemntViewPagerAdapter extends FragmentStatePagerAdapter {
+public class AssignmentViewPagerAdapter extends FragmentStatePagerAdapter {
 
     private AssignmentPresenter presenter;//获取ViewPager相关数据信息
     private HashMap<Integer, AssignmentListFragment> fragments = new HashMap<>();//保存Fragment引用
-    public AssignemntViewPagerAdapter(FragmentManager fm, AssignmentPresenter presenter) {
+    public AssignmentViewPagerAdapter(FragmentManager fm, AssignmentPresenter presenter) {
         super(fm);
         this.presenter = presenter;
     }
@@ -31,7 +31,8 @@ public class AssignemntViewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         //ViewPager会完全销毁Fragment 只保存Fragment状态数据   每次需要时重新请求Fragment
-        AssignmentListFragment fragment = AssignmentListFragment.newInstance(position);
+
+        AssignmentListFragment fragment = AssignmentListFragment.newInstance(position, presenter.getClassID(position));
         fragments.put(position, fragment);
         return fragment;
     }
@@ -61,6 +62,14 @@ public class AssignemntViewPagerAdapter extends FragmentStatePagerAdapter {
      * */
     public AssignmentListFragment findItem(Integer position){
         return fragments.get(position);
+    }
+
+
+    /**
+     * 找到classID对应的Fragment
+     * */
+    public AssignmentListFragment findItem(String classID){
+        return fragments.get(presenter.getPosition(classID));
     }
 
 }

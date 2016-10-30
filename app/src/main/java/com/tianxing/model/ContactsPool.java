@@ -113,7 +113,11 @@ public interface ContactsPool {
      * */
     void putClassInfo(ClassInfo classInfo);
 
+    public List<GroupInfo> getGroups();
 
+    public List<UserInfo> getFriends();
+
+    public List<ClassInfo> getClasses();
 
 
 

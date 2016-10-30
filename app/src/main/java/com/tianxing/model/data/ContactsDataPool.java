@@ -103,6 +103,18 @@ public class ContactsDataPool implements ContactsPool {
         Friends.add(userInfo);
     }
 
+    public List<GroupInfo> getGroups() {
+        return Groups;
+    }
+
+    public List<UserInfo> getFriends() {
+        return Friends;
+    }
+
+    public List<ClassInfo> getClasses() {
+        return Classes;
+    }
+
     /**
      * 刷新好友列表
      *

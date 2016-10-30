@@ -1,17 +1,17 @@
 package com.tianxing.entity;
 
+import com.tianxing.entity.info.ClassInfo;
+
 /**
  * Created by tianxing on 16/7/20.
  */
 public class ClassDataFactory {
 
-    public static ClassData getNewClassData(String title){
+    public static ClassData getNewClassData(ClassInfo classInfo){
         ClassData classData = new ClassData();
-        classData.setTitle(title);
-        /*int a = 5;
-        for (int i = 0; i < a; i++) {
-            classData.putAssignment(new AssignmentDownload());
-        }*/
+        classData.setClassID(classInfo.getId());
+        classData.setTitle(classInfo.getName());
+
         return classData;
     }
 }

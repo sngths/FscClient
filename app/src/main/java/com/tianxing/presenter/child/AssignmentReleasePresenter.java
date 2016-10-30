@@ -2,6 +2,7 @@ package com.tianxing.presenter.child;
 
 import com.tianxing.entity.assignment.AssignmentUpload;
 import com.tianxing.entity.http.json.ImageFile;
+import com.tianxing.entity.info.ClassInfo;
 
 import java.util.List;
 
@@ -14,6 +15,11 @@ import rx.Observable;
 
 public interface AssignmentReleasePresenter {
 
+
+    /**
+     * 获取班级列表
+     * */
+    List<ClassInfo> getClassList();
 
     /**
      * 上传一张图片
