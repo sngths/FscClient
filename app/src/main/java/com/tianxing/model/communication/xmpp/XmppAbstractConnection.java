@@ -115,11 +115,11 @@ abstract class XmppAbstractConnection implements XmppConnection {
 
         //所有房间添加多消息监听
         for (final GroupInfo groupInfo: App.getInstance().getContactsPool().getGroupInfoList()) {
-            MultiUserChat multiUserChat = multiUserChatManager.getMultiUserChat(groupInfo.getRoomName() + "@" + serverInfo.getRoomServiceName());
+            MultiUserChat multiUserChat = multiUserChatManager.getMultiUserChat(groupInfo.getRoomID() + "@" + serverInfo.getRoomServiceName());
             multiUserChat.addMessageListener(new MessageListener() {
                 @Override
                 public void processMessage(Message message) {
-                    onMultiUserMessageReceived(groupInfo.getRoomName(), message);
+                    onMultiUserMessageReceived(groupInfo.getRoomID(), message);
                 }
             });
         }
@@ -136,7 +136,7 @@ abstract class XmppAbstractConnection implements XmppConnection {
 
 
         for (GroupInfo groupInfo: App.getInstance().getContactsPool().getGroupInfoList()) {
-            MultiUserChat chat = multiUserChatManager.getMultiUserChat(groupInfo.getRoomName() + "@" + serverInfo.getRoomServiceName());
+            MultiUserChat chat = multiUserChatManager.getMultiUserChat(groupInfo.getRoomID() + "@" + serverInfo.getRoomServiceName());
             DiscussionHistory history = new DiscussionHistory();
             history.setMaxStanzas(30);
             chat.join("群昵称", "", history, 5000);

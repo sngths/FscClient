@@ -43,12 +43,12 @@ public class ContactsDataPool implements ContactsPool {
             }else if (parentPosition == 1){
                 return "好友";
             }else {
-                return Classes.get(parentPosition - 2).getTitle();
+                return Classes.get(parentPosition - 2).getName();
             }
         }else {
             //子项标题
             if (parentPosition == 0){
-                return Groups.get(childPosition).getRoomTitle();
+                return Groups.get(childPosition).getRoomName();
             }else if (parentPosition == 1){
                 return Friends.get(childPosition).getNickName();
             }else {

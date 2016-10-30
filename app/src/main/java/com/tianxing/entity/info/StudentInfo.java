@@ -5,4 +5,9 @@ package com.tianxing.entity.info;
  */
 public class StudentInfo extends UserInfo {
 
+    private String classID;//所在班级ID
+
+    public String getClassID() {
+        return classID;
+    }
 }

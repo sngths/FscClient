@@ -74,9 +74,16 @@ public class LoginViewPresenter implements LoginPresenter {
                         //班级
                         for (ClassInfo classInfo : loginInfo.getClasses()) {
                             contactsPool.putClassInfo(classInfo);
-                            assignmentPool.createClassData(classInfo.getTitle());
+                            assignmentPool.createClassData(classInfo.getName());
                         }
                     }
                 });
     }
+
+
+
+    /**
+     * 获取用户信息
+     * */
+
 }

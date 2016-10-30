@@ -88,7 +88,7 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
      * */
     private void setClassSelect(){
         RadioButton button1 = new RadioButton(getContext());
-        button1.setId(R.id.radioButton1);
+        button1.setId(R.id.radioButton_class1);
         RadioButton button2 = new RadioButton(getContext());
         RadioButton button3 = new RadioButton(getContext());
         button1.setText("一年级");

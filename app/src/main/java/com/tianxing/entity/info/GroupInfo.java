@@ -5,16 +5,20 @@ package com.tianxing.entity.info;
  * 单个会话群组信息
  */
 public class GroupInfo implements InfoEntity{
-    private String roomName = "";
-    private String roomTitle;
+    private String roomID;
+    private String roomName;
 
+
+    public String getRoomID() {
+        return roomID;
+    }
 
     public String getRoomName() {
         return roomName;
     }
 
-    public String getRoomTitle() {
-        return roomTitle;
+    public void setRoomID(String roomID) {
+        this.roomID = roomID;
     }
 
     public void setRoomName(String roomName) {

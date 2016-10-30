@@ -45,6 +45,7 @@ dependencies {
     compile 'com.liulishuo.filedownloader:library:1.1.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.jakewharton:butterknife:8.1.0'
+    compile 'top.zibin:Luban:1.0.9'//图片压缩
     //compile 'com.bignerdranch.android:expandablerecyclerview:2.1.1'
     compile 'tv.danmaku.ijk.media:ijkplayer-java:0.6.0'
     compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.6.0'

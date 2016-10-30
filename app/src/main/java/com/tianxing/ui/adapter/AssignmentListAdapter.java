@@ -6,10 +6,15 @@ import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.tianxing.entity.assignment.AssignmentDownload;
+import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.main.AssignmentListPresenter;
 import com.tianxing.ui.listener.AssignmentItemOnClickListerner;
+
+import java.util.List;
 
 /**
  * Created by tianxing on 16/7/13.
@@ -49,8 +54,12 @@ public class AssignmentListAdapter extends Adapter<AssignmentListAdapter.mViewHo
 
     @Override
     public void onBindViewHolder(mViewHold holder, int position) {
-        //修改View视图 取得作业数据
-        presenter.getAssignment(calssID, position);
+        // 取得作业数据 修改View视图
+        AssignmentDownload assignment = presenter.getAssignment(calssID, position);
+        holder.setTitle(assignment.getTitle());
+        holder.setDate(assignment.getDate());
+        holder.setContent(assignment.getContent());
+        holder.setImage(assignment.getImages());
     }
 
 
@@ -62,14 +71,6 @@ public class AssignmentListAdapter extends Adapter<AssignmentListAdapter.mViewHo
 
 
 
-    class mViewHold extends ViewHolder{
-        public mViewHold(View itemView) {
-            super(itemView);
-        }
-
-        //View的修改函数
-
-    }
 
 
     /**
@@ -78,4 +79,63 @@ public class AssignmentListAdapter extends Adapter<AssignmentListAdapter.mViewHo
     public void setItemOnClickListener(AssignmentItemOnClickListerner listener){
         this.listerner = listener;
     }
+
+
+    class mViewHold extends ViewHolder{
+        private View view;
+        private TextView title;
+        private TextView date;
+        private TextView time;
+        private TextView content;
+
+        public mViewHold(View itemView) {
+            super(itemView);
+            this.view = itemView;
+            title = (TextView) itemView.findViewById(R.id.textView_title);
+            date = (TextView) itemView.findViewById(R.id.textView_date);
+            time = (TextView) itemView.findViewById(R.id.textView_time);
+            content = (TextView) itemView.findViewById(R.id.textView_content);
+        }
+
+        //View的修改函数
+        /**
+         * 设置标题
+         * */
+        public void setTitle(String title){
+            if (title == null){
+                this.title.setVisibility(View.INVISIBLE);
+            }else {
+                this.title.setText(title);
+            }
+        }
+        /**
+         * 设置内容
+         * */
+        public void setContent(String content){
+            if (content == null){
+                this.content.setVisibility(View.INVISIBLE);
+            }else {
+                this.content.setText(content);
+            }
+        }
+
+        /**
+         * 设置时间
+         * @param date  格式为： 星期日 2016.10.30 10:13:49 上午 CST
+         * */
+        public void setDate(String date){
+            String[] dateArray = date.split(" ");
+            this.date.setText(dateArray[0].concat(dateArray[3]));
+            this.time.setText(dateArray[2]);
+        }
+
+        /**
+         * 设置图片 根据图片数目设置布局
+         * */
+        public void setImage(List<ImageFile> images){
+
+        }
+
+    }
+
 }

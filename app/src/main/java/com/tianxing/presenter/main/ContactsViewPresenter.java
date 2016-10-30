@@ -145,7 +145,7 @@ public class ContactsViewPresenter implements ContactsPresenter {
      */
     @Override
     public String getRoomName(int position) {
-        return contactsPool.getGroupInfo(position).getRoomName();
+        return contactsPool.getGroupInfo(position).getRoomID();
     }
 
     /**
