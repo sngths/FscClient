@@ -11,4 +11,10 @@ public interface AssignmentView {
      * 刷新作业数据
      * */
     void refreshAssignment(String classId);
+
+
+    /***
+     * 取消下拉状态
+     * */
+    void refreshRelease(String classID);
 }

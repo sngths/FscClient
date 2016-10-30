@@ -115,7 +115,7 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
 
 
     /**
-     * 从载数据 撤销下拉载入状态
+     * 重载数据 撤销下拉载入状态
      */
     @Override
     public void refresh() {
@@ -124,4 +124,13 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
             swipeRefreshLayout.setRefreshing(false);
         }
     }
+
+    @Override
+    public void release() {
+        if (swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.setRefreshing(false);
+        }
+    }
+
+
 }

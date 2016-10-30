@@ -15,4 +15,8 @@ public interface AssignmentListView {
     void refresh();
 
 
+    /**
+     * 释放下拉状态
+     * */
+    void release();
 }

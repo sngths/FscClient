@@ -143,6 +143,9 @@ public class AssignmentListAdapter extends Adapter<AssignmentListAdapter.mViewHo
          * 设置图片 根据图片数目设置布局
          * */
         public void setImage(List<ImageFile> images){
+            if (images == null){
+                return;
+            }
             imageFrame.removeAllViews();
             if (images.size() == 1){
                 ImageButton imageButton = new ImageButton(view.getContext());

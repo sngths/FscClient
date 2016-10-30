@@ -111,6 +111,8 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
                         //请求数据完成 通知界面刷新
                         if (assignmentCount != 0){
                             view.refreshAssignment(classID);
+                        }else {
+                            view.refreshRelease(classID);
                         }
                     }
 

@@ -108,6 +108,16 @@ public class AssignmentFragment extends BaseFragment implements AssignmentView {
 
     }
 
+    @Override
+    public void refreshRelease(String classID) {
+        AssignmentListView view = adapter.findItem(classID);
+
+        if (view != null){
+            view.release();
+        }
+    }
+
+
     /**
      * 供子Fragment取得P层引用
      * */
