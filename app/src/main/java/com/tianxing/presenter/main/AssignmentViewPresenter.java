@@ -6,7 +6,7 @@ import com.tianxing.entity.assignment.AssignmentDownload;
 import com.tianxing.model.App;
 import com.tianxing.model.AssignmentPool;
 import com.tianxing.model.communication.HttpClient;
-import com.tianxing.ui.AssingmentView;
+import com.tianxing.ui.AssignmentView;
 
 import java.util.List;
 
@@ -25,10 +25,10 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
     private AssignmentPool assignmentPool;
 
 
-    private AssingmentView view;
+    private AssignmentView view;
     private HttpClient httpClient;
 
-    public AssignmentViewPresenter(AssingmentView view) {
+    public AssignmentViewPresenter(AssignmentView view) {
         this.view = view;
         assignmentPool = App.getInstance().getAssignmentPool();
         httpClient = App.getInstance().getHttpClient();
@@ -104,10 +104,14 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Response<List<AssignmentDownload>>>() {
+
+                    private int assignmentCount;//取得的作业条数
                     @Override
                     public void onCompleted() {
                         //请求数据完成 通知界面刷新
-                        view.refreshAssignment(classID);
+                        if (assignmentCount != 0){
+                            view.refreshAssignment(classID);
+                        }
                     }
 
                     @Override
@@ -118,6 +122,7 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
                     @Override
                     public void onNext(Response<List<AssignmentDownload>> listResponse) {
                         Log.e("AssignmentViewPresenter", "取得请求的作业数据 条数：" + String.valueOf(listResponse.body().size()));
+                        assignmentCount = listResponse.body().size();
                         for (AssignmentDownload assignment : listResponse.body()) {
                             assignmentPool.getClassData(classID).putAssignment(assignment);
                         }

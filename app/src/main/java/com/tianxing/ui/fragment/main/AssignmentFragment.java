@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.main.AssignmentPresenter;
 import com.tianxing.presenter.main.AssignmentViewPresenter;
-import com.tianxing.ui.AssingmentView;
+import com.tianxing.ui.AssignmentView;
 import com.tianxing.ui.adapter.AssignmentViewPagerAdapter;
 import com.tianxing.ui.fragment.BaseFragment;
 
@@ -23,7 +23,7 @@ import butterknife.Unbinder;
 /**
  * Created by tianxing on 16/7/11.
  */
-public class AssignmentFragment extends BaseFragment implements AssingmentView{
+public class AssignmentFragment extends BaseFragment implements AssignmentView {
     public static final String TAG = "AssignmentFragment";
 
 

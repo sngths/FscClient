@@ -1,7 +1,6 @@
 package com.tianxing.ui.fragment.child;
 
 import android.os.Bundle;
-import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -38,6 +37,9 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import retrofit2.Response;
 import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 /**
  * Created by tianxing on 16/7/26.
@@ -67,8 +69,12 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
     EditText editTextTitle;
     @BindView(R.id.editText_content)
     EditText editTextContent;
-    @BindView(R.id.linearLayout_image_frame)//图片框
-    LinearLayout imageFrame;
+    @BindView(R.id.linearLayout_image_frame1)//图片框1
+    LinearLayout imageFrame1;
+    @BindView(R.id.linearLayout_image_frame2)//图片框2
+    LinearLayout imageFrame2;
+    @BindView(R.id.linearLayout_image_frame3)//图片框3
+    LinearLayout imageFrame3;
     @BindView(R.id.imageButton)//拍照按钮
     ImageButton captureButton;
 
@@ -144,7 +150,30 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
         ((MainView) getActivity()).startCapture(new MainView.CaptureResult() {
             @Override
             public void Successed(File imageFile) {
-                showPicture(imageFile);
+                //压缩图片
+                Luban.get(getContext())
+                        .load(imageFile)
+                        .putGear(Luban.THIRD_GEAR)
+                        .setCompressListener(new OnCompressListener() {
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onSuccess(File file) {
+                        //压缩成功后显示图片
+                        Log.e(TAG, "压缩成功：" + file.getAbsolutePath());
+                        showPicture(file);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                }).launch();
+
+
             }
 
             @Override
@@ -161,39 +190,50 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
 
 
     /**
-     * 在view中放置图片
+     * 在view中放置图片 最多三张图片
      */
     private void showPicture(File imageFile) {
         if (imageCount == 0) {
             ImageView imageView = new ImageView(getContext());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ScreenSize.dp2px(96), ScreenSize.dp2px(96));
-            params.setMargins(0, 0, 0, 8);
+            params.setMargins(8, 0, 8, 8);
             imageView.setLayoutParams(params);
-            Picasso.with(getContext()).load(imageFile).into(imageView);
-            imageFrame.addView(imageView, 0);
+            Picasso.with(getContext())
+                    .load(imageFile)
+                    .resize(ScreenSize.dp2px(96), ScreenSize.dp2px(96))
+                    .centerCrop().into(imageView);
+            imageFrame1.addView(imageView, 0);
             imageFiles.add(imageFile.getAbsolutePath());
             imageCount += 1;
         } else if (imageCount == 1) {
             ImageView imageView = new ImageView(getContext());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ScreenSize.dp2px(96), ScreenSize.dp2px(96));
-            params.setMargins(0, 0, 0, 8);
+            params.setMargins(8, 0, 8, 8);
             imageView.setLayoutParams(params);
-            Picasso.with(getContext()).load(imageFile).into(imageView);
-            imageFrame.addView(imageView, 1);
+            Picasso.with(getContext())
+                    .load(imageFile)
+                    .resize(ScreenSize.dp2px(96), ScreenSize.dp2px(96))
+                    .centerCrop()
+                    .into(imageView);
+            imageFrame1.addView(imageView, 1);
             imageFiles.add(imageFile.getAbsolutePath());
             imageCount += 1;
         } else if (imageCount == 2) {
             ImageView imageView = new ImageView(getContext());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ScreenSize.dp2px(96), ScreenSize.dp2px(96));
-            params.setMargins(0, 0, 0, 8);
+            params.setMargins(8, 0, 8, 8);
             imageView.setLayoutParams(params);
-            Picasso.with(getContext()).load(imageFile).into(imageView);
-            imageFrame.addView(imageView, 2);
-            imageFrame.removeView(captureButton);
+            Picasso.with(getContext())
+                    .load(imageFile)
+                    .resize(ScreenSize.dp2px(96), ScreenSize.dp2px(96))
+                    .centerCrop()
+                    .into(imageView);
+            imageFrame1.addView(imageView, 2);
+            imageFrame1.removeView(captureButton);
             imageFiles.add(imageFile.getAbsolutePath());
             imageCount += 1;
         }
-        imageFrame.invalidate();
+        imageFrame1.invalidate();
     }
 
 
@@ -226,7 +266,10 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
             uploadAssignment(assignmentUpload);
         } else if (imageFiles.size() == 1) {
             //上传单个图片
-            presenter.uploadImage(imageFiles.get(0)).subscribe(new Subscriber<Response<ImageFile>>() {
+            Log.e(TAG, "开始上传单张图片" + imageFiles.get(0));
+            presenter.uploadImage(imageFiles.get(0))
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Subscriber<Response<ImageFile>>() {
                 @Override
                 public void onCompleted() {
                     //完成后开始上传作业
@@ -236,12 +279,13 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
 
                 @Override
                 public void onError(Throwable e) {
-
+                    e.printStackTrace();
                 }
 
                 @Override
                 public void onNext(Response<ImageFile> imageFileResponse) {
                     //保存图片信息
+                    Log.e(TAG, "单张图片上传成功 + 返回码" + imageFileResponse.code() );
                     images.add(imageFileResponse.body());
                 }
             });
@@ -258,7 +302,7 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
 
                 @Override
                 public void onError(Throwable e) {
-
+                    e.printStackTrace();
                 }
 
                 @Override

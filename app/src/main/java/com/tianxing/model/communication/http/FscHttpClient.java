@@ -192,7 +192,7 @@ public class FscHttpClient implements HttpClient {
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), new File(imagePath));
         Map<String, RequestBody> requestBodyMap = new HashMap<>();
         requestBodyMap.put(name, requestBody);
-        return service.uploadImage(requestBodyMap);
+        return service.uploadImage(requestBodyMap).subscribeOn(Schedulers.io());
     }
 
     /***

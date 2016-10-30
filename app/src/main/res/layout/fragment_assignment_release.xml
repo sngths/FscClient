@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <include layout="@layout/toolbar_child"/>
+    <include layout="@layout/toolbar_child" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,15 +18,14 @@
             android:orientation="vertical">
             <!--班级选择框-->
             <RadioGroup
+                android:id="@+id/radioGroup_class"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="4dp"
-                android:orientation="horizontal"
-                android:id="@+id/radioGroup_class">
-            </RadioGroup>
+                android:orientation="horizontal"></RadioGroup>
 
             <EditText
                 android:id="@+id/editText_title"
@@ -41,7 +40,7 @@
                 android:lines="1"
                 android:maxLines="1"
                 android:padding="10dp"
-                android:textSize="@dimen/Title_TextSize"/>
+                android:textSize="@dimen/Title_TextSize" />
 
             <EditText
                 android:id="@+id/editText_content"
@@ -56,13 +55,12 @@
                 android:hint="正文"
                 android:minLines="8"
                 android:padding="10dp"
-                android:textSize="@dimen/Body_TextSize"/>
-            <!--图片选取-->
+                android:textSize="@dimen/Body_TextSize" />
+            <!--图片选取第一列-->
             <LinearLayout
-                android:id="@+id/linearLayout_image_frame"
+                android:id="@+id/linearLayout_image_frame1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
                 android:orientation="horizontal">
@@ -72,8 +70,27 @@
                     android:layout_width="96dp"
                     android:layout_height="96dp"
                     android:layout_marginEnd="8dp"
-                    app:srcCompat="@android:drawable/ic_input_add"/>
+                    app:srcCompat="@android:drawable/ic_input_add" />
 
+
+            </LinearLayout>
+            <!--图片选取第二列-->
+            <LinearLayout
+                android:id="@+id/linearLayout_image_frame2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+            <!--图片选取第三列-->
+            <LinearLayout
+                android:id="@+id/linearLayout_image_frame3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:orientation="horizontal">
 
             </LinearLayout>
 
@@ -86,7 +103,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/assignment_release_button_background"
-                android:text="发布"/>
+                android:text="发布" />
 
 
         </LinearLayout>

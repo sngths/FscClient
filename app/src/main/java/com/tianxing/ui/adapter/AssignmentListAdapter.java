@@ -7,13 +7,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.tianxing.entity.assignment.AssignmentDownload;
 import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.main.AssignmentListPresenter;
 import com.tianxing.ui.listener.AssignmentItemOnClickListerner;
+import com.tianxing.util.ScreenSize;
 
 import java.util.List;
 
@@ -89,14 +94,16 @@ public class AssignmentListAdapter extends Adapter<AssignmentListAdapter.mViewHo
         private TextView date;
         private TextView time;
         private TextView content;
+        private LinearLayout imageFrame;
 
         public mViewHold(View itemView) {
             super(itemView);
-            this.view = itemView;
+            view = itemView;
             title = (TextView) itemView.findViewById(R.id.textView_title);
             date = (TextView) itemView.findViewById(R.id.textView_date);
             time = (TextView) itemView.findViewById(R.id.textView_time);
             content = (TextView) itemView.findViewById(R.id.textView_content);
+            imageFrame = (LinearLayout) itemView.findViewById(R.id.linearLayout_image_frame);
         }
 
         //View的修改函数
@@ -128,15 +135,50 @@ public class AssignmentListAdapter extends Adapter<AssignmentListAdapter.mViewHo
         public void setDate(String date){
             Log.e(TAG, "日期：" + date);
             String[] dateArray = date.split(" ");
-            this.date.setText(dateArray[0].concat(dateArray[3]));
-            this.time.setText(dateArray[2]);
+            this.date.setText(dateArray[1]);
+            this.time.setText("");
         }
 
         /**
          * 设置图片 根据图片数目设置布局
          * */
         public void setImage(List<ImageFile> images){
-
+            imageFrame.removeAllViews();
+            if (images.size() == 1){
+                ImageButton imageButton = new ImageButton(view.getContext());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ScreenSize.dp2px(240), ScreenSize.dp2px(180));
+                params.setMargins(8, 0, 8, 8);
+                imageButton.setLayoutParams(params);
+                Picasso.with(view.getContext())
+                        .load(images.get(0).getUrl())
+                        .resize(ScreenSize.dp2px(240), ScreenSize.dp2px(180))
+                        .centerCrop().into(imageButton);
+                imageFrame.addView(imageButton);
+            }else if (images.size()>1 && images.size()<=3){
+                for (ImageFile imageFile:images) {
+                    ImageButton imageButton = new ImageButton(view.getContext());
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ScreenSize.dp2px(96), ScreenSize.dp2px(96));
+                    params.setMargins(8, 0, 8, 8);
+                    imageButton.setLayoutParams(params);
+                    Picasso.with(view.getContext())
+                            .load(imageFile.getUrl())
+                            .resize(ScreenSize.dp2px(96), ScreenSize.dp2px(96))
+                            .centerCrop().into(imageButton);
+                    imageFrame.addView(imageButton);
+                }
+            }else if (images.size()>3){
+                for (int i = 0; i < 3; i++) {
+                    ImageButton imageButton = new ImageButton(view.getContext());
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ScreenSize.dp2px(96), ScreenSize.dp2px(96));
+                    params.setMargins(8, 0, 8, 8);
+                    imageButton.setLayoutParams(params);
+                    Picasso.with(view.getContext())
+                            .load(images.get(i).getUrl())
+                            .resize(ScreenSize.dp2px(96), ScreenSize.dp2px(96))
+                            .centerCrop().into(imageButton);
+                    imageFrame.addView(imageButton);
+                }
+            }
         }
 
     }
