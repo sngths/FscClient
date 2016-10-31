@@ -45,6 +45,7 @@ public class LoginActivity extends BaseActivity {
      */
     public void startMainActivity() {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        this.finish();
     }
 
     /**

@@ -38,7 +38,7 @@ public class AssignmentDetailFragment extends BaseBackFragment implements Assign
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //取出作业位置信息 创建Presenter
-        presenter = new AssignmentDetailViewPresenter();
+        presenter = new AssignmentDetailViewPresenter(getArguments().getString("classID"), getArguments().getInt("position"));
     }
 
     @Nullable

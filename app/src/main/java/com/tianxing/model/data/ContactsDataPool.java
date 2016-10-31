@@ -7,7 +7,9 @@ import com.tianxing.entity.info.UserInfo;
 import com.tianxing.model.ContactsPool;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tianxing on 16/7/22.
@@ -19,12 +21,14 @@ public class ContactsDataPool implements ContactsPool {
     private List<UserInfo> Friends;//好友列表
     private List<ClassInfo> Classes;//班级列表
 
-
+    private Map<String, ClassInfo> classInfoMap;
 
     public ContactsDataPool(){
         Groups = new ArrayList<>();
         Friends = new ArrayList<>();
         Classes = new ArrayList<>();
+
+        classInfoMap = new HashMap<>();
     }
 
 
@@ -116,6 +120,16 @@ public class ContactsDataPool implements ContactsPool {
     }
 
     /**
+     * 根据ID 取得相应数据
+     *
+     * @param id
+     */
+    @Override
+    public ClassInfo getClassInfo(String id) {
+        return classInfoMap.get(id);
+    }
+
+    /**
      * 刷新好友列表
      *
      * @param friengList
@@ -133,6 +147,8 @@ public class ContactsDataPool implements ContactsPool {
     @Override
     public void putClassInfo(ClassInfo classInfo) {
         Classes.add(classInfo);
+        //保存到map
+        classInfoMap .put(classInfo.getId(), classInfo);
     }
 
 

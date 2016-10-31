@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="用户名"
+        android:text=""
         android:textSize="@dimen/Subheading_TextSize"
         android:layout_marginTop="4dp"
         android:padding="4dp"
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/Micro_TextSize"
-        android:text="8-25"
+        android:text=""
         android:textColor="@color/colorPrimary"
         android:id="@+id/textView_date"
         android:paddingStart="4dp"
@@ -43,7 +43,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="17:20"
+        android:text=""
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/Micro_TextSize"
         android:id="@+id/textView_time"

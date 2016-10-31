@@ -37,11 +37,11 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
     /**
      * 取得单个班级作业列表中作业条数
      *
-     * @param classID
+     * @param classPosition
      */
     @Override
-    public Integer getAssignemntCount(int classID) {
-        return assignmentPool.getClassData(classID).getAssigmnetsCount();
+    public Integer getAssignemntCount(int classPosition) {
+        return assignmentPool.getClassData(classPosition).getAssigmnetsCount();
     }
 
     /**
@@ -119,6 +119,8 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
+                        //请求作业出错 通知界面 取消下拉状态
+                        view.refreshRelease(classID);
                     }
 
                     @Override
@@ -130,57 +132,5 @@ public class AssignmentViewPresenter extends AssignmentPresenter {
                         }
                     }
                 });
-
-
-        //开始从网络请求数据
-        /*Observable.create(new Observable.OnSubscribe<Integer>() {
-            @Override
-            public void call(Subscriber<? super Integer> subscriber) {
-                subscriber.onStart();
-                subscriber.onNext(classID);
-                subscriber.onCompleted();
-            }
-        }).subscribeOn(Schedulers.immediate())//指定 subscribe() 所发生的线程，即 Observable.OnSubscribe 被激活时所处的线程。
-                .observeOn(Schedulers.io())
-                .map(new Func1<Integer, String>() {
-                    @Override
-                    public String call(Integer integer) {
-                        //请求网络数据
-                        try {
-                            Thread.currentThread().sleep(2000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        return null;
-                    }
-                })
-                .observeOn(AndroidSchedulers.mainThread())
-                .map(new Func1<String, Integer>() {
-                    @Override
-                    public Integer call(String s) {
-                        //在主线程中将保存请求到的数据
-                        assignmentPool.getClassData(classID).putAssignment(new AssignmentDownload());
-                        return null;
-                    }
-                })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Integer>() {
-                    @Override
-                    public void onCompleted() {
-                        //请求完成 通知界面更新
-                        view.refreshAssignment(classID);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(Integer s) {
-
-                    }
-                });*/
-
     }
 }

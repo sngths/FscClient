@@ -18,13 +18,15 @@ public interface AssignmentListPresenter {
      * 取得班级名称
      * */
     String getClassTitle(int position);
+
     String getClassTitle(String classID);
 
 
     /**
      * 取得对应位置的一条作业数据
      * */
-    AssignmentDownload getAssignment(int classID, int position);
+    AssignmentDownload getAssignment(int classPosition, int position);
+
 
     /**
      * 请求刷新作业数据

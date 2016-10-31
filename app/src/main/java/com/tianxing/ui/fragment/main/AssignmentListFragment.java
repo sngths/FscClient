@@ -83,9 +83,11 @@ public class AssignmentListFragment extends BaseFragment implements SwipeRefresh
         //点击监听
         adapter.setItemOnClickListener(new AssignmentItemOnClickListerner() {
             @Override
-            public void OnClick(Integer classID, Integer position) {
+            public void OnClick(Integer classPosition, Integer assignmentPosition) {
+                //根据班级位置取得对应的classID
+                String classID = presenter.getAssignment(classPosition, assignmentPosition).getClassID();
                 //启动作业详情界面
-                ((MainView)getActivity()).startAssignmentDetailFragment(classID, position);
+                ((MainView)getActivity()).startAssignmentDetailFragment(classID, assignmentPosition);
             }
         });
 

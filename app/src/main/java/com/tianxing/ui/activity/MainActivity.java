@@ -64,10 +64,10 @@ public class MainActivity extends BaseActivity implements MainView {
      * @param position
      */
     @Override
-    public void startAssignmentDetailFragment(Integer classID, Integer position) {
+    public void startAssignmentDetailFragment(String classID, Integer position) {
         AssignmentDetailFragment fragment = new AssignmentDetailFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("classID", classID);
+        bundle.putString("classID", classID);
         bundle.putInt("position", position);
         fragment.setArguments(bundle);
         startFragment(fragment);
@@ -228,10 +228,14 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         //按键返回时Fragment出栈
         if (!fragmentStack.empty()){
             fragmentStack.pop();
+            //fragment栈不为空则返回交个系统处理
+            super.onBackPressed();
+        }else {
+            //拦截返回 退出提示框
+
         }
 
     }

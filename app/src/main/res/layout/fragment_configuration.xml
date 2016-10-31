@@ -2,18 +2,49 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_primary">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/background_primary">
+            <!--个人信息-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:background="@color/background_primary_white"
+                android:layout_marginBottom="24dp"
+                android:layout_height="160dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="设置"
-        android:id="@+id/textView7"
-        android:layout_gravity="left|top"/>
+            </RelativeLayout>
+            <!--班级管理-->
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="班级管理"
+                android:background="@color/background_primary_white"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="设置"
-        android:id="@+id/textView9"
-        android:layout_gravity="center"/>
+            <!--设置-->
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="设置"
+                android:background="@color/background_primary_white"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"/>
+            <!--关于-->
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="关于"
+                android:background="@color/background_primary_white"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"/>
+        </LinearLayout>
+    </ScrollView>
+
 </FrameLayout>

@@ -14,7 +14,7 @@ public interface MainView {
     /**
      * 启动一个作业详情界面
      * */
-    void startAssignmentDetailFragment(Integer classID, Integer position);
+    void startAssignmentDetailFragment(String classID, Integer position);
 
     /**
      * 启动回复详情界面

@@ -273,6 +273,7 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
                 @Override
                 public void onCompleted() {
                     //完成后开始上传作业
+                    Log.e(TAG, "图片上传成功， 开始上传作业");
                     assignmentUpload.setImages(images);
                     uploadAssignment(assignmentUpload);
                 }
@@ -330,7 +331,7 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
 
             @Override
             public void onError(Throwable e) {
-
+                e.printStackTrace();
             }
 
             @Override

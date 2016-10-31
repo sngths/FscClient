@@ -113,11 +113,18 @@ public interface ContactsPool {
      * */
     void putClassInfo(ClassInfo classInfo);
 
-    public List<GroupInfo> getGroups();
+    List<GroupInfo> getGroups();
 
-    public List<UserInfo> getFriends();
+    List<UserInfo> getFriends();
 
-    public List<ClassInfo> getClasses();
+    List<ClassInfo> getClasses();
+
+
+
+    /**
+     * 根据ID 取得相应数据
+     * */
+    ClassInfo getClassInfo(String id);
 
 
 

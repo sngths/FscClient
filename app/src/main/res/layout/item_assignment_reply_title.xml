@@ -8,9 +8,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="一年级二班(15/30)"
+        android:text=""
         android:layout_marginStart="16dp"
-        android:id="@+id/textView5"
+        android:textSize="@dimen/Subheading_TextSize"
+        android:id="@+id/textView_class_title"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"/>
     <!--  分割线 -->
