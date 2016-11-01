@@ -1,4 +1,4 @@
-package com.tianxing.entity.assignment;
+package com.tianxing.entity.transfer.receive;
 
 import com.tianxing.entity.http.json.ImageFile;
 
@@ -11,7 +11,7 @@ import java.util.List;
 public class AssignmentDownload {
 
 
-    private String serialNumber;
+    private String id;
     private String teacherName;
     private String className;
 
@@ -26,8 +26,8 @@ public class AssignmentDownload {
 
     private List<ImageFile> images;
 
-    public String getSerialNumber() {
-        return serialNumber;
+    public String getId() {
+        return id;
     }
 
     public String getTeacherName() {

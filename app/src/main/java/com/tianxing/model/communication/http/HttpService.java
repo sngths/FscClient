@@ -1,7 +1,7 @@
 package com.tianxing.model.communication.http;
 
-import com.tianxing.entity.assignment.AssignmentDownload;
-import com.tianxing.entity.assignment.AssignmentUpload;
+import com.tianxing.entity.transfer.receive.AssignmentDownload;
+import com.tianxing.entity.transfer.send.AssignmentUpload;
 import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.entity.transfer.receive.LoginInfo;
 import com.tianxing.entity.transfer.receive.LoginResponse;

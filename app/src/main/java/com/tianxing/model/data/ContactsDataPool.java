@@ -16,6 +16,7 @@ import java.util.Map;
  *
  */
 public class ContactsDataPool implements ContactsPool {
+    private static String TAG = "ContactsDataPool";
 
     private List<GroupInfo> Groups;//群会话列表
     private List<UserInfo> Friends;//好友列表
@@ -204,6 +205,7 @@ public class ContactsDataPool implements ContactsPool {
      */
     @Override
     public Integer getStudentCount(Integer classPosition) {
+        //Log.e(TAG, "获取对应位置班级的学生数: " + classPosition);
         return Classes.get(classPosition).getStudentCount();
     }
 

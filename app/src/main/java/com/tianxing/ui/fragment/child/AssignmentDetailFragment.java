@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.tianxing.entity.assignment.AssignmentDownload;
+import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.child.AssignmentDetailPresenter;
@@ -77,6 +77,13 @@ public class AssignmentDetailFragment extends BaseBackFragment implements Assign
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        //开始获取学生列表
+
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
@@ -92,7 +99,6 @@ public class AssignmentDetailFragment extends BaseBackFragment implements Assign
      * 设置作业数据
      */
     private void setAssignmentViewData(Context context) {
-
         assignmentTitle.setText(assignment.getTitle());
         String[] dateArray = assignment.getDate().split(" ");
         assignmentDate.setText(dateArray[1]);
@@ -137,5 +143,13 @@ public class AssignmentDetailFragment extends BaseBackFragment implements Assign
                 }
             }
         }
+    }
+
+
+    /**
+     * 开始载入学生列表学生列表
+     * */
+    private void loadStudentList(){
+        //presenter
     }
 }

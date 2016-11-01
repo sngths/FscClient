@@ -1,9 +1,14 @@
 package com.tianxing.presenter.child;
 
-import com.tianxing.entity.assignment.AssignmentDownload;
+import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.entity.info.ClassInfo;
+import com.tianxing.entity.info.StudentInfo;
 import com.tianxing.model.App;
 import com.tianxing.model.AssignmentPool;
+
+import java.util.List;
+
+import rx.Observable;
 
 /**
  * Created by tianxing on 16/7/26.
@@ -40,5 +45,14 @@ public class AssignmentDetailViewPresenter implements AssignmentDetailPresenter 
     @Override
     public ClassInfo getClassInfo() {
         return classInfo;
+    }
+
+
+    /**
+     * 载入学生列表
+     */
+    @Override
+    public Observable<List<StudentInfo>> loadStudentList() {
+        return null;
     }
 }

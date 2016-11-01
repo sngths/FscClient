@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.tianxing.entity.assignment.AssignmentDownload;
+import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.entity.info.StudentInfo;
 import com.tianxing.fscteachersedition.R;

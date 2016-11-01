@@ -1,4 +1,4 @@
-package com.tianxing.entity.assignment;
+package com.tianxing.entity.transfer.send;
 
 import com.tianxing.entity.http.json.ImageFile;
 

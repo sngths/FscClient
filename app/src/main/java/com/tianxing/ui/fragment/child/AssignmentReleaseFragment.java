@@ -16,7 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
-import com.tianxing.entity.assignment.AssignmentUpload;
+import com.tianxing.entity.transfer.send.AssignmentUpload;
 import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.entity.info.ClassInfo;
 import com.tianxing.fscteachersedition.R;

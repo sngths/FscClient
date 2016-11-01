@@ -2,9 +2,6 @@ package com.tianxing.presenter.login;
 
 import android.util.Log;
 
-import com.tianxing.entity.info.StudentInfo;
-import com.tianxing.entity.info.TeacherInfo;
-import com.tianxing.entity.transfer.receive.LoginInfo;
 import com.tianxing.entity.info.ClassInfo;
 import com.tianxing.entity.info.GroupInfo;
 import com.tianxing.entity.info.UserInfo;
@@ -16,6 +13,8 @@ import com.tianxing.model.AssignmentPool;
 import com.tianxing.model.ContactsPool;
 import com.tianxing.model.MessagePool;
 import com.tianxing.model.communication.HttpClient;
+import com.tianxing.model.user.StudentUser;
+import com.tianxing.model.user.TeacherUser;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -144,7 +143,7 @@ public class LoginViewPresenter implements LoginPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        e.printStackTrace();
                     }
 
                     @Override
@@ -165,16 +164,20 @@ public class LoginViewPresenter implements LoginPresenter {
                     @Override
                     public void onCompleted() {
                         //启动学生界面
+                        Log.e(TAG, "请求学生信息完成 启动主界面");
+                        view.startMainActivity();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        e.printStackTrace();
                     }
 
                     @Override
                     public void onNext(StudentInfoResponse studentInfoResponse) {
                         //保存学生个人信息
+                        Log.e(TAG, "接收到学生个人信息");
+                        Log.e(TAG, "studentInfo:" + studentInfoResponse.getStudentInfo() + "  classInfo:" + studentInfoResponse.getClassInfo());
                         saveStudentInfo(studentInfoResponse);
                     }
                 });
@@ -185,7 +188,40 @@ public class LoginViewPresenter implements LoginPresenter {
      * 保存学生相关信息
      * */
     private void saveStudentInfo(StudentInfoResponse response){
+        //保存当前用户信息
+        StudentUser user = new StudentUser();
+        user.setInfo(response.getStudentInfo());
+        App.getInstance().setCurrentUser(user);
 
+        //xmpp服务器信息
+        App.getInstance().setXmppServerInfo(response.getXmppServerInfo());
+        //好友
+        for (UserInfo userInfo : response.getFriends()) {
+            contactsPool.putFriendInfo(userInfo);
+            messagePool.putUser(userInfo.getUserName());
+        }
+
+        //班级
+        ClassInfo classInfo = response.getClassInfo();
+        contactsPool.putClassInfo(classInfo);
+        assignmentPool.createClassData(classInfo);
+        contactsPool.putGroupInfo(classInfo);
+        //创建消息池的 用户和房间
+        messagePool.putRoom(classInfo.getRoomID());
+
+        //好友
+        for (UserInfo userInfo:classInfo.getStudents()) {
+            messagePool.putUser(userInfo.getUserName());
+        }
+        for (UserInfo userInfo: classInfo.getTeachers()) {
+            messagePool.putUser(userInfo.getUserName());
+        }
+        //群组
+        for (GroupInfo groupInfo : response.getGroups()) {
+            contactsPool.putGroupInfo(groupInfo);
+
+            messagePool.putRoom(groupInfo.getRoomID());
+        }
     }
 
 
@@ -193,6 +229,11 @@ public class LoginViewPresenter implements LoginPresenter {
      * 保存老师相关信息
      * */
     private void saveTeacherInfo(TeacherInfoResponse response){
+        //保存当前用户信息
+        TeacherUser user = new TeacherUser();
+        user.setInfo(response.getTeacherInfo());
+        App.getInstance().setCurrentUser(user);
+
         //xmpp服务器信息
         App.getInstance().setXmppServerInfo(response.getXmppServerInfo());
 

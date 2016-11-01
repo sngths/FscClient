@@ -1,6 +1,6 @@
 package com.tianxing.entity;
 
-import com.tianxing.entity.assignment.AssignmentDownload;
+import com.tianxing.entity.transfer.receive.AssignmentDownload;
 
 import java.util.ArrayList;
 

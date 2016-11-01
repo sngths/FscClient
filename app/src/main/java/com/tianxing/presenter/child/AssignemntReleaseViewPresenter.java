@@ -1,12 +1,11 @@
 package com.tianxing.presenter.child;
 
-import com.tianxing.entity.assignment.AssignmentUpload;
+import com.tianxing.entity.transfer.send.AssignmentUpload;
 import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.entity.info.ClassInfo;
 import com.tianxing.model.App;
 import com.tianxing.model.ContactsPool;
 import com.tianxing.model.communication.HttpClient;
-import com.tianxing.model.data.ContactsDataPool;
 
 import java.util.List;
 

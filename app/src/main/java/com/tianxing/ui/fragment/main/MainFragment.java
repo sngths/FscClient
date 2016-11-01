@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tianxing.fscteachersedition.R;
+import com.tianxing.model.App;
+import com.tianxing.model.user.User;
 import com.tianxing.presenter.MainPresenter;
 import com.tianxing.presenter.main.MainViewPresenter;
 import com.tianxing.ui.activity.MainActivity;
@@ -83,16 +85,24 @@ public class MainFragment extends BaseFragment {
                     .hide(configurationFragment)
                     .commit();
         }
-        initView();
+
         fragments[0] = assignmentFragment;
         fragments[1] = reviewFragment;
         fragments[2] = contactsFragment;
         fragments[3] = configurationFragment;
+        if (App.getInstance().getCurrentUser().getUserType() == User.UserType.teacher){
+            teacherViewInitialize();
+        }else if (App.getInstance().getCurrentUser().getUserType() == User.UserType.student){
+            studentViewInitialize();
+        }
         return view;
     }
 
 
-    private void initView(){
+    /**
+     * 初始化老师主界面
+     * */
+    private void teacherViewInitialize(){
         bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_assignment_24dp, "作业"));
         bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_class_24dp, "课堂"));
         bottomBar.addItem(new BottomBarReleaseTab(getContext()));//发布按钮
@@ -127,6 +137,69 @@ public class MainFragment extends BaseFragment {
                         }
                         break;
                     case 4:
+                        getChildFragmentManager().beginTransaction().hide(fragments[0]).hide(fragments[1]).hide(fragments[2]).show(fragments[3]).commit();
+                        if (actionBar != null){
+                            toolbar.setTitle("设置");
+                        }
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(int position) {
+
+            }
+
+            @Override
+            public void onTabReselected(int position) {
+                //Tab点击 执行刷新等操作
+            }
+
+            @Override
+            public void onClick() {
+                startAssignmentReleaseFragment();
+            }
+        });
+    }
+
+
+    /**
+     * 初始化学生主界面
+     * */
+    private void studentViewInitialize(){
+        bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_assignment_24dp, "作业"));
+        bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_class_24dp, "课堂"));
+        bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_contects_24dp, "学生"));
+        bottomBar.addItem(new BottomBarTab(getContext(), R.mipmap.ic_bottombar_config, "我的"));
+        bottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(int position, int prePosition) {
+                //显示对应位置的Fragment
+                if (position == prePosition) {
+                    return;
+                }
+
+                ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+                switch (position){
+                    case 0:
+                        getChildFragmentManager().beginTransaction().hide(fragments[1]).hide(fragments[2]).hide(fragments[3]).show(fragments[0]).commit();
+                        if (actionBar != null){
+                            toolbar.setTitle("作业");
+                        }
+                        break;
+                    case 1:
+                        getChildFragmentManager().beginTransaction().hide(fragments[0]).hide(fragments[2]).hide(fragments[3]).show(fragments[1]).commit();
+                        if (actionBar != null){
+                            toolbar.setTitle("课堂");
+                        }
+                        break;
+                    case 2:
+                        getChildFragmentManager().beginTransaction().hide(fragments[0]).hide(fragments[1]).hide(fragments[3]).show(fragments[2]).commit();
+                        if (actionBar != null){
+                            toolbar.setTitle("学生");
+                        }
+                        break;
+                    case 3:
                         getChildFragmentManager().beginTransaction().hide(fragments[0]).hide(fragments[1]).hide(fragments[2]).show(fragments[3]).commit();
                         if (actionBar != null){
                             toolbar.setTitle("设置");

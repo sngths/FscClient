@@ -21,6 +21,7 @@ import butterknife.Unbinder;
 
 /**
  * Created by tianxing on 16/7/11.
+ * 联系人界面
  */
 public class ContactsFragment extends BaseFragment implements ContactsView, AdapterView.OnItemClickListener{
     public static final String TAG = "ContactsFragment";

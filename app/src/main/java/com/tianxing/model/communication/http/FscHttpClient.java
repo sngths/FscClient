@@ -1,8 +1,9 @@
 package com.tianxing.model.communication.http;
 
-import com.tianxing.entity.assignment.AssignmentDownload;
-import com.tianxing.entity.assignment.AssignmentUpload;
+import com.tianxing.entity.transfer.receive.AssignmentDownload;
+import com.tianxing.entity.transfer.send.AssignmentUpload;
 import com.tianxing.entity.http.json.ImageFile;
+import com.tianxing.entity.info.StudentInfo;
 import com.tianxing.entity.transfer.receive.LoginInfo;
 import com.tianxing.entity.transfer.receive.LoginResponse;
 import com.tianxing.entity.transfer.receive.StudentInfoResponse;
@@ -211,6 +212,16 @@ public class FscHttpClient implements HttpClient {
                         return uploadImage(s).subscribeOn(Schedulers.io());
                     }
                 });
+    }
+
+    /**
+     * 请求一条作业的回复学生列表
+     *
+     * @param AssignmentID 该条作业的ID
+     */
+    @Override
+    public Observable<Response<List<StudentInfo>>> requestReplyStudentList(String AssignmentID) {
+        return null;
     }
 
 
