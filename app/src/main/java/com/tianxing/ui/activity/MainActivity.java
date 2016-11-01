@@ -11,8 +11,8 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.tianxing.fscteachersedition.R;
-import com.tianxing.ui.fragment.child.AssignmentReleaseFragment;
 import com.tianxing.ui.fragment.child.AssignmentDetailFragment;
+import com.tianxing.ui.fragment.child.AssignmentReleaseFragment;
 import com.tianxing.ui.fragment.child.AssignmentReplyFragment;
 import com.tianxing.ui.fragment.child.BaseBackFragment;
 import com.tianxing.ui.fragment.child.ChatFragment;

@@ -95,4 +95,15 @@ public interface HttpClient {
      * */
     Observable<Response<ImageFile>> uploadImageSet(List<String> imagePath);
 
+
+
+    /**
+     * 请求一条作业的回复学生列表
+     * */
+
+
+    /**
+     * 请求一条作业的一个学生的回复
+     * */
+
 }
