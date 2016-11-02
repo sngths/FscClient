@@ -11,7 +11,9 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.tianxing.fscteachersedition.R;
-import com.tianxing.ui.fragment.child.AssignmentDetailFragment;
+import com.tianxing.model.App;
+import com.tianxing.model.user.User;
+import com.tianxing.ui.fragment.child.teacher.AssignmentDetailFragment;
 import com.tianxing.ui.fragment.child.AssignmentReleaseFragment;
 import com.tianxing.ui.fragment.child.AssignmentReplyFragment;
 import com.tianxing.ui.fragment.child.BaseBackFragment;
@@ -34,6 +36,8 @@ public class MainActivity extends BaseActivity implements MainView {
     private File imageFile;
     private CaptureResult result;
 
+    private User user;
+
     private String currentFragmentTag; //当前正在显示的Fragment的Tag
     Stack<BaseBackFragment> fragmentStack = new Stack<>();//Fragment栈
 
@@ -43,6 +47,7 @@ public class MainActivity extends BaseActivity implements MainView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         currentFragmentTag = MainFragment.TAG;
+        user = App.getInstance().getCurrentUser();
         getSupportFragmentManager().beginTransaction().add(R.id.frameLayout, new MainFragment(), MainFragment.TAG).commit();
     }
 
@@ -65,10 +70,17 @@ public class MainActivity extends BaseActivity implements MainView {
      */
     @Override
     public void startAssignmentDetailFragment(String classID, Integer position) {
-        AssignmentDetailFragment fragment = new AssignmentDetailFragment();
+        BaseBackFragment fragment;
+        if(user.getUserType() == User.UserType.student){
+            fragment = new com.tianxing.ui.fragment.child.student.AssignmentDetailFragment();
+        }else if (user.getUserType() == User.UserType.teacher){
+            fragment = new AssignmentDetailFragment();
+        }else {
+            return;
+        }
         Bundle bundle = new Bundle();
         bundle.putString("classID", classID);
-        bundle.putInt("position", position);
+        bundle.putInt("position", position);//作业数据所在列表中的位置
         fragment.setArguments(bundle);
         startFragment(fragment);
     }

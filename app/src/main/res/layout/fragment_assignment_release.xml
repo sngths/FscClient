@@ -25,7 +25,8 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:orientation="horizontal"></RadioGroup>
+                android:orientation="horizontal">
+            </RadioGroup>
 
             <EditText
                 android:id="@+id/editText_title"
@@ -95,7 +96,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/button_release"
+                android:id="@+id/button_commit"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_gravity="center_horizontal"

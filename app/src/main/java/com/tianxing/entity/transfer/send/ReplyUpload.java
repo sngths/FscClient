@@ -10,11 +10,7 @@ import java.util.List;
 
 public class ReplyUpload {
 
-    private String id;
-    private String assignemntID;
-    private String classID;
-    private String studentID;
-    private String teacherID;
+    private String assignmentID;
 
 
     //回复内容
@@ -22,44 +18,14 @@ public class ReplyUpload {
     private String content;
     private List<Image> images;
 
-    public String getId() {
-        return id;
+
+
+    public String getAssignmentID() {
+        return assignmentID;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getAssignemntID() {
-        return assignemntID;
-    }
-
-    public void setAssignemntID(String assignemntID) {
-        this.assignemntID = assignemntID;
-    }
-
-    public String getClassID() {
-        return classID;
-    }
-
-    public void setClassID(String classID) {
-        this.classID = classID;
-    }
-
-    public String getStudentID() {
-        return studentID;
-    }
-
-    public void setStudentID(String studentID) {
-        this.studentID = studentID;
-    }
-
-    public String getTeacherID() {
-        return teacherID;
-    }
-
-    public void setTeacherID(String teacherID) {
-        this.teacherID = teacherID;
+    public void setAssignmentID(String assignmentID) {
+        this.assignmentID = assignmentID;
     }
 
     public String getTitle() {

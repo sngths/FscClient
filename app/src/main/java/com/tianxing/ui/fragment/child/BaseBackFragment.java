@@ -39,7 +39,7 @@ public class BaseBackFragment extends BaseFragment {
     /**
      * 设置标题栏
      * */
-    void setToolBarTitle(String title){
+    public void setToolBarTitle(String title){
         this.title = title;
         if (textView != null){
             textView.setText(title);

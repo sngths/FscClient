@@ -1,58 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-            android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/background_primary">
+              android:layout_height="match_parent"
+              android:background="@color/background_primary"
+              android:orientation="vertical">
+
     <include layout="@layout/toolbar_child"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <!--作业详情-->
-            <include layout="@layout/item_assignment"/>
+            <include layout="@layout/item_assignment_teacher"/>
             <!--班级标题-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@color/background_primary_white">
+
                 <TextView
+                    android:id="@+id/textView_class_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:textSize="@dimen/Subheading_TextSize"
-                    android:text=""
-
                     android:layout_centerVertical="true"
-                    android:id="@+id/textView_class_title"/>
+                    android:layout_marginStart="16dp"
+
+                    android:text=""
+                    android:textSize="@dimen/Subheading_TextSize"/>
             </RelativeLayout>
             <!--载入进度条和重新加载按钮-->
             <LinearLayout
+                android:id="@+id/linearLayout_loading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/linearLayout_loading"
                 android:orientation="vertical">
 
 
                 <ProgressBar
+                    android:id="@+id/progressBar_loading"
                     style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="48dp"
                     android:layout_marginBottom="48dp"
-                    android:id="@+id/progressBar_loading"
+                    android:layout_marginTop="48dp"
                     android:indeterminate="false"/>
             </LinearLayout>
             <!--提交学生列表-->
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView_student_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/recyclerView_student_list">
+                android:layout_height="wrap_content">
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>
 

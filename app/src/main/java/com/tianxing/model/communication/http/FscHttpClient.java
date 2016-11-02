@@ -1,6 +1,7 @@
 package com.tianxing.model.communication.http;
 
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
+import com.tianxing.entity.transfer.receive.ReplyReceived;
 import com.tianxing.entity.transfer.send.AssignmentUpload;
 import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.entity.info.StudentInfo;
@@ -8,6 +9,7 @@ import com.tianxing.entity.transfer.receive.LoginInfo;
 import com.tianxing.entity.transfer.receive.LoginResponse;
 import com.tianxing.entity.transfer.receive.StudentInfoResponse;
 import com.tianxing.entity.transfer.receive.TeacherInfoResponse;
+import com.tianxing.entity.transfer.send.ReplyUpload;
 import com.tianxing.entity.transfer.send.UsernameAndPassword;
 import com.tianxing.entity.info.PersonalInfo;
 import com.tianxing.model.communication.HttpClient;
@@ -222,6 +224,27 @@ public class FscHttpClient implements HttpClient {
     @Override
     public Observable<Response<List<StudentInfo>>> requestReplyStudentList(String AssignmentID) {
         return null;
+    }
+
+    /**
+     * 请求一条作业的一个学生的回复
+     *
+     * @param assignmentID
+     * @param studentID
+     */
+    @Override
+    public Observable<Response<ReplyReceived>> requestReply(String assignmentID, String studentID) {
+        return service.reqestReply(token, assignmentID, studentID).subscribeOn(Schedulers.io());
+    }
+
+    /**
+     * 上传一条回复
+     *
+     * @param replyUpload
+     */
+    @Override
+    public Observable<Response<Void>> uploadReply(ReplyUpload replyUpload) {
+        return service.uploadReply(token, replyUpload.getAssignmentID(), replyUpload).subscribeOn(Schedulers.io());
     }
 
 

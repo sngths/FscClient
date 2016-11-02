@@ -1,4 +1,4 @@
-package com.tianxing.ui.fragment.child;
+package com.tianxing.ui.fragment.child.teacher;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -17,6 +17,8 @@ import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.child.AssignmentDetailPresenter;
 import com.tianxing.presenter.child.AssignmentDetailViewPresenter;
+import com.tianxing.ui.fragment.child.AssignmentDetailView;
+import com.tianxing.ui.fragment.child.BaseBackFragment;
 import com.tianxing.util.ScreenSize;
 
 import java.util.List;
@@ -27,6 +29,7 @@ import butterknife.Unbinder;
 
 /**
  * Created by tianxing on 16/11/1.
+ * 教师端作业详情界面
  */
 
 public class AssignmentDetailFragment extends BaseBackFragment implements AssignmentDetailView {
@@ -67,7 +70,7 @@ public class AssignmentDetailFragment extends BaseBackFragment implements Assign
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_assignment_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_assignment_detail_teacher, container, false);
         unbinder = ButterKnife.bind(this, view);
         toolBarInit(toolbar);
         setToolBarTitle("作业详情");

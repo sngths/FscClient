@@ -93,7 +93,7 @@ public class AssignmentDetailListAdapterDeprecated implements PinnedSectionListV
         ViewHolder viewHolder;
         if (convertView == null){
             if (position == 0){
-                convertView = inflater.inflate(R.layout.item_assignment, parent, false);
+                convertView = inflater.inflate(R.layout.item_assignment_teacher, parent, false);
             }else if (position == 1){
                 convertView = inflater.inflate(R.layout.item_assignment_reply_title, parent, false);
             }else {

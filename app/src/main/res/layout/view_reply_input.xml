@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--作业回复输入框-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <!--内容输入框-->
+    <EditText
+        android:id="@+id/editText_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/assignment_release_title_background"
+        android:gravity="top"
+        android:hint="正文"
+        android:minLines="8"
+        android:padding="10dp"
+        android:textSize="@dimen/Body_TextSize" />
+    <!--图片选取第一列-->
+    <LinearLayout
+        android:id="@+id/linearLayout_image_frame1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_marginEnd="8dp" />
+
+
+    </LinearLayout>
+
+    <!--上传确认按钮-->
+    <Button
+        android:id="@+id/button_commit"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/assignment_release_button_background"
+        android:text="提交" />
+
+</LinearLayout>

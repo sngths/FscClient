@@ -1,12 +1,15 @@
 package com.tianxing.model.communication.http;
 
+import com.tianxing.entity.info.StudentInfo;
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
+import com.tianxing.entity.transfer.receive.ReplyReceived;
 import com.tianxing.entity.transfer.send.AssignmentUpload;
 import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.entity.transfer.receive.LoginInfo;
 import com.tianxing.entity.transfer.receive.LoginResponse;
 import com.tianxing.entity.transfer.receive.StudentInfoResponse;
 import com.tianxing.entity.transfer.receive.TeacherInfoResponse;
+import com.tianxing.entity.transfer.send.ReplyUpload;
 import com.tianxing.entity.transfer.send.UsernameAndPassword;
 
 import java.util.List;
@@ -93,5 +96,28 @@ public interface HttpService {
     @Multipart
     @POST("upload/image")
     Observable<Response<ImageFile>> uploadImage(@PartMap Map<String, RequestBody> params);
+
+
+    /**
+     * 请求一条作业的回复学生列表
+     * */
+    @GET("reply/list")
+    @Headers("Content-Type: application/json")
+    Observable<List<StudentInfo>> reqestReplyStudentList(@Header("token") String token, @Query("AssignmentID") String assignmentID);
+
+    /**
+     * 请求一条作业
+     * */
+    @GET("reply")
+    @Headers("Content-Type: application/json")
+    Observable<Response<ReplyReceived>> reqestReply(@Header("token") String token, @Query("AssignmentID") String assignmentID, @Query("StudentID") String studentID);
+
+
+    /**
+     * 学生回复一条作业
+     * */
+    @POST("reply/upload")
+    @Headers("Content-Type: application/json")
+    Observable<Response<Void>> uploadReply(@Header("token") String token, @Query("AssignmentID") String assignmentID, @Body ReplyUpload replyUpload);
 
 }

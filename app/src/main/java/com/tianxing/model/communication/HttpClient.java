@@ -1,6 +1,7 @@
 package com.tianxing.model.communication;
 
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
+import com.tianxing.entity.transfer.receive.ReplyReceived;
 import com.tianxing.entity.transfer.send.AssignmentUpload;
 import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.entity.info.StudentInfo;
@@ -9,6 +10,7 @@ import com.tianxing.entity.info.PersonalInfo;
 import com.tianxing.entity.transfer.receive.LoginResponse;
 import com.tianxing.entity.transfer.receive.StudentInfoResponse;
 import com.tianxing.entity.transfer.receive.TeacherInfoResponse;
+import com.tianxing.entity.transfer.send.ReplyUpload;
 
 import java.util.List;
 
@@ -104,8 +106,18 @@ public interface HttpClient {
     Observable<Response<List<StudentInfo>>> requestReplyStudentList(String AssignmentID);
 
 
+
     /**
      * 请求一条作业的一个学生的回复
      * */
+    Observable<Response<ReplyReceived>> requestReply(String assignmentID, String studentID);
+
+
+    /**
+     * 上传一条回复
+     *
+     */
+
+    Observable<Response<Void>> uploadReply(ReplyUpload replyUpload);
 
 }

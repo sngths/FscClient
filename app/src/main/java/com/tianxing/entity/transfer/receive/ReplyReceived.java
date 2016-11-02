@@ -10,9 +10,9 @@ import java.util.List;
  */
 
 public class ReplyReceived {
+
     private String id;
-    private String assignemntID;
-    private String classID;
+    private String assignmentID;
     private String studentID;
     private String teacherID;
 
@@ -27,12 +27,8 @@ public class ReplyReceived {
         return id;
     }
 
-    public String getAssignemntID() {
-        return assignemntID;
-    }
-
-    public String getClassID() {
-        return classID;
+    public String getAssignmentID() {
+        return assignmentID;
     }
 
     public String getStudentID() {

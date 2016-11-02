@@ -240,7 +240,7 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
     /**
      * 发布作业
      */
-    @OnClick(R.id.button_release)
+    @OnClick(R.id.button_commit)
     public void release() {
 
         String title = editTextTitle.getText().toString();
