@@ -3,22 +3,28 @@ package com.tianxing.ui.fragment.child.teacher;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.tianxing.entity.info.StudentInfo;
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.fscteachersedition.R;
-import com.tianxing.presenter.child.AssignmentDetailPresenter;
-import com.tianxing.presenter.child.AssignmentDetailViewPresenter;
-import com.tianxing.ui.fragment.child.AssignmentDetailView;
+import com.tianxing.presenter.child.teacher.AssignmentDetailPresenter;
+import com.tianxing.presenter.child.teacher.AssignmentDetailViewPresenter;
+import com.tianxing.ui.adapter.teacher.ReplyStudentListAdapter;
 import com.tianxing.ui.fragment.child.BaseBackFragment;
+import com.tianxing.ui.listener.ReplyListItemOnClickListener;
 import com.tianxing.util.ScreenSize;
 
 import java.util.List;
@@ -26,6 +32,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import retrofit2.Response;
+import rx.Subscriber;
 
 /**
  * Created by tianxing on 16/11/1.
@@ -55,9 +63,15 @@ public class AssignmentDetailFragment extends BaseBackFragment implements Assign
     @BindView(R.id.textView_class_title)
     TextView classTitle;
 
+    //学生列表框
+    @BindView(R.id.frameLayout_reply_list)
+    FrameLayout frame;
+
 
     private AssignmentDetailPresenter presenter;
     private AssignmentDownload assignment;
+
+    private LayoutInflater inflater;
 
 
     @Override
@@ -71,6 +85,7 @@ public class AssignmentDetailFragment extends BaseBackFragment implements Assign
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_assignment_detail_teacher, container, false);
+        this.inflater = inflater;
         unbinder = ButterKnife.bind(this, view);
         toolBarInit(toolbar);
         setToolBarTitle("作业详情");
@@ -80,9 +95,15 @@ public class AssignmentDetailFragment extends BaseBackFragment implements Assign
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        //开始获取学生列表
+        loadStudentList();
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
-        //开始获取学生列表
 
     }
 
@@ -153,6 +174,56 @@ public class AssignmentDetailFragment extends BaseBackFragment implements Assign
      * 开始载入学生列表学生列表
      * */
     private void loadStudentList(){
-        //presenter
+        setLoadingView();
+        presenter.loadStudentList().subscribe(new Subscriber<Response<List<StudentInfo>>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onNext(Response<List<StudentInfo>> listResponse) {
+                Log.e("Detail", "请求到回复学生列表 " + listResponse.body().size());
+                setReplyList(listResponse.body());
+            }
+        });
     }
+
+
+
+    /**
+     * 加载loading视图
+     * */
+    private void setLoadingView(){
+        frame.removeAllViews();
+        View view = inflater.inflate(R.layout.view_loading, null);
+        frame.addView(view);
+        frame.invalidate();
+    }
+
+    /**
+     * 加载学生列表
+     * */
+    private void setReplyList(List<StudentInfo> studentInfos){
+        View view = inflater.inflate(R.layout.view_reply_student_list_teacher, null);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_student_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        ReplyStudentListAdapter adapter = new ReplyStudentListAdapter(inflater, studentInfos);
+        recyclerView.setAdapter(adapter);
+        adapter.setItemOnClickListener(new ReplyListItemOnClickListener() {
+            @Override
+            public void OnClick(int position) {
+                //启动批阅界面
+            }
+        });
+        frame.removeAllViews();
+        frame.addView(view);
+        frame.invalidate();
+    }
+
 }

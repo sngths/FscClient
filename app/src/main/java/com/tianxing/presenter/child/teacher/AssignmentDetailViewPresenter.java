@@ -1,14 +1,17 @@
-package com.tianxing.presenter.child;
+package com.tianxing.presenter.child.teacher;
 
-import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.entity.info.ClassInfo;
 import com.tianxing.entity.info.StudentInfo;
+import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.model.App;
 import com.tianxing.model.AssignmentPool;
+import com.tianxing.model.communication.HttpClient;
 
 import java.util.List;
 
+import retrofit2.Response;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by tianxing on 16/7/26.
@@ -21,12 +24,15 @@ public class AssignmentDetailViewPresenter implements AssignmentDetailPresenter 
     private AssignmentDownload assignment;
     private ClassInfo classInfo;//作业所属的班级信息
 
+    private HttpClient client;
+
 
 
     public AssignmentDetailViewPresenter(String classID, int position){
         assignmentPool = App.getInstance().getAssignmentPool();
         assignment = assignmentPool.getClassData(classID).getAssignment(position);
         classInfo = App.getInstance().getContactsPool().getClassInfo(classID);
+        client = App.getInstance().getHttpClient();
     }
 
 
@@ -52,7 +58,7 @@ public class AssignmentDetailViewPresenter implements AssignmentDetailPresenter 
      * 载入学生列表
      */
     @Override
-    public Observable<List<StudentInfo>> loadStudentList() {
-        return null;
+    public Observable<Response<List<StudentInfo>>> loadStudentList() {
+        return client.requestReplyStudentList(assignment.getId()).observeOn(AndroidSchedulers.mainThread());
     }
 }

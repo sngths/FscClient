@@ -103,7 +103,7 @@ public interface HttpService {
      * */
     @GET("reply/list")
     @Headers("Content-Type: application/json")
-    Observable<List<StudentInfo>> reqestReplyStudentList(@Header("token") String token, @Query("AssignmentID") String assignmentID);
+    Observable<Response<List<StudentInfo>>> reqestReplyStudentList(@Header("token") String token, @Query("AssignmentID") String assignmentID);
 
     /**
      * 请求一条作业

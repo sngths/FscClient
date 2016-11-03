@@ -1,4 +1,4 @@
-package com.tianxing.presenter.child;
+package com.tianxing.presenter.child.teacher;
 
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.entity.info.ClassInfo;
@@ -6,6 +6,7 @@ import com.tianxing.entity.info.StudentInfo;
 
 import java.util.List;
 
+import retrofit2.Response;
 import rx.Observable;
 
 /**
@@ -30,7 +31,7 @@ public interface AssignmentDetailPresenter {
     /**
      * 载入学生列表
      * */
-    Observable<List<StudentInfo>> loadStudentList();
+    Observable<Response<List<StudentInfo>>> loadStudentList();
 
 
 

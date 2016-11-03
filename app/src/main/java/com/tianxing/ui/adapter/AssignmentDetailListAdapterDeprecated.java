@@ -15,7 +15,7 @@ import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.entity.info.StudentInfo;
 import com.tianxing.fscteachersedition.R;
-import com.tianxing.presenter.child.AssignmentDetailPresenter;
+import com.tianxing.presenter.child.teacher.AssignmentDetailPresenter;
 import com.tianxing.ui.view.PinnedSectionListView;
 import com.tianxing.util.ScreenSize;
 
@@ -97,7 +97,7 @@ public class AssignmentDetailListAdapterDeprecated implements PinnedSectionListV
             }else if (position == 1){
                 convertView = inflater.inflate(R.layout.item_assignment_reply_title, parent, false);
             }else {
-                convertView = inflater.inflate(R.layout.item_assignment_reply, parent, false);
+                convertView = inflater.inflate(R.layout.item_reply_user_teacher, parent, false);
             }
             viewHolder = new ViewHolder(convertView);
             viewHolder.setViewData(position);

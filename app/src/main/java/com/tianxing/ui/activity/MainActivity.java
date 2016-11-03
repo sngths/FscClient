@@ -15,7 +15,7 @@ import com.tianxing.model.App;
 import com.tianxing.model.user.User;
 import com.tianxing.ui.fragment.child.teacher.AssignmentDetailFragment;
 import com.tianxing.ui.fragment.child.AssignmentReleaseFragment;
-import com.tianxing.ui.fragment.child.AssignmentReplyFragment;
+import com.tianxing.ui.fragment.child.teacher.AssignmentReplyFragment;
 import com.tianxing.ui.fragment.child.BaseBackFragment;
 import com.tianxing.ui.fragment.child.ChatFragment;
 import com.tianxing.ui.fragment.child.ChatGroupFragment;

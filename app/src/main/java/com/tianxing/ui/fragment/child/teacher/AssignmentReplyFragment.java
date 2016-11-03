@@ -1,4 +1,4 @@
-package com.tianxing.ui.fragment.child;
+package com.tianxing.ui.fragment.child.teacher;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +12,8 @@ import android.widget.ImageButton;
 
 import com.squareup.picasso.Picasso;
 import com.tianxing.fscteachersedition.R;
+import com.tianxing.ui.fragment.child.AssignmentReplyView;
+import com.tianxing.ui.fragment.child.BaseBackFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

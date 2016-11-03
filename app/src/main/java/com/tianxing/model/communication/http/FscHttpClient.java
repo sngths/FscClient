@@ -219,11 +219,11 @@ public class FscHttpClient implements HttpClient {
     /**
      * 请求一条作业的回复学生列表
      *
-     * @param AssignmentID 该条作业的ID
+     * @param assignmentID 该条作业的ID
      */
     @Override
-    public Observable<Response<List<StudentInfo>>> requestReplyStudentList(String AssignmentID) {
-        return null;
+    public Observable<Response<List<StudentInfo>>> requestReplyStudentList(String assignmentID) {
+        return service.reqestReplyStudentList(token, assignmentID).subscribeOn(Schedulers.io());
     }
 
     /**

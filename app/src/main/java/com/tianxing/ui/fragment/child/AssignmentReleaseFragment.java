@@ -43,6 +43,7 @@ import top.zibin.luban.OnCompressListener;
 
 /**
  * Created by tianxing on 16/7/26.
+ * 发布作业界面
  */
 public class AssignmentReleaseFragment extends BaseBackFragment {
     public static final String TAG = "ReleaseFragment";
