@@ -19,7 +19,7 @@ public interface MainView {
     /**
      * 启动回复详情界面
      * */
-    void startAssignmentReplyFragment();
+    void startAssignmentCommentFragment(String assignemntID, String studentID);
 
 
     /**

@@ -13,9 +13,9 @@ import android.util.Log;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.model.App;
 import com.tianxing.model.user.User;
+import com.tianxing.ui.fragment.child.teacher.AssignmentCommentFragment;
 import com.tianxing.ui.fragment.child.teacher.AssignmentDetailFragment;
 import com.tianxing.ui.fragment.child.AssignmentReleaseFragment;
-import com.tianxing.ui.fragment.child.teacher.AssignmentReplyFragment;
 import com.tianxing.ui.fragment.child.BaseBackFragment;
 import com.tianxing.ui.fragment.child.ChatFragment;
 import com.tianxing.ui.fragment.child.ChatGroupFragment;
@@ -89,9 +89,11 @@ public class MainActivity extends BaseActivity implements MainView {
      * 启动回复详情界面
      */
     @Override
-    public void startAssignmentReplyFragment() {
-        AssignmentReplyFragment fragment = new AssignmentReplyFragment();
+    public void startAssignmentCommentFragment(String assignmentID, String studentID) {
+        AssignmentCommentFragment fragment = new AssignmentCommentFragment();
         Bundle bundle = new Bundle();
+        bundle.putString("assignmentID", assignmentID);
+        bundle.putString("studentID", studentID);
         fragment.setArguments(bundle);
         startFragment(fragment);
     }

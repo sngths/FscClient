@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+    android:background="@color/background_primary_white">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="作业得分 :"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/Subheading_TextSize"
+        android:id="@+id/textView6"
+        android:layout_marginStart="12dp"
+        android:padding="4dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"/>
+
+    <CheckBox
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:padding="4dp"
+        android:button="@drawable/checkbox_background"
+        android:text="@null"
+        android:id="@+id/checkBox1"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/textView6"
+        android:checked="false"/>
+
+    <CheckBox
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:padding="4dp"
+        android:layout_marginStart="8dp"
+        android:button="@drawable/checkbox_background"
+        android:text="@null"
+        android:id="@+id/checkBox2"
+        android:layout_toEndOf="@+id/checkBox1"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentTop="true"/>
+
+    <CheckBox
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:padding="4dp"
+        android:layout_marginStart="8dp"
+        android:button="@drawable/checkbox_background"
+        android:text="@null"
+        android:id="@+id/checkBox3"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/checkBox2"/>
+
+    <CheckBox
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:padding="4dp"
+        android:layout_marginStart="8dp"
+        android:button="@drawable/checkbox_background"
+        android:text="@null"
+        android:id="@+id/checkBox4"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/checkBox3"/>
+
+    <CheckBox
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:padding="4dp"
+        android:layout_marginStart="8dp"
+        android:button="@drawable/checkbox_background"
+        android:text="@null"
+        android:id="@+id/checkBox5"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/checkBox4"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/Medium_TextSize"
+        android:hint="输入评语"
+        android:padding="8dp"
+        android:minLines="5"
+        android:gravity="top"
+        android:background="@drawable/edittext_assignment_remark_background"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:id="@+id/editText_comment"
+        android:layout_below="@+id/textView6"/>
+
+    <!--上传确认按钮-->
+    <Button
+        android:id="@+id/button_commit"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@id/editText_comment"
+        android:background="@drawable/assignment_release_button_background"
+        android:text="提交" />
+
+</RelativeLayout>

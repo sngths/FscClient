@@ -127,6 +127,17 @@ public interface ContactsPool {
     ClassInfo getClassInfo(String id);
 
 
+    /**
+     * 根据学生ID取出一个学生信息
+     * */
+    StudentInfo getStudentInfo(String studentID);
+
+
+    /**
+     * 存入一个学生ID-info 键值对
+     * */
+    void putStudentInfo(String studentID, StudentInfo studentInfo);
+
 
 
 

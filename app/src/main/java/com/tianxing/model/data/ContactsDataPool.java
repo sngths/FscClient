@@ -22,7 +22,9 @@ public class ContactsDataPool implements ContactsPool {
     private List<UserInfo> Friends;//好友列表
     private List<ClassInfo> Classes;//班级列表
 
-    private Map<String, ClassInfo> classInfoMap;
+    private Map<String, ClassInfo> classInfoMap;//班级ID对应的班级信息
+
+    private Map<String, StudentInfo> studentInfoMap; //学生ID对应的学生信息
 
     public ContactsDataPool(){
         Groups = new ArrayList<>();
@@ -30,6 +32,7 @@ public class ContactsDataPool implements ContactsPool {
         Classes = new ArrayList<>();
 
         classInfoMap = new HashMap<>();
+        studentInfoMap = new HashMap<>();
     }
 
 
@@ -128,6 +131,27 @@ public class ContactsDataPool implements ContactsPool {
     @Override
     public ClassInfo getClassInfo(String id) {
         return classInfoMap.get(id);
+    }
+
+    /**
+     * 根据学生ID取出一个学生信息
+     *
+     * @param studentID
+     */
+    @Override
+    public StudentInfo getStudentInfo(String studentID) {
+        return studentInfoMap.get(studentID);
+    }
+
+    /**
+     * 存入一个学生ID-info 键值对
+     *
+     * @param studentID
+     * @param studentInfo
+     */
+    @Override
+    public void putStudentInfo(String studentID, StudentInfo studentInfo) {
+        studentInfoMap.put(studentID, studentInfo);
     }
 
     /**

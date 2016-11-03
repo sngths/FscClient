@@ -16,12 +16,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.entity.info.StudentInfo;
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
-import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.fscteachersedition.R;
+import com.tianxing.model.App;
+import com.tianxing.model.ContactsPool;
 import com.tianxing.presenter.child.teacher.AssignmentDetailPresenter;
 import com.tianxing.presenter.child.teacher.AssignmentDetailViewPresenter;
+import com.tianxing.ui.activity.MainView;
 import com.tianxing.ui.adapter.teacher.ReplyStudentListAdapter;
 import com.tianxing.ui.fragment.child.BaseBackFragment;
 import com.tianxing.ui.listener.ReplyListItemOnClickListener;
@@ -189,6 +192,11 @@ public class AssignmentDetailFragment extends BaseBackFragment implements Assign
             @Override
             public void onNext(Response<List<StudentInfo>> listResponse) {
                 Log.e("Detail", "请求到回复学生列表 " + listResponse.body().size());
+                //保存学生信息键值对
+                ContactsPool pool = App.getInstance().getContactsPool();
+                for (StudentInfo info: listResponse.body()) {
+                    pool.putStudentInfo(info.getUserName(), info);
+                }
                 setReplyList(listResponse.body());
             }
         });
@@ -209,7 +217,7 @@ public class AssignmentDetailFragment extends BaseBackFragment implements Assign
     /**
      * 加载学生列表
      * */
-    private void setReplyList(List<StudentInfo> studentInfos){
+    private void setReplyList(final List<StudentInfo> studentInfos){
         View view = inflater.inflate(R.layout.view_reply_student_list_teacher, null);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_student_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -219,6 +227,7 @@ public class AssignmentDetailFragment extends BaseBackFragment implements Assign
             @Override
             public void OnClick(int position) {
                 //启动批阅界面
+                ((MainView)getActivity()).startAssignmentCommentFragment(assignment.getId(), studentInfos.get(position).getUserName());
             }
         });
         frame.removeAllViews();
