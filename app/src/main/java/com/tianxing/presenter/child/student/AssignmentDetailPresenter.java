@@ -1,9 +1,12 @@
 package com.tianxing.presenter.child.student;
 
+import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.entity.info.ClassInfo;
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.entity.transfer.receive.ReplyReceived;
 import com.tianxing.entity.transfer.send.ReplyUpload;
+
+import java.util.List;
 
 import retrofit2.Response;
 import rx.Observable;
@@ -38,5 +41,18 @@ public interface AssignmentDetailPresenter {
     /***
      * 发送回复
      * */
-    Observable<Response<Void>> uploadReply(ReplyUpload reply);
+    Observable<Response<ReplyReceived>> uploadReply(ReplyUpload reply);
+
+
+    /**
+     * 上传一张图片
+     * */
+    Observable<Response<ImageFile>> uploadImage(String imageFile);
+
+
+    /**
+     * 上传一组图片
+     * */
+    Observable<Response<ImageFile>> uploadImageSet(List<String> imageFiles);
+
 }

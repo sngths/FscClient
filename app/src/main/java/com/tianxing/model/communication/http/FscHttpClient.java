@@ -243,7 +243,7 @@ public class FscHttpClient implements HttpClient {
      * @param replyUpload
      */
     @Override
-    public Observable<Response<Void>> uploadReply(ReplyUpload replyUpload) {
+    public Observable<Response<ReplyReceived>> uploadReply(ReplyUpload replyUpload) {
         return service.uploadReply(token, replyUpload.getAssignmentID(), replyUpload).subscribeOn(Schedulers.io());
     }
 

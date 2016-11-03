@@ -1,82 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
                 android:background="@color/background_primary_white"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp">
 
 
-    <!--头像-->
-    <ImageButton
-        android:id="@+id/imageButton_icon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginLeft="12dp"
-        android:background="@color/background_primary_white"/>
     <TextView
-        android:id="@+id/textView_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/Title_TextSize"
+        android:id="@+id/textView_title"
         android:layout_marginTop="12dp"
-        android:layout_marginLeft="8dp"
-        android:layout_toEndOf="@+id/imageButton_icon"
+        android:text="我的回复"
+        android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="2dp"
-        android:paddingStart="4dp"
-        android:paddingEnd="4dp"
+        android:padding="4dp"
         android:textColor="@color/colorPrimary"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"/>
 
     <TextView
         android:id="@+id/textView_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="8dp"
-        android:paddingEnd="4dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="4dp"
+        android:padding="4dp"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/Micro_TextSize"
-        android:layout_alignStart="@+id/textView_title"
-        android:layout_below="@+id/textView_title"/>
+        android:layout_alignBottom="@+id/textView_title"
+        android:layout_toEndOf="@+id/textView_title"/>
 
     <TextView
+        android:id="@+id/textView_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
         android:textSize="@dimen/Micro_TextSize"
         android:textColor="@color/colorPrimary"
-        android:id="@+id/textView_time"
         android:padding="4dp"
         android:layout_alignBottom="@+id/textView_date"
         android:layout_toEndOf="@+id/textView_date"/>
 
-    <!--提交状态-->
-    <TextView
-        android:id="@+id/textView_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/Medium_TextSize"
-        android:padding="4dp"
-        android:textColor="@color/colorPrimary"
-        android:layout_marginStart="12dp"
-        android:layout_toEndOf="@+id/textView_time"
-        android:layout_alignBottom="@+id/textView_title"/>
+
 
     <TextView
         android:id="@+id/textView_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/Medium_TextSize"
-        android:padding="4dp"
-        android:layout_alignStart="@+id/imageButton_icon"
-        android:layout_below="@+id/textView_date"/>
+        android:padding="8dp"
+        android:layout_alignStart="@+id/textView_title"
+        android:layout_below="@+id/textView_title"/>
 
     <LinearLayout
-        android:id="@+id/linearLayout_image_frame"
+        android:id="@+id/linearLayout_reply_image_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView_content"

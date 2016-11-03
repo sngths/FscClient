@@ -1,6 +1,6 @@
 package com.tianxing.entity.transfer.receive;
 
-import android.media.Image;
+import com.tianxing.entity.http.json.ImageFile;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class ReplyReceived {
     private String title;
     private String date;
     private String content;
-    private List<Image> images;
+    private List<ImageFile> images;
 
     public String getId() {
         return id;
@@ -51,7 +51,7 @@ public class ReplyReceived {
         return content;
     }
 
-    public List<Image> getImages() {
+    public List<ImageFile> getImages() {
         return images;
     }
 }

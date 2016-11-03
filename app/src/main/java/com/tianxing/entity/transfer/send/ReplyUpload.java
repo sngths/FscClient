@@ -1,6 +1,6 @@
 package com.tianxing.entity.transfer.send;
 
-import android.media.Image;
+import com.tianxing.entity.http.json.ImageFile;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class ReplyUpload {
     //回复内容
     private String title;
     private String content;
-    private List<Image> images;
+    private List<ImageFile> images;
 
 
 
@@ -44,11 +44,11 @@ public class ReplyUpload {
         this.content = content;
     }
 
-    public List<Image> getImages() {
+    public List<ImageFile> getImages() {
         return images;
     }
 
-    public void setImages(List<Image> images) {
+    public void setImages(List<ImageFile> images) {
         this.images = images;
     }
 }

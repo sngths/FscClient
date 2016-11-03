@@ -118,6 +118,6 @@ public interface HttpService {
      * */
     @POST("reply/upload")
     @Headers("Content-Type: application/json")
-    Observable<Response<Void>> uploadReply(@Header("token") String token, @Query("AssignmentID") String assignmentID, @Body ReplyUpload replyUpload);
+    Observable<Response<ReplyReceived>> uploadReply(@Header("token") String token, @Query("AssignmentID") String assignmentID, @Body ReplyUpload replyUpload);
 
 }

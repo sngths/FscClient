@@ -118,6 +118,6 @@ public interface HttpClient {
      *
      */
 
-    Observable<Response<Void>> uploadReply(ReplyUpload replyUpload);
+    Observable<Response<ReplyReceived>> uploadReply(ReplyUpload replyUpload);
 
 }
