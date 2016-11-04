@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.squareup.picasso.Picasso;
 import com.tianxing.entity.http.json.ImageFile;
+import com.tianxing.entity.transfer.Comment;
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.entity.transfer.receive.ReplyReceived;
 import com.tianxing.entity.transfer.send.ReplyUpload;
@@ -77,6 +79,8 @@ public class AssignmentDetailFragment extends BaseBackFragment {
 
     @BindView(R.id.frameLayout_reply)
     FrameLayout replyFrame;
+    @BindView(R.id.frameLayout_comment)
+    FrameLayout commentFrame;
 
 
     private LayoutInflater inflater;
@@ -215,7 +219,9 @@ public class AssignmentDetailFragment extends BaseBackFragment {
                     public void onNext(Response<ReplyReceived> replyReceivedResponse) {
                         Log.e("DetailPresenter", "收到请求的作业回复");
                         setReplyView(replyReceivedResponse.body());
-
+                        if (replyReceivedResponse.body().getComment() != null){
+                            setCommentView(replyReceivedResponse.body().getComment());
+                        }
                     }
                 });
     }
@@ -455,6 +461,7 @@ public class AssignmentDetailFragment extends BaseBackFragment {
                 //上传成功
                 Log.e("Detail", "回复上传成功 ");
                 setReplyView(replyReceivedResponse.body());
+
             }
         });
     }
@@ -525,4 +532,29 @@ public class AssignmentDetailFragment extends BaseBackFragment {
 
     }
 
+
+    /**
+     * 显示批阅结果
+     * */
+    private void setCommentView(Comment comment){
+        commentFrame.removeAllViews();
+        View view = inflater.inflate(R.layout.view_comment_student, null);
+        CheckBox checkBox1 = (CheckBox) view.findViewById(R.id.checkBox1);
+        CheckBox checkBox2 = (CheckBox) view.findViewById(R.id.checkBox2);
+        CheckBox checkBox3 = (CheckBox) view.findViewById(R.id.checkBox3);
+        CheckBox checkBox4 = (CheckBox) view.findViewById(R.id.checkBox4);
+        CheckBox checkBox5 = (CheckBox) view.findViewById(R.id.checkBox5);
+        CheckBox[] checkBoxes = {checkBox1, checkBox2, checkBox3, checkBox4, checkBox5};
+        TextView textView = (TextView) view.findViewById(R.id.textView_comment);
+        for (int i = 0; i < 5; i++) {
+            checkBoxes[i].setClickable(false);
+        }
+        for (int i = 0; i < comment.getScore(); i++) {
+            checkBoxes[i].setChecked(true);
+        }
+        textView.setText(comment.getContent());
+        commentFrame.addView(view);
+        commentFrame.invalidate();
+
+    }
 }

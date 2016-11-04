@@ -13,9 +13,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.tianxing.entity.http.json.ImageFile;
+import com.tianxing.entity.transfer.Comment;
 import com.tianxing.entity.transfer.receive.ReplyReceived;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.child.teacher.AssignmentCommentPresenter;
@@ -52,7 +54,9 @@ public class AssignmentCommentFragment extends BaseBackFragment implements Assig
 
     private AssignmentCommentPresenter presenter;
 
-    private int score = 0;
+    private ReplyReceived reply;
+
+    private Integer score;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +80,7 @@ public class AssignmentCommentFragment extends BaseBackFragment implements Assig
         super.onActivityCreated(savedInstanceState);
         //开始请求作业回复 和批阅 数据
         requestReply();
-        setCommentInputView();
+        //setCommentInputView();
     }
 
     @Override
@@ -120,7 +124,13 @@ public class AssignmentCommentFragment extends BaseBackFragment implements Assig
 
             @Override
             public void onNext(Response<ReplyReceived> replyReceivedResponse) {
+                reply = replyReceivedResponse.body();
                 setReplyView(replyReceivedResponse.body());
+                if (reply.getComment() != null){
+                    setCommentView(reply.getComment());
+                }else {
+                    setCommentInputView();
+                }
             }
         });
 
@@ -234,7 +244,7 @@ public class AssignmentCommentFragment extends BaseBackFragment implements Assig
         final CheckBox checkBox3 = (CheckBox) view.findViewById(R.id.checkBox3);
         final CheckBox checkBox4 = (CheckBox) view.findViewById(R.id.checkBox4);
         final CheckBox checkBox5 = (CheckBox) view.findViewById(R.id.checkBox5);
-        EditText comment = (EditText) view.findViewById(R.id.editText_comment);
+        final EditText editTextComment = (EditText) view.findViewById(R.id.editText_comment);
         Button commitButton = (Button) view.findViewById(R.id.button_commit);
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -286,6 +296,20 @@ public class AssignmentCommentFragment extends BaseBackFragment implements Assig
             @Override
             public void onClick(View v) {
                 //提交评论
+                if (reply == null){
+                    Toast.makeText(getContext(), "等待回复内容载入", Toast.LENGTH_SHORT).show();
+                }else if(score == null){
+                    Toast.makeText(getContext(), "请输入分数", Toast.LENGTH_SHORT).show();
+                }else if(editTextComment.getText().toString().replace(" ", "").equals("")){
+                    Toast.makeText(getContext(), "请输入评语", Toast.LENGTH_SHORT).show();
+                }else {
+                    Comment comment = new Comment();
+                    comment.setReplyID(reply.getId());
+                    comment.setScore(score);
+                    comment.setContent(editTextComment.getText().toString());
+                    uploadComment(comment);
+                }
+
             }
         });
 
@@ -297,8 +321,50 @@ public class AssignmentCommentFragment extends BaseBackFragment implements Assig
     /**
      * 载入评语界面
      * */
-    private void setCommentView(){
+    private void setCommentView(Comment comment){
+        commentFrame.removeAllViews();
+        View view = inflater.inflate(R.layout.view_comment_teacher, null);
+        CheckBox checkBox1 = (CheckBox) view.findViewById(R.id.checkBox1);
+        CheckBox checkBox2 = (CheckBox) view.findViewById(R.id.checkBox2);
+        CheckBox checkBox3 = (CheckBox) view.findViewById(R.id.checkBox3);
+        CheckBox checkBox4 = (CheckBox) view.findViewById(R.id.checkBox4);
+        CheckBox checkBox5 = (CheckBox) view.findViewById(R.id.checkBox5);
+        CheckBox[] checkBoxes = {checkBox1, checkBox2, checkBox3, checkBox4, checkBox5};
+        TextView textView = (TextView) view.findViewById(R.id.textView_comment);
+        for (int i = 0; i < 5; i++) {
+            checkBoxes[i].setClickable(false);
+        }
+        for (int i = 0; i < comment.getScore(); i++) {
+            checkBoxes[i].setChecked(true);
+        }
+        textView.setText(comment.getContent());
+        commentFrame.addView(view);
+        commentFrame.invalidate();
+    }
 
+    /**
+     * 上传评语
+     * */
+    private void uploadComment(final Comment comment){
+        //载入界面
+        presenter.uploadComment(comment).subscribe(new Subscriber<Response<Void>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                //失败显示输入界面
+                setCommentInputView();
+            }
+
+            @Override
+            public void onNext(Response<Void> voidResponse) {
+                //上传成功
+                setCommentView(comment);
+            }
+        });
     }
 
 }

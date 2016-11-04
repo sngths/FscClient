@@ -1,6 +1,7 @@
 package com.tianxing.presenter.child.teacher;
 
 import com.tianxing.entity.info.StudentInfo;
+import com.tianxing.entity.transfer.Comment;
 import com.tianxing.entity.transfer.receive.ReplyReceived;
 import com.tianxing.model.App;
 import com.tianxing.model.communication.HttpClient;
@@ -55,5 +56,15 @@ public class AssignmentCommentViewPresenter implements AssignmentCommentPresente
     @Override
     public StudentInfo getStudentInfo(String studentID) {
         return App.getInstance().getContactsPool().getStudentInfo(studentID);
+    }
+
+    /**
+     * 上传一条评语
+     *
+     * @param comment
+     */
+    @Override
+    public Observable<Response<Void>> uploadComment(Comment comment) {
+        return client.uploadComment(comment).observeOn(AndroidSchedulers.mainThread());
     }
 }

@@ -1,5 +1,6 @@
 package com.tianxing.model.communication;
 
+import com.tianxing.entity.transfer.Comment;
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.entity.transfer.receive.ReplyReceived;
 import com.tianxing.entity.transfer.send.AssignmentUpload;
@@ -119,5 +120,10 @@ public interface HttpClient {
      */
 
     Observable<Response<ReplyReceived>> uploadReply(ReplyUpload replyUpload);
+
+    /**
+     * 上传一条批阅
+     * */
+    Observable<Response<Void>> uploadComment(Comment comment);
 
 }

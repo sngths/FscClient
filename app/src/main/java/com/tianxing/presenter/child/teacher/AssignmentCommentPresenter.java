@@ -1,6 +1,7 @@
 package com.tianxing.presenter.child.teacher;
 
 import com.tianxing.entity.info.StudentInfo;
+import com.tianxing.entity.transfer.Comment;
 import com.tianxing.entity.transfer.receive.ReplyReceived;
 
 import retrofit2.Response;
@@ -29,4 +30,9 @@ public interface AssignmentCommentPresenter {
      * 取得一个学生信息
      * */
     StudentInfo getStudentInfo(String studentID);
+
+    /**
+     * 上传一条评语
+     * */
+    Observable<Response<Void>> uploadComment(Comment comment);
 }

@@ -1,6 +1,7 @@
 package com.tianxing.entity.transfer.receive;
 
 import com.tianxing.entity.http.json.ImageFile;
+import com.tianxing.entity.transfer.Comment;
 
 import java.util.List;
 
@@ -22,6 +23,9 @@ public class ReplyReceived {
     private String date;
     private String content;
     private List<ImageFile> images;
+
+    //教师评语
+    private Comment comment;
 
     public String getId() {
         return id;
@@ -53,5 +57,9 @@ public class ReplyReceived {
 
     public List<ImageFile> getImages() {
         return images;
+    }
+
+    public Comment getComment() {
+        return comment;
     }
 }

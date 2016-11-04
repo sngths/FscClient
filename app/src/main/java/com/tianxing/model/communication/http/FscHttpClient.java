@@ -1,5 +1,6 @@
 package com.tianxing.model.communication.http;
 
+import com.tianxing.entity.transfer.Comment;
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.entity.transfer.receive.ReplyReceived;
 import com.tianxing.entity.transfer.send.AssignmentUpload;
@@ -245,6 +246,16 @@ public class FscHttpClient implements HttpClient {
     @Override
     public Observable<Response<ReplyReceived>> uploadReply(ReplyUpload replyUpload) {
         return service.uploadReply(token, replyUpload.getAssignmentID(), replyUpload).subscribeOn(Schedulers.io());
+    }
+
+    /**
+     * 上传一条批阅
+     *
+     * @param comment
+     */
+    @Override
+    public Observable<Response<Void>> uploadComment(Comment comment) {
+        return service.uploadComment(token, comment).subscribeOn(Schedulers.io());
     }
 
 

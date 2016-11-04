@@ -1,6 +1,7 @@
 package com.tianxing.model.communication.http;
 
 import com.tianxing.entity.info.StudentInfo;
+import com.tianxing.entity.transfer.Comment;
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.entity.transfer.receive.ReplyReceived;
 import com.tianxing.entity.transfer.send.AssignmentUpload;
@@ -120,4 +121,11 @@ public interface HttpService {
     @Headers("Content-Type: application/json")
     Observable<Response<ReplyReceived>> uploadReply(@Header("token") String token, @Query("AssignmentID") String assignmentID, @Body ReplyUpload replyUpload);
 
+
+    /**
+     * 老师上传一条批阅
+     * */
+    @POST("comment/upload")
+    @Headers("Content-Type: application/json")
+    Observable<Response<Void>> uploadComment(@Header("token") String token, @Body Comment comment);
 }
