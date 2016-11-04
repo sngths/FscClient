@@ -1,99 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
-    android:background="@color/background_primary_white">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/background_primary_white"
+                android:orientation="vertical">
 
 
     <TextView
-        android:text="批阅结果"
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="12dp"
+        android:layout_alignParentTop="true"
         android:layout_marginBottom="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
         android:padding="4dp"
-        android:textSize="@dimen/Subheading_TextSize"
+        android:text="批阅结果"
         android:textColor="@color/colorPrimary"
-        android:id="@+id/textView5"/>
+        android:textSize="@dimen/Subheading_TextSize"/>
 
 
     <TextView
+        android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="作业得分 :"
-        android:textSize="@dimen/Medium_TextSize"
-        android:id="@+id/textView6"
-        android:layout_marginStart="12dp"
-        android:padding="4dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/textView5"
-        android:layout_alignParentStart="true"/>
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:padding="4dp"
+        android:text="作业得分 :"
+        android:textSize="@dimen/Medium_TextSize"/>
 
     <CheckBox
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:padding="4dp"
-        android:button="@drawable/checkbox_background"
-        android:text="@null"
         android:id="@+id/checkBox1"
-        android:layout_marginTop="0dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_alignBottom="@+id/textView6"
+        android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/textView6"
-        android:checked="false"/>
+        android:button="@drawable/checkbox_background"
+        android:checked="false"
+        android:padding="4dp"
+        android:text="@null"/>
 
     <CheckBox
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:padding="4dp"
-        android:layout_marginStart="8dp"
-        android:button="@drawable/checkbox_background"
-        android:text="@null"
         android:id="@+id/checkBox2"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignBottom="@id/checkBox1"
+        android:layout_marginStart="8dp"
         android:layout_toEndOf="@+id/checkBox1"
-        android:layout_alignBottom="@id/checkBox1"/>
+        android:button="@drawable/checkbox_background"
+        android:padding="4dp"
+        android:text="@null"/>
 
     <CheckBox
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:padding="4dp"
-        android:layout_marginStart="8dp"
-        android:button="@drawable/checkbox_background"
-        android:text="@null"
         android:id="@+id/checkBox3"
-        android:layout_marginTop="8dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_alignBottom="@id/checkBox2"
-        android:layout_toEndOf="@+id/checkBox2"/>
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/checkBox2"
+        android:button="@drawable/checkbox_background"
+        android:padding="4dp"
+        android:text="@null"/>
 
     <CheckBox
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:padding="4dp"
-        android:layout_marginStart="8dp"
-        android:button="@drawable/checkbox_background"
-        android:text="@null"
         android:id="@+id/checkBox4"
-        android:layout_marginTop="8dp"
-        android:layout_alignBottom="@id/checkBox3"
-        android:layout_toEndOf="@+id/checkBox3"/>
-
-    <CheckBox
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:padding="4dp"
+        android:layout_alignBottom="@id/checkBox3"
         android:layout_marginStart="8dp"
-        android:button="@drawable/checkbox_background"
-        android:text="@null"
-        android:id="@+id/checkBox5"
         android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/checkBox3"
+        android:button="@drawable/checkbox_background"
+        android:padding="4dp"
+        android:text="@null"/>
+
+    <CheckBox
+        android:id="@+id/checkBox5"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_alignBottom="@id/checkBox4"
-        android:layout_toEndOf="@+id/checkBox4"/>
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/checkBox4"
+        android:button="@drawable/checkbox_background"
+        android:padding="4dp"
+        android:text="@null"/>
 
     <!--评语-->
     <TextView
@@ -101,9 +101,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textView6"
+        android:layout_marginBottom="16dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
         android:padding="4dp"/>
 
 </RelativeLayout>

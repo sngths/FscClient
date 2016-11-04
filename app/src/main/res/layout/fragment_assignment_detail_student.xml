@@ -37,7 +37,9 @@
             <FrameLayout
                 android:id="@+id/frameLayout_reply"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp">
 
 
             </FrameLayout>
@@ -46,7 +48,9 @@
             <FrameLayout
                 android:id="@+id/frameLayout_comment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp">
             </FrameLayout>
             <!--提交学生列表-->
             <!--<android.support.v7.widget.RecyclerView

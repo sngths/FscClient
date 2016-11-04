@@ -93,7 +93,7 @@ public class AssignmentDetailFragment extends BaseBackFragment implements Assign
         toolBarInit(toolbar);
         setToolBarTitle("作业详情");
         setAssignmentViewData(inflater.getContext());
-        classTitle.setText(assignment.getClassName());
+        classTitle.setText("已提交作业学生：");
         return view;
     }
 
