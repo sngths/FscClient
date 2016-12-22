@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -33,9 +34,14 @@ public class LoginFragment extends BaseBackFragment implements LoginView {
     @BindView(R.id.editText_password)
     EditText editTextPassword;
 
+    @BindView(R.id.button_login)
+    Button loginButton;
+
 
 
     private LoginPresenter presenter;
+
+    private boolean isLoading = false;
 
 
     @Override
@@ -64,12 +70,15 @@ public class LoginFragment extends BaseBackFragment implements LoginView {
     @OnClick(R.id.button_login)
     public void loginButton(View view){
         //完成登陆流程
+        isLoading = true;
+        loginButton.setClickable(false);
         String username = editTextUsername.getText().toString();
         String password = editTextPassword.getText().toString();
 
         if (username.equals("") || password.equals("")){
             //显示输入提示
             Toast.makeText(getContext(), "输入用户名密码", Toast.LENGTH_SHORT).show();
+            loginButton.setClickable(true);
         }else {
             //执行登陆
             presenter.login(username, password);
@@ -89,4 +98,17 @@ public class LoginFragment extends BaseBackFragment implements LoginView {
     public void startMainActivity() {
         ((LoginActivity)getActivity()).startMainActivity();
     }
+
+    /**
+     * 登陆失败
+     */
+    @Override
+    public void loginFailed() {
+        Toast.makeText(getContext(), "登陆失败", Toast.LENGTH_SHORT).show();
+        loginButton.setClickable(true);
+        isLoading = false;
+    }
+
+
+
 }
