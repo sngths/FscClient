@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -79,6 +80,16 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
     @BindView(R.id.imageButton)//拍照按钮
     ImageButton captureButton;
 
+    @BindView(R.id.button_commit)
+    Button commitButton;
+
+
+    private boolean isCommitWaiting = false;
+
+
+    private int pictureCount = 0;//拍摄图片数目
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,6 +159,7 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
      */
     @OnClick(R.id.imageButton)
     public void capture() {
+        pictureCount +=1;
         ((MainView) getActivity()).startCapture(new MainView.CaptureResult() {
             @Override
             public void Successed(File imageFile) {
@@ -170,7 +182,7 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        pictureCount -=1;
                     }
                 }).launch();
 
@@ -191,7 +203,7 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
 
 
     /**
-     * 在view中放置图片 最多三张图片
+     * 在view中放置图片 最多三张图片   图片显示完成后判断 是否用户已点击发送
      */
     private void showPicture(File imageFile) {
         if (imageCount == 0) {
@@ -235,6 +247,11 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
             imageCount += 1;
         }
         imageFrame1.invalidate();
+
+
+        if (isCommitWaiting){
+            release();
+        }
     }
 
 
@@ -243,7 +260,11 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
      */
     @OnClick(R.id.button_commit)
     public void release() {
-
+        CommitDisable();
+        if (pictureCount > imageFiles.size()){
+            isCommitWaiting = true;
+            return;
+        }
         String title = editTextTitle.getText().toString();
         String content = editTextContent.getText().toString();
         final List<ImageFile> images = new ArrayList<>();
@@ -251,11 +272,13 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
         //判断是否选择了班级
         if (classID == null){
             Toast.makeText(getContext(), "请选择班级", Toast.LENGTH_SHORT).show();
+            commitEnable();
             return;
         }
         //判断上传内容是否为空
         if (title.replace(" ", "").equals("") && content.replace(" ", "").equals("") && imageFiles.size() == 0){
             Toast.makeText(getContext(), "请输入作业内容", Toast.LENGTH_SHORT).show();
+            commitEnable();
             return;
         }
         assignmentUpload.setClassID(classID);
@@ -282,6 +305,8 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
                 @Override
                 public void onError(Throwable e) {
                     e.printStackTrace();
+                    Toast.makeText(getContext(), "发布失败", Toast.LENGTH_SHORT).show();
+                    commitEnable();
                 }
 
                 @Override
@@ -305,6 +330,8 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
                 @Override
                 public void onError(Throwable e) {
                     e.printStackTrace();
+                    Toast.makeText(getContext(), "发布失败", Toast.LENGTH_SHORT).show();
+                    commitEnable();
                 }
 
                 @Override
@@ -316,6 +343,16 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
             });
         }
 
+    }
+
+
+    private void commitEnable(){
+        commitButton.setClickable(true);
+    }
+
+
+    private void CommitDisable(){
+        commitButton.setClickable(false);
     }
 
 
@@ -333,6 +370,8 @@ public class AssignmentReleaseFragment extends BaseBackFragment {
             @Override
             public void onError(Throwable e) {
                 e.printStackTrace();
+                Toast.makeText(getContext(), "发布失败", Toast.LENGTH_SHORT).show();
+                commitEnable();
             }
 
             @Override

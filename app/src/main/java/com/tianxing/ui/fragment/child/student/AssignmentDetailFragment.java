@@ -83,6 +83,10 @@ public class AssignmentDetailFragment extends BaseBackFragment {
     FrameLayout commentFrame;
 
 
+    private int pictureCount = 0;
+    private boolean isWaitingUpload = false;//图片压缩完成后判断 用户是否已经点击了发送
+
+
     private LayoutInflater inflater;
 
     private AssignmentDetailPresenter presenter;
@@ -194,6 +198,7 @@ public class AssignmentDetailFragment extends BaseBackFragment {
      * 获取该条作业的回复
      */
     private void requestReply() {
+
         //显示载入界面
         setLoadingView();
         presenter.requestReply().observeOn(AndroidSchedulers.mainThread())
@@ -218,6 +223,9 @@ public class AssignmentDetailFragment extends BaseBackFragment {
                     @Override
                     public void onNext(Response<ReplyReceived> replyReceivedResponse) {
                         Log.e("DetailPresenter", "收到请求的作业回复");
+                        if (replyFrame == null){
+                            return;
+                        }
                         setReplyView(replyReceivedResponse.body());
                         if (replyReceivedResponse.body().getComment() != null){
                             setCommentView(replyReceivedResponse.body().getComment());
@@ -231,7 +239,14 @@ public class AssignmentDetailFragment extends BaseBackFragment {
      * 显示载入界面
      */
     private void setLoadingView() {
-        replyFrame.removeAllViews();
+        if (replyFrame == null){
+            return;
+        }
+
+        if (replyFrame.getChildCount() > 0){
+            replyFrame.removeAllViews();
+        }
+
         View view = inflater.inflate(R.layout.activity_loading, null);
         replyFrame.addView(view);
         replyFrame.invalidate();
@@ -243,7 +258,13 @@ public class AssignmentDetailFragment extends BaseBackFragment {
      * 显示输入框
      */
     private void setInputView() {
-        replyFrame.removeAllViews();
+        if (replyFrame == null){
+            return;
+        }
+
+        if (replyFrame.getChildCount() > 0){
+            replyFrame.removeAllViews();
+        }
         View view = inflater.inflate(R.layout.view_reply_input, null);
         //设置点击监听
         final EditText input = (EditText) view.findViewById(R.id.editText_content);
@@ -254,6 +275,7 @@ public class AssignmentDetailFragment extends BaseBackFragment {
 
             @Override
             public void onClick(View v) {
+                pictureCount +=1;
                 ((MainView) getActivity()).startCapture(new MainView.CaptureResult() {
                     @Override
                     public void Successed(File imageFile) {
@@ -271,12 +293,13 @@ public class AssignmentDetailFragment extends BaseBackFragment {
                                     public void onSuccess(File file) {
                                         //压缩成功后显示图片
                                         //Log.e(TAG, "压缩成功：" + file.getAbsolutePath());
+                                        replyImages.add(file.getAbsolutePath());
                                         showPicture(file);
                                     }
 
                                     @Override
                                     public void onError(Throwable e) {
-
+                                        pictureCount -=1;
                                     }
                                 }).launch();
 
@@ -296,9 +319,12 @@ public class AssignmentDetailFragment extends BaseBackFragment {
             }
 
             /**
-             * 添加一张显示图片
+             * 添加一张显示图片  显示完成后判断是否在等待发布
              * */
             private void showPicture(File imageFile){
+                if (replyFrame == null){
+                    return;
+                }
                 if (replyImageCount == 0) {
                     ImageView imageView = new ImageView(getContext());
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ScreenSize.dp2px(96), ScreenSize.dp2px(96));
@@ -309,7 +335,6 @@ public class AssignmentDetailFragment extends BaseBackFragment {
                             .resize(ScreenSize.dp2px(96), ScreenSize.dp2px(96))
                             .centerCrop().into(imageView);
                     replyImageFrame1.addView(imageView, 0);
-                    replyImages.add(imageFile.getAbsolutePath());
                     replyImageCount += 1;
                 } else if (replyImageCount == 1) {
                     ImageView imageView = new ImageView(getContext());
@@ -322,7 +347,6 @@ public class AssignmentDetailFragment extends BaseBackFragment {
                             .centerCrop()
                             .into(imageView);
                     replyImageFrame1.addView(imageView, 1);
-                    replyImages.add(imageFile.getAbsolutePath());
                     replyImageCount += 1;
                 } else if (replyImageCount == 2) {
                     ImageView imageView = new ImageView(getContext());
@@ -336,10 +360,18 @@ public class AssignmentDetailFragment extends BaseBackFragment {
                             .into(imageView);
                     replyImageFrame1.addView(imageView, 2);
                     replyImageFrame1.removeView(addImageButton);
-                    replyImages.add(imageFile.getAbsolutePath());
                     replyImageCount += 1;
                 }
                 replyImageFrame1.invalidate();
+
+
+                if (isWaitingUpload){
+                    ReplyUpload replyUpload = new ReplyUpload();
+                    replyUpload.setAssignmentID(assignment.getId());
+                    replyUpload.setContent(input.getText().toString());
+                    replyUpload.setTitle("");
+                    uploadReplyImages(replyUpload);
+                }
             }
         });
 
@@ -349,6 +381,15 @@ public class AssignmentDetailFragment extends BaseBackFragment {
             @Override
             public void onClick(View v) {
                 //开始回复作业
+                if (replyFrame == null){
+                    return;
+                }
+
+                if (pictureCount != replyImages.size()){
+                    isWaitingUpload = true;
+                    return;
+                }
+
                 ReplyUpload replyUpload = new ReplyUpload();
                 replyUpload.setAssignmentID(assignment.getId());
                 replyUpload.setContent(input.getText().toString());
@@ -366,7 +407,13 @@ public class AssignmentDetailFragment extends BaseBackFragment {
      * 提示请求失败点击重试
      */
     private void setRequestError() {
-        replyFrame.removeAllViews();
+        if (replyFrame == null){
+            return;
+        }
+
+        if (replyFrame.getChildCount() > 0){
+            replyFrame.removeAllViews();
+        }
         View view = inflater.inflate(R.layout.view_reload, null);
         TextView hint = (TextView) view.findViewById(R.id.textView_hint);
         Button confirm = (Button) view.findViewById(R.id.button_confirm);
@@ -387,7 +434,13 @@ public class AssignmentDetailFragment extends BaseBackFragment {
      * 显示 回复界面数据
      */
     private void setReplyView(ReplyReceived reply) {
-        replyFrame.removeAllViews();
+        if (replyFrame == null){
+            return;
+        }
+
+        if (replyFrame.getChildCount() > 0){
+            replyFrame.removeAllViews();
+        }
         View view = inflater.inflate(R.layout.view_reply_student, null);
         //设置作业数据
         TextView date = (TextView) view.findViewById(R.id.textView_time);
@@ -473,6 +526,9 @@ public class AssignmentDetailFragment extends BaseBackFragment {
      * 上传回复图片
      * */
     private void uploadReplyImages(final ReplyUpload replyUpload){
+        if (pictureCount != replyImages.size()){
+            return;
+        }
 
         //上传图片
         final List<ImageFile> imageFiles = new ArrayList<>();

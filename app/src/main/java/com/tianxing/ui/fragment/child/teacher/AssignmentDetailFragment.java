@@ -177,6 +177,9 @@ public class AssignmentDetailFragment extends BaseBackFragment implements Assign
      * 开始载入学生列表学生列表
      * */
     private void loadStudentList(){
+        if (frame == null){
+            return;
+        }
         setLoadingView();
         presenter.loadStudentList().subscribe(new Subscriber<Response<List<StudentInfo>>>() {
             @Override
@@ -208,7 +211,12 @@ public class AssignmentDetailFragment extends BaseBackFragment implements Assign
      * 加载loading视图
      * */
     private void setLoadingView(){
-        frame.removeAllViews();
+        if (frame == null){
+            return;
+        }
+        if (frame.getChildCount() > 0){
+            frame.removeAllViews();
+        }
         View view = inflater.inflate(R.layout.view_loading, null);
         frame.addView(view);
         frame.invalidate();
@@ -218,6 +226,9 @@ public class AssignmentDetailFragment extends BaseBackFragment implements Assign
      * 加载学生列表
      * */
     private void setReplyList(final List<StudentInfo> studentInfos){
+        if (frame == null){
+            return;
+        }
         View view = inflater.inflate(R.layout.view_reply_student_list_teacher, null);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_student_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -230,7 +241,10 @@ public class AssignmentDetailFragment extends BaseBackFragment implements Assign
                 ((MainView)getActivity()).startAssignmentCommentFragment(assignment.getId(), studentInfos.get(position).getUserName());
             }
         });
-        frame.removeAllViews();
+        if (frame.getChildCount() > 0){
+            frame.removeAllViews();
+        }
+
         frame.addView(view);
         frame.invalidate();
     }
