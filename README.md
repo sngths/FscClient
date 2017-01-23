@@ -3,10 +3,6 @@
 
 -----
 
-//# 设计模式:
-//![android mvp pattern](./app/src/main/res/drawable/mvp.png)
 
 
-
-# 图形架构：
- 多模块Activity + 多Fragment
+ mvp 多模块Activity + 多Fragment
