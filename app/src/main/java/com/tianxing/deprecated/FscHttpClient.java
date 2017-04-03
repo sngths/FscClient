@@ -1,4 +1,4 @@
-package com.tianxing.model.communication.http;
+package com.tianxing.deprecated;
 
 import com.tianxing.entity.transfer.Comment;
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
@@ -13,7 +13,7 @@ import com.tianxing.entity.transfer.receive.TeacherInfoResponse;
 import com.tianxing.entity.transfer.send.ReplyUpload;
 import com.tianxing.entity.transfer.send.UsernameAndPassword;
 import com.tianxing.entity.info.PersonalInfo;
-import com.tianxing.model.communication.HttpClient;
+import com.tianxing.model.communication.http.service.HttpService;
 
 import java.io.File;
 import java.util.HashMap;

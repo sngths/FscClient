@@ -5,7 +5,7 @@ import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.entity.info.ClassInfo;
 import com.tianxing.model.App;
 import com.tianxing.model.ContactsPool;
-import com.tianxing.model.communication.HttpClient;
+import com.tianxing.deprecated.HttpClient;
 
 import java.util.List;
 

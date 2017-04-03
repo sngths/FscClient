@@ -1,4 +1,4 @@
-package com.tianxing.model.data;
+package com.tianxing.data;
 
 /**
  * Created by tianxing on 16/7/8.

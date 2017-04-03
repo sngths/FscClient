@@ -6,7 +6,7 @@ import com.tianxing.entity.MessageFactory;
 import com.tianxing.entity.message.ChatMessage;
 import com.tianxing.model.App;
 import com.tianxing.model.MessagePool;
-import com.tianxing.model.communication.XmppClient;
+import com.tianxing.deprecated.XmppClient;
 import com.tianxing.model.communication.xmpp.ChatSession;
 import com.tianxing.ui.fragment.child.ChatView;
 

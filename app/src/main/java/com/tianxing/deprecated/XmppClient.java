@@ -1,4 +1,4 @@
-package com.tianxing.model.communication;
+package com.tianxing.deprecated;
 
 import com.tianxing.model.communication.xmpp.ChatSession;
 import com.tianxing.model.communication.xmpp.MultiUserChatSession;

@@ -5,7 +5,7 @@ import com.tianxing.entity.info.StudentInfo;
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.model.App;
 import com.tianxing.model.AssignmentPool;
-import com.tianxing.model.communication.HttpClient;
+import com.tianxing.deprecated.HttpClient;
 
 import java.util.List;
 

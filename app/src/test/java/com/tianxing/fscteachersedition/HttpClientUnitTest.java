@@ -4,8 +4,8 @@ import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.entity.transfer.send.AssignmentUpload;
 import com.tianxing.entity.http.json.ImageFile;
 import com.tianxing.entity.transfer.receive.LoginInfo;
-import com.tianxing.model.communication.HttpClient;
-import com.tianxing.model.communication.http.FscHttpClient;
+import com.tianxing.deprecated.HttpClient;
+import com.tianxing.deprecated.FscHttpClient;
 
 import org.junit.Test;
 
@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Response;
+import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.schedulers.Schedulers;
 
 /**
@@ -39,7 +41,9 @@ public class HttpClientUnitTest {
     @Test
     public void getAssignmentList() {
         HttpClient client = new FscHttpClient();
-        client.Login("username", "password").subscribe(new Subscriber<LoginInfo>() {
+        Observable<LoginInfo> observable = client.Login("username", "password");
+
+        Subscription subscription = observable.subscribe(new Subscriber<LoginInfo>() {
             @Override
             public void onCompleted() {
                 System.out.println("登陆成功");
@@ -55,6 +59,8 @@ public class HttpClientUnitTest {
 
             }
         });
+
+        subscription.unsubscribe();
 
         try {
             Thread.currentThread().sleep(3000);

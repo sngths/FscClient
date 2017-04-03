@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.login.LoginPresenter;
-import com.tianxing.presenter.login.LoginView;
+import com.tianxing.ui.LoginView;
 import com.tianxing.presenter.login.LoginViewPresenter;
 import com.tianxing.ui.activity.LoginActivity;
 import com.tianxing.ui.fragment.child.BaseBackFragment;

@@ -7,7 +7,7 @@ import com.tianxing.entity.transfer.receive.ReplyReceived;
 import com.tianxing.entity.transfer.send.ReplyUpload;
 import com.tianxing.model.App;
 import com.tianxing.model.AssignmentPool;
-import com.tianxing.model.communication.HttpClient;
+import com.tianxing.deprecated.HttpClient;
 import com.tianxing.model.user.StudentUser;
 
 import java.util.List;

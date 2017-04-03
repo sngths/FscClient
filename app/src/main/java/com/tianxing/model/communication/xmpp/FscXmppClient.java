@@ -3,7 +3,7 @@ package com.tianxing.model.communication.xmpp;
 import android.util.Pair;
 
 import com.tianxing.exception.UnconnectedException;
-import com.tianxing.model.communication.XmppClient;
+import com.tianxing.deprecated.XmppClient;
 
 import rx.Observable;
 import rx.Subscriber;

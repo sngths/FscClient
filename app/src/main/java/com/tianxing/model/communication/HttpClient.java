@@ -1,129 +1,41 @@
 package com.tianxing.model.communication;
 
-import com.tianxing.entity.transfer.Comment;
-import com.tianxing.entity.transfer.receive.AssignmentDownload;
-import com.tianxing.entity.transfer.receive.ReplyReceived;
-import com.tianxing.entity.transfer.send.AssignmentUpload;
-import com.tianxing.entity.http.json.ImageFile;
-import com.tianxing.entity.info.StudentInfo;
-import com.tianxing.entity.transfer.receive.LoginInfo;
-import com.tianxing.entity.info.PersonalInfo;
-import com.tianxing.entity.transfer.receive.LoginResponse;
-import com.tianxing.entity.transfer.receive.StudentInfoResponse;
-import com.tianxing.entity.transfer.receive.TeacherInfoResponse;
-import com.tianxing.entity.transfer.send.ReplyUpload;
+import com.tianxing.model.communication.http.api.RetrofitApi;
+import com.tianxing.model.communication.http.api.RxApi;
+import com.tianxing.model.communication.http.service.Service;
 
-import java.util.List;
-
-import retrofit2.Response;
+import retrofit2.Call;
 import rx.Observable;
 
 /**
- * Created by tianxing on 16/7/19.
- *
+ * Created by tianxing on 2017/3/30.
+ * 不包含具体的 请求方法
  */
+
 public interface HttpClient {
 
 
 
-    /**
-     * 登录
-     * */
-    Observable<LoginInfo> Login(String username, String password);
-
 
     /**
-     * 用户登录
+     * 尝试连接服务器
      * */
-    Observable<LoginResponse> userLogin(String username, String password);
 
 
     /**
-     * 请求学生信息
+     * 取得网络请求接口
      * */
-    Observable<StudentInfoResponse> requestStudentInfo();
+    <R extends RxApi> R getApiService(Class<R> service);
 
     /**
-     * 请求老师信息
+     * 取得Retrofit类型API
      * */
-    Observable<TeacherInfoResponse> requestTeacherInfo();
-
+    <R extends RetrofitApi> R getRetrofitApiService(Class<R> service);
 
     /**
-     * 认证
+     * 取得Rx类型API
      * */
-    void authenticate(String refreshToken);
+    <R extends RxApi> R getRxApiService(Class<R> service);
 
-    String getToken();
-
-    String getRefreshToken();
-
-
-    /**
-     * 请求用户信息 包含班级信息
-     * */
-    PersonalInfo getPersonalInfo();
-
-
-
-
-
-    /**
-     * 请求单个班级作业数据
-     * */
-    Observable<Response<List<AssignmentDownload>>> requestAssignmentList(String classID, String serialNumber);
-
-
-
-    /**
-     * 上传一个作业
-     * */
-    Observable<Response<Void>> uploadAssignment(AssignmentUpload assignment);
-
-
-
-    /**
-     * 上传文件
-     * */
-    Observable<Response<ImageFile>> uploadFile(String filePath);
-
-
-    /**
-     * 上传一张图片
-     * */
-    Observable<Response<ImageFile>> uploadImage(String imagePath);
-
-
-    /***
-     * 上传一组图片
-     * */
-    Observable<Response<ImageFile>> uploadImageSet(List<String> imagePath);
-
-
-
-    /**
-     * 请求一条作业的回复学生列表
-     * */
-    Observable<Response<List<StudentInfo>>> requestReplyStudentList(String AssignmentID);
-
-
-
-    /**
-     * 请求一条作业的一个学生的回复
-     * */
-    Observable<Response<ReplyReceived>> requestReply(String assignmentID, String studentID);
-
-
-    /**
-     * 上传一条回复
-     *
-     */
-
-    Observable<Response<ReplyReceived>> uploadReply(ReplyUpload replyUpload);
-
-    /**
-     * 上传一条批阅
-     * */
-    Observable<Response<Void>> uploadComment(Comment comment);
-
+    <R extends RxApi, T>void getRxApi(R r);
 }

@@ -1,4 +1,4 @@
-package com.tianxing.model.data;
+package com.tianxing.data;
 
 import com.tianxing.model.communication.xmpp.XmppServerInfo;
 

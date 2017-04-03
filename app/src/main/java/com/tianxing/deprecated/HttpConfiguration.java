@@ -1,4 +1,4 @@
-package com.tianxing.model.communication.http;
+package com.tianxing.deprecated;
 
 /**
  * Created by tianxing on 16/9/1.

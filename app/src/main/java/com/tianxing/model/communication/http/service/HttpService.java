@@ -1,4 +1,4 @@
-package com.tianxing.model.communication.http;
+package com.tianxing.model.communication.http.service;
 
 import com.tianxing.entity.info.StudentInfo;
 import com.tianxing.entity.transfer.Comment;
@@ -41,7 +41,7 @@ public interface HttpService {
      * */
     @POST("login")
     @Headers("Content-Type: application/json")
-    Observable<LoginInfo> login(@Body UsernameAndPassword usernamendPassword);
+    Observable<LoginInfo> login(@Body UsernameAndPassword usernameAndPassword);
 
 
 
@@ -50,7 +50,7 @@ public interface HttpService {
      * */
     @POST("mlogin")
     @Headers("Content-Type: application/json")
-    Observable<LoginResponse> userLogin(@Body UsernameAndPassword usernamendPassword);
+    Observable<LoginResponse> userLogin(@Body UsernameAndPassword usernameAndPassword);
 
     /**
      * 请求学生信息

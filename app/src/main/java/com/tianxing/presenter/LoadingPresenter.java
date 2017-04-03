@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.tianxing.model.App;
-import com.tianxing.model.data.Config;
-import com.tianxing.model.data.LocalConfig;
+import com.tianxing.data.Config;
+import com.tianxing.data.LocalConfig;
 
 /**
  * Created by tianxing on 16/7/8.

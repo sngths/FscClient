@@ -4,7 +4,7 @@ import com.tianxing.entity.info.StudentInfo;
 import com.tianxing.entity.transfer.Comment;
 import com.tianxing.entity.transfer.receive.ReplyReceived;
 import com.tianxing.model.App;
-import com.tianxing.model.communication.HttpClient;
+import com.tianxing.deprecated.HttpClient;
 
 import retrofit2.Response;
 import rx.Observable;

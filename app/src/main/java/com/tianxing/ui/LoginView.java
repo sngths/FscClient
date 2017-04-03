@@ -1,4 +1,4 @@
-package com.tianxing.presenter.login;
+package com.tianxing.ui;
 
 /**
  * Created by tianxing on 16/9/1.

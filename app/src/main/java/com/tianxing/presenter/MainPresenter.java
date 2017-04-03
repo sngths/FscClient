@@ -1,9 +1,12 @@
 package com.tianxing.presenter;
 
+import com.tianxing.ui.View;
+
 /**
  * Created by tianxing on 16/7/14.
+ *
  */
-public interface MainPresenter {
+public interface MainPresenter extends Presenter{
 
 
 

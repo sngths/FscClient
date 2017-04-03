@@ -2,7 +2,7 @@ package com.tianxing.fscteachersedition;
 
 import com.tianxing.model.App;
 import com.tianxing.model.AssignmentPool;
-import com.tianxing.model.data.Config;
+import com.tianxing.data.Config;
 import com.tianxing.presenter.main.AssignmentViewPresenter;
 
 import org.junit.Test;

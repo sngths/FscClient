@@ -11,4 +11,9 @@ public class MainViewPresenter implements MainPresenter {
     public MainViewPresenter(){
         App.getInstance().getXmppClient().login("user1", "123456");
     }
+
+    @Override
+    public void destroy() {
+
+    }
 }

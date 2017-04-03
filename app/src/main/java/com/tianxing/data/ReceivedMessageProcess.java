@@ -1,4 +1,4 @@
-package com.tianxing.model.data;
+package com.tianxing.data;
 
 import com.tianxing.entity.message.ChatMessage;
 import com.tianxing.entity.message.GroupChatMessage;

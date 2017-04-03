@@ -12,15 +12,17 @@ import com.tianxing.model.App;
 import com.tianxing.model.AssignmentPool;
 import com.tianxing.model.ContactsPool;
 import com.tianxing.model.MessagePool;
-import com.tianxing.model.communication.HttpClient;
+import com.tianxing.deprecated.HttpClient;
 import com.tianxing.model.user.StudentUser;
 import com.tianxing.model.user.TeacherUser;
+import com.tianxing.ui.LoginView;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by tianxing on 16/9/1.
+ *
  */
 public class LoginViewPresenter implements LoginPresenter {
     private static final String TAG = "LoginViewPresenter";
