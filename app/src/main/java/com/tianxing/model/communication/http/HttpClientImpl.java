@@ -3,6 +3,7 @@ package com.tianxing.model.communication.http;
 import com.tianxing.model.communication.HttpClient;
 import com.tianxing.model.communication.http.api.RetrofitApi;
 import com.tianxing.model.communication.http.api.RxApi;
+import com.tianxing.model.communication.http.service.Service;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -27,39 +28,12 @@ public class HttpClientImpl implements HttpClient {
 
 
     /**
-     * 取得网络请求接口
+     * 取得服务接口
      *
      * @param service
      */
     @Override
-    public <R extends RxApi> R getApiService(Class<R> service) {
+    public <T extends Service> T getService(Class<T> service) {
         return retrofit.create(service);
     }
-
-    /**
-     * 取得Retrofit类型API
-     *
-     * @param service
-     */
-    @Override
-    public <R extends RetrofitApi> R getRetrofitApiService(Class<R> service) {
-        return retrofit.create(service);
-    }
-
-    /**
-     * 取得Rx类型API
-     *
-     * @param service
-     */
-    @Override
-    public <R extends RxApi> R getRxApiService(Class<R> service) {
-        return retrofit.create(service);
-    }
-
-    @Override
-    public <R extends RxApi, T> void getRxApi(R r) {
-
-    }
-
-
 }

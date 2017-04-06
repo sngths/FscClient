@@ -16,7 +16,5 @@ public interface Service {
     @Headers("Content-Type: application/json")
     Call<ResponseBody> connect();
 
-    @GET("/")
-    @Headers("Content-Type: application/json")
-    <T> Call<T> connect(Class<T> responseType);
+
 }
