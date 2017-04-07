@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.tianxing.entity.info.StudentInfo;
+import com.tianxing.deprecated.entity.info.StudentInfo;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.ui.listener.ReplyListItemOnClickListener;
 

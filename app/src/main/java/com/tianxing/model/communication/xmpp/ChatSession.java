@@ -1,6 +1,6 @@
 package com.tianxing.model.communication.xmpp;
 
-import com.tianxing.entity.message.ChatMessage;
+import com.tianxing.deprecated.entity.message.ChatMessage;
 import com.tianxing.exception.UnconnectedException;
 
 import org.jivesoftware.smack.SmackException;
@@ -44,11 +44,11 @@ public class ChatSession {
         Message message1 = new Message();
         message1.setBody(message.getContent());
         if (message.getContentType() == ChatMessage.TYPE_CONTENT_TEXT){
-            message1.setSubject(com.tianxing.entity.message.Message.XMPP_SUBJECT_TEXT);
+            message1.setSubject(com.tianxing.deprecated.entity.message.Message.XMPP_SUBJECT_TEXT);
         }else if (message.getContentType() == ChatMessage.TYPE_CONTENT_IMAGE){
-            message1.setSubject(com.tianxing.entity.message.Message.XMPP_SUBJECT_IMAGE);
+            message1.setSubject(com.tianxing.deprecated.entity.message.Message.XMPP_SUBJECT_IMAGE);
         }else if (message.getContentType() == ChatMessage.TYPE_CONTENT_AUDIO){
-            message1.setSubject(com.tianxing.entity.message.Message.XMPP_SUBJECT_AUDIO);
+            message1.setSubject(com.tianxing.deprecated.entity.message.Message.XMPP_SUBJECT_AUDIO);
         }
         try {
             chat.sendMessage(message1);

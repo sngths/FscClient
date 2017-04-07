@@ -16,12 +16,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.tianxing.entity.http.json.ImageFile;
-import com.tianxing.entity.info.StudentInfo;
+import com.tianxing.deprecated.entity.http.json.ImageFile;
+import com.tianxing.deprecated.entity.info.StudentInfo;
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.model.App;
-import com.tianxing.model.ContactsPool;
+import com.tianxing.deprecated.data.ContactsPool;
 import com.tianxing.presenter.child.teacher.AssignmentDetailPresenter;
 import com.tianxing.presenter.child.teacher.AssignmentDetailViewPresenter;
 import com.tianxing.ui.activity.MainView;

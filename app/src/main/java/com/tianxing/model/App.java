@@ -1,14 +1,17 @@
 package com.tianxing.model;
 
+import com.tianxing.deprecated.data.AssignmentPool;
+import com.tianxing.deprecated.data.ContactsPool;
+import com.tianxing.deprecated.data.MessagePool;
 import com.tianxing.deprecated.HttpClient;
 import com.tianxing.deprecated.XmppClient;
 import com.tianxing.deprecated.FscHttpClient;
 import com.tianxing.model.communication.xmpp.FscXmppClient;
 import com.tianxing.model.communication.xmpp.XmppServerInfo;
-import com.tianxing.data.AssignmentDataPool;
+import com.tianxing.deprecated.data.AssignmentDataPool;
 import com.tianxing.data.Config;
-import com.tianxing.data.ContactsDataPool;
-import com.tianxing.data.MessageDataPool;
+import com.tianxing.deprecated.data.ContactsDataPool;
+import com.tianxing.deprecated.data.MessageDataPool;
 import com.tianxing.data.ReceivedMessageProcess;
 import com.tianxing.model.user.User;
 

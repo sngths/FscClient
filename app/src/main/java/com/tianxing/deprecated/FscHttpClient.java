@@ -4,15 +4,15 @@ import com.tianxing.entity.transfer.Comment;
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.entity.transfer.receive.ReplyReceived;
 import com.tianxing.entity.transfer.send.AssignmentUpload;
-import com.tianxing.entity.http.json.ImageFile;
-import com.tianxing.entity.info.StudentInfo;
+import com.tianxing.deprecated.entity.http.json.ImageFile;
+import com.tianxing.deprecated.entity.info.StudentInfo;
 import com.tianxing.entity.transfer.receive.LoginInfo;
 import com.tianxing.entity.transfer.receive.LoginResponse;
 import com.tianxing.entity.transfer.receive.StudentInfoResponse;
 import com.tianxing.entity.transfer.receive.TeacherInfoResponse;
 import com.tianxing.entity.transfer.send.ReplyUpload;
 import com.tianxing.entity.transfer.send.UsernameAndPassword;
-import com.tianxing.entity.info.PersonalInfo;
+import com.tianxing.deprecated.entity.info.PersonalInfo;
 import com.tianxing.model.communication.http.service.HttpService;
 
 import java.io.File;

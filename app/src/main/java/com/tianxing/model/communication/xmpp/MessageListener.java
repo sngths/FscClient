@@ -1,7 +1,7 @@
 package com.tianxing.model.communication.xmpp;
 
-import com.tianxing.entity.message.ChatMessage;
-import com.tianxing.entity.message.GroupChatMessage;
+import com.tianxing.deprecated.entity.message.ChatMessage;
+import com.tianxing.deprecated.entity.message.GroupChatMessage;
 
 /**
  * Created by tianxing on 16/8/24.

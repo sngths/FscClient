@@ -1,7 +1,7 @@
 package com.tianxing.presenter.child.student;
 
-import com.tianxing.entity.http.json.ImageFile;
-import com.tianxing.entity.info.ClassInfo;
+import com.tianxing.deprecated.entity.http.json.ImageFile;
+import com.tianxing.deprecated.entity.info.ClassInfo;
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.entity.transfer.receive.ReplyReceived;
 import com.tianxing.entity.transfer.send.ReplyUpload;

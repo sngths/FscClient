@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.squareup.picasso.Picasso;
-import com.tianxing.entity.http.json.ImageFile;
+import com.tianxing.deprecated.entity.http.json.ImageFile;
 import com.tianxing.entity.transfer.Comment;
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.entity.transfer.receive.ReplyReceived;

@@ -1,6 +1,6 @@
 package com.tianxing.model.communication.xmpp;
 
-import com.tianxing.entity.message.GroupChatMessage;
+import com.tianxing.deprecated.entity.message.GroupChatMessage;
 import com.tianxing.exception.UnconnectedException;
 
 import org.jivesoftware.smack.SmackException;

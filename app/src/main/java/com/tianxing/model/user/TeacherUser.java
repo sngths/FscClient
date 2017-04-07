@@ -1,6 +1,6 @@
 package com.tianxing.model.user;
 
-import com.tianxing.entity.info.TeacherInfo;
+import com.tianxing.deprecated.entity.info.TeacherInfo;
 
 /**
  * Created by tianxing on 16/10/28.

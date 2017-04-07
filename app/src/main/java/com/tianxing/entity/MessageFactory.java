@@ -1,8 +1,8 @@
 package com.tianxing.entity;
 
-import com.tianxing.entity.message.ChatMessage;
-import com.tianxing.entity.message.GroupChatMessage;
-import com.tianxing.entity.message.Message;
+import com.tianxing.deprecated.entity.message.ChatMessage;
+import com.tianxing.deprecated.entity.message.GroupChatMessage;
+import com.tianxing.deprecated.entity.message.Message;
 
 /**
  * Created by tianxing on 16/8/22.

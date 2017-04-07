@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.model.App;
-import com.tianxing.model.AssignmentPool;
+import com.tianxing.deprecated.data.AssignmentPool;
 import com.tianxing.deprecated.HttpClient;
 import com.tianxing.ui.AssignmentView;
 

@@ -7,7 +7,12 @@ import com.tianxing.data.visitor.Visitor;
  * 所有数据池继承该接口
  */
 
-public interface DataPool<T extends Visitor> {
+public interface DataPool {
 
-    void accept(T t);
+    <T extends Visitor>void accept(T t);
+
+    /**
+     * 创建一个新的数据池
+     * */
+
 }

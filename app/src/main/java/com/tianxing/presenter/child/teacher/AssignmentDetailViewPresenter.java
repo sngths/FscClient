@@ -1,10 +1,10 @@
 package com.tianxing.presenter.child.teacher;
 
-import com.tianxing.entity.info.ClassInfo;
-import com.tianxing.entity.info.StudentInfo;
+import com.tianxing.deprecated.entity.info.ClassInfo;
+import com.tianxing.deprecated.entity.info.StudentInfo;
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.model.App;
-import com.tianxing.model.AssignmentPool;
+import com.tianxing.deprecated.data.AssignmentPool;
 import com.tianxing.deprecated.HttpClient;
 
 import java.util.List;

@@ -7,6 +7,6 @@ import com.tianxing.data.pool.DataPool;
  * 数据观察者
  */
 
-public interface Visitor<T extends DataPool> {
-    void visit(T t);
+public interface Visitor {
+    <T extends DataPool>void visit(T t);
 }

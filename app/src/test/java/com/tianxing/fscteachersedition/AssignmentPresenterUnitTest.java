@@ -1,7 +1,7 @@
 package com.tianxing.fscteachersedition;
 
 import com.tianxing.model.App;
-import com.tianxing.model.AssignmentPool;
+import com.tianxing.deprecated.data.AssignmentPool;
 import com.tianxing.data.Config;
 import com.tianxing.presenter.main.AssignmentViewPresenter;
 

@@ -1,6 +1,6 @@
 package com.tianxing.presenter.child;
 
-import com.tianxing.entity.message.ChatMessage;
+import com.tianxing.deprecated.entity.message.ChatMessage;
 
 /**
  * Created by tianxing on 16/8/2.

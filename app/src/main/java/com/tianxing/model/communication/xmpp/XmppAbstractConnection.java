@@ -2,7 +2,7 @@ package com.tianxing.model.communication.xmpp;
 
 import android.util.Log;
 
-import com.tianxing.entity.info.GroupInfo;
+import com.tianxing.deprecated.entity.info.GroupInfo;
 import com.tianxing.model.App;
 
 import org.jivesoftware.smack.AbstractXMPPConnection;

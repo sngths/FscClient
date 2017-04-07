@@ -1,9 +1,9 @@
 package com.tianxing.entity.transfer.receive;
 
-import com.tianxing.entity.info.ClassInfo;
-import com.tianxing.entity.info.GroupInfo;
-import com.tianxing.entity.info.TeacherInfo;
-import com.tianxing.entity.info.UserInfo;
+import com.tianxing.deprecated.entity.info.ClassInfo;
+import com.tianxing.deprecated.entity.info.GroupInfo;
+import com.tianxing.deprecated.entity.info.TeacherInfo;
+import com.tianxing.deprecated.entity.info.UserInfo;
 import com.tianxing.model.communication.xmpp.XmppServerInfo;
 
 import java.util.List;

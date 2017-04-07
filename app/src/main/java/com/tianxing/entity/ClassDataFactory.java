@@ -1,6 +1,6 @@
 package com.tianxing.entity;
 
-import com.tianxing.entity.info.ClassInfo;
+import com.tianxing.deprecated.entity.info.ClassInfo;
 
 /**
  * Created by tianxing on 16/7/20.

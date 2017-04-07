@@ -1,6 +1,6 @@
 package com.tianxing.entity.transfer.receive;
 
-import com.tianxing.entity.http.json.ImageFile;
+import com.tianxing.deprecated.entity.http.json.ImageFile;
 
 import java.util.List;
 

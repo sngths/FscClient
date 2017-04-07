@@ -2,7 +2,7 @@ package com.tianxing.fscteachersedition;
 
 import com.tianxing.entity.transfer.receive.AssignmentDownload;
 import com.tianxing.entity.transfer.send.AssignmentUpload;
-import com.tianxing.entity.http.json.ImageFile;
+import com.tianxing.deprecated.entity.http.json.ImageFile;
 import com.tianxing.entity.transfer.receive.LoginInfo;
 import com.tianxing.deprecated.HttpClient;
 import com.tianxing.deprecated.FscHttpClient;

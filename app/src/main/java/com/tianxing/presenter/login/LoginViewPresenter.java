@@ -2,16 +2,16 @@ package com.tianxing.presenter.login;
 
 import android.util.Log;
 
-import com.tianxing.entity.info.ClassInfo;
-import com.tianxing.entity.info.GroupInfo;
-import com.tianxing.entity.info.UserInfo;
+import com.tianxing.deprecated.entity.info.ClassInfo;
+import com.tianxing.deprecated.entity.info.GroupInfo;
+import com.tianxing.deprecated.entity.info.UserInfo;
 import com.tianxing.entity.transfer.receive.LoginResponse;
 import com.tianxing.entity.transfer.receive.StudentInfoResponse;
 import com.tianxing.entity.transfer.receive.TeacherInfoResponse;
 import com.tianxing.model.App;
-import com.tianxing.model.AssignmentPool;
-import com.tianxing.model.ContactsPool;
-import com.tianxing.model.MessagePool;
+import com.tianxing.deprecated.data.AssignmentPool;
+import com.tianxing.deprecated.data.ContactsPool;
+import com.tianxing.deprecated.data.MessagePool;
 import com.tianxing.deprecated.HttpClient;
 import com.tianxing.model.user.StudentUser;
 import com.tianxing.model.user.TeacherUser;

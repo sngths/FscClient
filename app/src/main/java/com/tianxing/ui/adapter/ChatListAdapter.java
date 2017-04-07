@@ -9,8 +9,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.tianxing.entity.message.ChatMessage;
-import com.tianxing.entity.message.Message;
+import com.tianxing.deprecated.entity.message.ChatMessage;
+import com.tianxing.deprecated.entity.message.Message;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.child.ChatPresenter;
 

@@ -1,7 +1,7 @@
 package com.tianxing.presenter.main;
 
 import com.tianxing.model.App;
-import com.tianxing.model.ContactsPool;
+import com.tianxing.deprecated.data.ContactsPool;
 import com.tianxing.ui.fragment.main.ContactsView;
 
 /**

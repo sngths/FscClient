@@ -1,9 +1,9 @@
 package com.tianxing.presenter.child;
 
 import com.tianxing.entity.MessageFactory;
-import com.tianxing.entity.message.GroupChatMessage;
+import com.tianxing.deprecated.entity.message.GroupChatMessage;
 import com.tianxing.model.App;
-import com.tianxing.model.MessagePool;
+import com.tianxing.deprecated.data.MessagePool;
 import com.tianxing.deprecated.XmppClient;
 import com.tianxing.model.communication.xmpp.MultiUserChatSession;
 import com.tianxing.ui.fragment.child.ChatGroupView;

@@ -1,10 +1,10 @@
 package com.tianxing.presenter.child;
 
 import com.tianxing.entity.transfer.send.AssignmentUpload;
-import com.tianxing.entity.http.json.ImageFile;
-import com.tianxing.entity.info.ClassInfo;
+import com.tianxing.deprecated.entity.http.json.ImageFile;
+import com.tianxing.deprecated.entity.info.ClassInfo;
 import com.tianxing.model.App;
-import com.tianxing.model.ContactsPool;
+import com.tianxing.deprecated.data.ContactsPool;
 import com.tianxing.deprecated.HttpClient;
 
 import java.util.List;

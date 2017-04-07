@@ -1,8 +1,8 @@
 package com.tianxing.data;
 
-import com.tianxing.entity.message.ChatMessage;
-import com.tianxing.entity.message.GroupChatMessage;
-import com.tianxing.model.MessagePool;
+import com.tianxing.deprecated.data.MessagePool;
+import com.tianxing.deprecated.entity.message.ChatMessage;
+import com.tianxing.deprecated.entity.message.GroupChatMessage;
 import com.tianxing.model.communication.xmpp.MessageListener;
 
 import rx.Observable;
