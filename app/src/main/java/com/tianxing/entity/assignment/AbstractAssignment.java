@@ -9,13 +9,13 @@ public class AbstractAssignment implements Assignment {
 
     private int assignmentID;
 
-    private int teacherID;
-    private String teacherName;
     private int classID;
     private String className;
+    private int teacherID;
+    private String teacherName;
 
     private long timestamp;//创建时间
-    private long modificationime;//修改时间
+    private long modificationTime;//修改时间
 
     public int getAssignmentID() {
         return assignmentID;
@@ -65,12 +65,12 @@ public class AbstractAssignment implements Assignment {
         this.timestamp = timestamp;
     }
 
-    public long getModificationime() {
-        return modificationime;
+    public long getModificationTime() {
+        return modificationTime;
     }
 
-    public void setModificationime(long modificationime) {
-        this.modificationime = modificationime;
+    public void setModificationTime(long modificationTime) {
+        this.modificationTime = modificationTime;
     }
 }
 

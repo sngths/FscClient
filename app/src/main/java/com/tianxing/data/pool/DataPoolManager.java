@@ -4,6 +4,10 @@ package com.tianxing.data.pool;
 import com.tianxing.data.DataManager;
 import com.tianxing.data.visitor.Visitor;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by tianxing on 2017/4/6.
  *
@@ -19,6 +23,8 @@ public class DataPoolManager implements DataManager {
     private ContactsPool contactsPool;
     private InfoPool infoPool;
     private MessagePool messagePool;
+
+    private Map<Class<? extends DataPool>, Object> dataPoolMap;
 
 
     private boolean isInitialize = false;
@@ -38,7 +44,11 @@ public class DataPoolManager implements DataManager {
     @Override
     public void initialize() {
         if (!isInitialize){
-
+            dataPoolMap = new HashMap<>();
+            dataPoolMap.put(AssignmentPool.class, new AssignmentPoolImpl());
+            dataPoolMap.put(ContactsPool.class, new ContactsPoolImpl());
+            dataPoolMap.put(InfoPool.class, new InfoPoolImpl());
+            dataPoolMap.put(MessagePool.class, new MessagePoolImpl());
         }
         isInitialize = true;
     }
@@ -51,17 +61,14 @@ public class DataPoolManager implements DataManager {
     @SuppressWarnings("unchecked")
     @Override
     public <T extends DataPool> T getDataPool(Class<T> dataPool) {
-        if (dataPool == AssignmentPool.class){
-            return (T)assignmentPool;
-        }else if (dataPool == ContactsPool.class){
-            return (T) contactsPool;
-        }else if (dataPool == InfoPool.class){
-            return (T) infoPool;
-        }else if (dataPool == MessagePool.class){
-            return (T) messagePool;
-        }else {
+        if (!isInitialize){
+            throw new RuntimeException("dataPool is uninitialized");
+        }
+        Object o = dataPoolMap.get(dataPool);
+        if (o == null){
             throw new RuntimeException("dataPool not exist.");
         }
+        return (T)o;
     }
 
     /**
@@ -71,9 +78,11 @@ public class DataPoolManager implements DataManager {
      */
     @Override
     public void accept(Visitor visitor) {
-        assignmentPool.accept(visitor);
-        contactsPool.accept(visitor);
-        infoPool.accept(visitor);
-        messagePool.accept(visitor);
+        if (!isInitialize){
+            throw new RuntimeException("dataPool is uninitialized");
+        }
+        for (Object o : dataPoolMap.values()) {
+            ((DataPool)o).accept(visitor);
+        }
     }
 }

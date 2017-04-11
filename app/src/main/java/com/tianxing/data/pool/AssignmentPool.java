@@ -4,6 +4,7 @@ import com.tianxing.entity.assignment.AssignmentAssigned;
 import com.tianxing.entity.assignment.AssignmentFeedback;
 import com.tianxing.entity.assignment.AssignmentReply;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -39,26 +40,37 @@ public interface AssignmentPool extends DataPool {
     /**
      * 取得作业ID
      */
-    int assignmentId(int classPosition, int idPosition);
+    int assignmentId(int classId, int idPosition);
 
 
-    AssignmentAssigned assignment(int id);
+    AssignmentAssigned assignment(int assignmentId);
     /**
      * 取得0位置的回复
      * */
-    AssignmentReply reply(int id);
+    AssignmentReply reply(int assignmentId);
 
-    AssignmentReply reply(int id, int position);
+    AssignmentReply reply(int assignmentId, int position);
 
-    AssignmentFeedback feedback(int id);
+    AssignmentFeedback feedback(int replyId);
 
 
     /**
      * 存放
      * */
-    void putAssignment(AssignmentAssigned assignmentAssigned);
+    /**
+     * 添加一个班级
+     * */
+    void createClass(int classID);
+
+    /**
+     * 放入一条作业 返回存放位置 如果对象已存在则替换对象 并返回-1
+     * 传入对象 保存在
+     * */
+    int putAssignment(AssignmentAssigned assignmentAssigned);
 
     void putReply(AssignmentReply reply);
+
+    void putReplyList(int assignmentId, LinkedList<AssignmentReply> replyList);
 
     void putFeedback(AssignmentFeedback feedback);
 

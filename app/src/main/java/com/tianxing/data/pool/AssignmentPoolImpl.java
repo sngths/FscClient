@@ -7,10 +7,9 @@ import com.tianxing.entity.assignment.AssignmentAssigned;
 import com.tianxing.entity.assignment.AssignmentFeedback;
 import com.tianxing.entity.assignment.AssignmentReply;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by tianxing on 2017/4/6.
@@ -19,33 +18,41 @@ import java.util.Map;
 
 class AssignmentPoolImpl extends AbstractDataPool implements AssignmentPool {
 
-    //班级列表 K:班级ID  V:作业ID列表
-    private Map<Integer, LinkedList<Integer>> classMap;
+
+    //班级ID列表
+    private List<Integer> classIdList;
+
+    //班级作业ID列表列表 K:班级ID  V:作业ID列表
+    private SparseArray<LinkedList<Integer>> assignmentIdArray;
 
     //作业集合 K：作业ID V：作业内容
-    private Map<Integer, AssignmentAssigned> assignmentMap;
+    private SparseArray<AssignmentAssigned> assignmentArray;
 
     /**
      * 回复集合 K：作业ID V：作业回复列表
      * 对于学生用户只有一条回复 对于老师用户 列表中包含一条作业下所有学生的回复
-     * */
-    private Map<Integer, LinkedList<AssignmentReply>> replyMap;
+     */
+    private SparseArray<LinkedList<AssignmentReply>> replyArray;
 
 
     /**
      * 批阅集合 K：作业回复ID V：作业批阅
-     * */
-    private Map<Integer, AssignmentFeedback> feedbackMap;
+     */
+    private SparseArray<AssignmentFeedback> feedbackArray;
 
 
     private int maxAssignmentId = 0;
 
     //每个班级的作业列表的容量
-    private int capability = 0;
+    private int capability = -1;
 
 
     public AssignmentPoolImpl() {
-        //classMap = new SparseArray<>();
+        classIdList = new ArrayList<>();
+        assignmentIdArray = new SparseArray<>();
+        assignmentArray = new SparseArray<>();
+        replyArray = new SparseArray<>();
+        feedbackArray = new SparseArray<>();
     }
 
 
@@ -56,15 +63,13 @@ class AssignmentPoolImpl extends AbstractDataPool implements AssignmentPool {
      */
     @Override
     public void resize(int capability) {
-        if (capability <= 0){
+        if (capability <= 0) {
             throw new RuntimeException("capability <= 0");
         }
-        for (List<Integer> assignmentIdList:classMap.values()){
-            int removeCount = assignmentIdList.size() - capability;
-            if (removeCount <= 0){
-                return;
-            }else {
-
+        for (int id : classIdList) {
+            int removeCount = assignmentIdArray.get(id).size() - capability;
+            for (int i = 0; i < removeCount; i++) {
+                removeLastAssignment(id);
             }
         }
     }
@@ -82,7 +87,7 @@ class AssignmentPoolImpl extends AbstractDataPool implements AssignmentPool {
      */
     @Override
     public int classCount() {
-        return classMap.size();
+        return assignmentIdArray.size();
     }
 
     /**
@@ -92,23 +97,23 @@ class AssignmentPoolImpl extends AbstractDataPool implements AssignmentPool {
      */
     @Override
     public int assignmentCount(int classId) {
-        return classMap.get(classId).size();
+        return assignmentIdArray.get(classId).size();
     }
 
     /**
      * 取得作业ID
      *
-     * @param classPosition
+     * @param classId
      * @param idPosition
      */
     @Override
-    public int assignmentId(int classPosition, int idPosition) {
-        return classMap.get(classPosition).get(idPosition);
+    public int assignmentId(int classId, int idPosition) {
+        return assignmentIdArray.get(classId).get(idPosition);
     }
 
     @Override
     public AssignmentAssigned assignment(int id) {
-        return assignmentMap.get(id);
+        return assignmentArray.get(id);
     }
 
     /**
@@ -118,62 +123,149 @@ class AssignmentPoolImpl extends AbstractDataPool implements AssignmentPool {
      */
     @Override
     public AssignmentReply reply(int id) {
-        return replyMap.get(id).get(0);
+        return replyArray.get(id).get(0);
     }
 
     @Override
     public AssignmentReply reply(int id, int position) {
-        return replyMap.get(id).get(position);
+        return replyArray.get(id).get(position);
     }
 
     @Override
     public AssignmentFeedback feedback(int id) {
-        return feedbackMap.get(id);
+        return feedbackArray.get(id);
     }
 
     /**
      * 存放
      *
-     * @param assignmentAssigned
+     * @param classID
      */
     @Override
-    public void putAssignment(AssignmentAssigned assignmentAssigned) {
-        int id = assignmentAssigned.getAssignmentID();
-        //判断存放位置
-        if (id > maxAssignmentId){
+    public void createClass(int classID) {
+        if (classIdList.contains(classID)) {
+            return;
+        }
+        classIdList.add(classID);
+        //创建作业ID列表
+        if (assignmentIdArray.get(classID) == null) {
+            assignmentIdArray.put(classID, new LinkedList<Integer>());
+        }
+    }
 
 
-            maxAssignmentId = id;
-        }else if (id == maxAssignmentId){
-
-        }else {
+    @Override
+    public int putAssignment(AssignmentAssigned assignmentAssigned) {
+        if (assignmentAssigned == null) {
+            return -1;
+        }
+        int classID = assignmentAssigned.getClassID();
+        if (!classIdList.contains(classID)) {
+            createClass(classID);
+        }
+        int assignmentID = assignmentAssigned.getAssignmentID();
+        LinkedList<Integer> assignmentList = assignmentIdArray.get(classID);
+        if (assignmentList == null){
 
         }
+        //保存ID
+        int insertPosition = -1;
+        assignmentList.addFirst(assignmentID);
+        for (int i = 1; i < assignmentList.size(); i++) {
+            if (assignmentID > assignmentList.get(i)) {
+                if (i == 1) {
+                    insertPosition = 0;
+                    break;
+                } else {
+                    assignmentList.remove(0);
+                    assignmentList.add(i, assignmentID);
+                    insertPosition = i;
+                    break;
+                }
+            } else if (assignmentID == assignmentList.get(i)) {
+                assignmentList.remove(0);
+                insertPosition = i - 1;
+                break;
+            }
+        }
+        assignmentArray.put(assignmentID, assignmentAssigned);
+        return insertPosition;
     }
 
     @Override
     public void putReply(AssignmentReply reply) {
+        if (reply == null) {
+            return;
+        }
+        int id = reply.getAssignmentID();
+        LinkedList<AssignmentReply> replyList = replyArray.get(id);
+        if (replyList == null) {
+            replyList = new LinkedList<>();
+            replyList.addLast(reply);
+            replyArray.put(id, replyList);
+        } else {
+            for (int i = 0; i < replyList.size(); i++) {
+                if (replyList.get(i).getStudentId() == reply.getStudentId()) {
+                    replyList.remove(i);
+                    replyList.addLast(reply);
+                    return;
+                }
+            }
+            replyList.addLast(reply);
+        }
 
     }
 
     @Override
+    public void putReplyList(int assignmentId, LinkedList<AssignmentReply> replyList) {
+        if (replyList == null) {
+            return;
+        }
+        //检查回复列表中所有回复 是否属于该条作业 否则删除
+        for (int i = 0; i < replyList.size(); i++) {
+            if (replyList.get(i).getAssignmentID() != assignmentId) {
+                replyList.remove(i);
+            }
+        }
+        replyArray.put(assignmentId, replyList);
+    }
+
+    @Override
     public void putFeedback(AssignmentFeedback feedback) {
-
+        if (feedback == null) {
+            return;
+        }
+        feedbackArray.put(feedback.getReplyId(), feedback);
     }
 
 
-    /**
-     * 移除指定班级 顶部的一条作业
-     * */
-    private void removeFirstElement(int classId){
-
+    private void removeFirstAssignment(int classId) {
+        List<Integer> assignmentIdList = assignmentIdArray.get(classId);
+        if (assignmentIdList.isEmpty()) {
+            return;
+        }
+        int assignmentId = assignmentIdList.remove(0);
+        assignmentArray.remove(assignmentId);
+        List<AssignmentReply> replies = replyArray.get(assignmentId);
+        replyArray.remove(assignmentId);
+        for (AssignmentReply reply : replies) {
+            feedbackArray.remove(reply.getReplyId());
+        }
     }
 
-    /**
-     * 移除指定班级 底部一条作业
-     * */
-    private void removeLastElement(int classId){
 
+    private void removeLastAssignment(int classId) {
+        List<Integer> assignmentIdList = assignmentIdArray.get(classId);
+        if (assignmentIdList.isEmpty()) {
+            return;
+        }
+        int assignmentId = assignmentIdList.remove(assignmentIdList.size() - 1);
+        assignmentArray.remove(assignmentId);
+        List<AssignmentReply> replies = replyArray.get(assignmentId);
+        replyArray.remove(assignmentId);
+        for (AssignmentReply reply : replies) {
+            feedbackArray.remove(reply.getReplyId());
+        }
     }
 
 
