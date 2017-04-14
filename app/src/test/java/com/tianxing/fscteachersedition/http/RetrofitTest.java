@@ -135,5 +135,8 @@ public class RetrofitTest {
 
         @GET("/")
         Observable<ResponseBody> getRx();
+
+        @GET("/")
+        Observable<Response<String>> getResponse();//只有网络出错才抛出异常
     }
 }

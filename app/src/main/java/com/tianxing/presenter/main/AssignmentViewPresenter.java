@@ -2,7 +2,7 @@ package com.tianxing.presenter.main;
 
 import android.util.Log;
 
-import com.tianxing.entity.transfer.receive.AssignmentDownload;
+import com.tianxing.pojo.transfer.receive.AssignmentDownload;
 import com.tianxing.model.App;
 import com.tianxing.deprecated.data.AssignmentPool;
 import com.tianxing.deprecated.HttpClient;

@@ -1,7 +1,7 @@
 package com.tianxing.deprecated.data;
 
-import com.tianxing.entity.ClassData;
-import com.tianxing.entity.ClassDataFactory;
+import com.tianxing.pojo.ClassData;
+import com.tianxing.pojo.ClassDataFactory;
 import com.tianxing.deprecated.entity.info.ClassInfo;
 
 import java.util.ArrayList;

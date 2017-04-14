@@ -2,7 +2,7 @@ package com.tianxing.model.communication.xmpp;
 
 import android.util.Log;
 
-import com.tianxing.entity.MessageFactory;
+import com.tianxing.pojo.MessageFactory;
 import com.tianxing.exception.UnconnectedException;
 
 import org.jivesoftware.smack.SmackException;

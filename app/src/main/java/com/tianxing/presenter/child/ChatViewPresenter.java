@@ -2,7 +2,7 @@ package com.tianxing.presenter.child;
 
 import android.util.Log;
 
-import com.tianxing.entity.MessageFactory;
+import com.tianxing.pojo.MessageFactory;
 import com.tianxing.deprecated.entity.message.ChatMessage;
 import com.tianxing.model.App;
 import com.tianxing.deprecated.data.MessagePool;

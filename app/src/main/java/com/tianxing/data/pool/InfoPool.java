@@ -6,4 +6,16 @@ package com.tianxing.data.pool;
  */
 
 public interface InfoPool extends DataPool{
+
+    /**
+     * 添加班级信息
+     * */
+
+    /**
+     * 添加学生信息
+     * */
+
+    /**
+     * 添加老师信息
+     * */
 }

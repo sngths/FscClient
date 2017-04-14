@@ -8,7 +8,7 @@ import retrofit2.Converter;
 
 /**
  * Created by tianxing on 2017/4/1.
- *
+ * 编码网络请求的上传数据
  */
 
 public class JsonRequestBodyConventer<T> implements Converter<T , RequestBody> {

@@ -1,6 +1,6 @@
 package com.tianxing.presenter.child.teacher;
 
-import com.tianxing.entity.transfer.receive.AssignmentDownload;
+import com.tianxing.pojo.transfer.receive.AssignmentDownload;
 import com.tianxing.deprecated.entity.info.ClassInfo;
 import com.tianxing.deprecated.entity.info.StudentInfo;
 

@@ -1,16 +1,12 @@
 package com.tianxing.fscteachersedition.data;
 
-import android.support.v4.util.SparseArrayCompat;
-import android.test.AndroidTestRunner;
-import android.util.SparseArray;
-
 import com.tianxing.data.DataManager;
 import com.tianxing.data.pool.AssignmentPool;
 import com.tianxing.data.pool.DataPoolManager;
-import com.tianxing.entity.assignment.AssignmentAssigned;
-import com.tianxing.entity.assignment.AssignmentFeedback;
-import com.tianxing.entity.assignment.AssignmentReply;
-import com.tianxing.entity.file.ImageFile;
+import com.tianxing.pojo.assignment.AssignmentAssigned;
+import com.tianxing.pojo.assignment.AssignmentFeedback;
+import com.tianxing.pojo.assignment.AssignmentReply;
+import com.tianxing.pojo.file.ImageFile;
 import com.tianxing.fscteachersedition.BuildConfig;
 
 import org.junit.Assert;

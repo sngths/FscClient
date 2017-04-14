@@ -1,6 +1,6 @@
 package com.tianxing.presenter.child;
 
-import com.tianxing.entity.MessageFactory;
+import com.tianxing.pojo.MessageFactory;
 import com.tianxing.deprecated.entity.message.GroupChatMessage;
 import com.tianxing.model.App;
 import com.tianxing.deprecated.data.MessagePool;

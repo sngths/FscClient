@@ -3,9 +3,9 @@ package com.tianxing.data.pool;
 
 import android.util.SparseArray;
 
-import com.tianxing.entity.assignment.AssignmentAssigned;
-import com.tianxing.entity.assignment.AssignmentFeedback;
-import com.tianxing.entity.assignment.AssignmentReply;
+import com.tianxing.pojo.assignment.AssignmentAssigned;
+import com.tianxing.pojo.assignment.AssignmentFeedback;
+import com.tianxing.pojo.assignment.AssignmentReply;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

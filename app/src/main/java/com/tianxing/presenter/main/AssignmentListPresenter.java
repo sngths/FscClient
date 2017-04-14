@@ -1,6 +1,6 @@
 package com.tianxing.presenter.main;
 
-import com.tianxing.entity.transfer.receive.AssignmentDownload;
+import com.tianxing.pojo.transfer.receive.AssignmentDownload;
 
 /**
  * Created by tianxing on 16/7/18.

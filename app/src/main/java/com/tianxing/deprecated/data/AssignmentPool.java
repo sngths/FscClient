@@ -1,6 +1,6 @@
 package com.tianxing.deprecated.data;
 
-import com.tianxing.entity.ClassData;
+import com.tianxing.pojo.ClassData;
 import com.tianxing.deprecated.entity.info.ClassInfo;
 
 /**

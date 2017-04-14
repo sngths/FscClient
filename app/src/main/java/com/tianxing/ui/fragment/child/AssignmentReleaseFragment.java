@@ -17,7 +17,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
-import com.tianxing.entity.transfer.send.AssignmentUpload;
+import com.tianxing.pojo.transfer.send.AssignmentUpload;
 import com.tianxing.deprecated.entity.http.json.ImageFile;
 import com.tianxing.deprecated.entity.info.ClassInfo;
 import com.tianxing.fscteachersedition.R;

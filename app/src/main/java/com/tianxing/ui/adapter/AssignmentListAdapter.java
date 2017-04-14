@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.tianxing.entity.transfer.receive.AssignmentDownload;
+import com.tianxing.pojo.transfer.receive.AssignmentDownload;
 import com.tianxing.deprecated.entity.http.json.ImageFile;
 import com.tianxing.fscteachersedition.R;
 import com.tianxing.presenter.main.AssignmentListPresenter;

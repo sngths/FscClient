@@ -1,5 +1,7 @@
 package com.tianxing.model.communication.http.converter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
@@ -17,12 +19,19 @@ public class JsonConverterFactory extends Converter.Factory {
 
 
 
-    private JsonConverterFactory(){
-
+    private JsonConverterFactory(ObjectMapper mapper){
+        if (mapper == null) throw new NullPointerException();
+        this.mapper = mapper;
     }
 
+    private final ObjectMapper mapper;
+
     public static JsonConverterFactory create(){
-        return new JsonConverterFactory();
+        return new JsonConverterFactory(new ObjectMapper());
+    }
+
+    public static JsonConverterFactory create(ObjectMapper mapper){
+        return new JsonConverterFactory(mapper);
     }
 
     @Override

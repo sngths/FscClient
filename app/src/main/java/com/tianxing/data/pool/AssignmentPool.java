@@ -1,11 +1,10 @@
 package com.tianxing.data.pool;
 
-import com.tianxing.entity.assignment.AssignmentAssigned;
-import com.tianxing.entity.assignment.AssignmentFeedback;
-import com.tianxing.entity.assignment.AssignmentReply;
+import com.tianxing.pojo.assignment.AssignmentAssigned;
+import com.tianxing.pojo.assignment.AssignmentFeedback;
+import com.tianxing.pojo.assignment.AssignmentReply;
 
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by tianxing on 2017/4/6.

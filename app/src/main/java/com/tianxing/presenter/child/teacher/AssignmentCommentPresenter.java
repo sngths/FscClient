@@ -1,8 +1,8 @@
 package com.tianxing.presenter.child.teacher;
 
 import com.tianxing.deprecated.entity.info.StudentInfo;
-import com.tianxing.entity.transfer.Comment;
-import com.tianxing.entity.transfer.receive.ReplyReceived;
+import com.tianxing.pojo.transfer.Comment;
+import com.tianxing.pojo.transfer.receive.ReplyReceived;
 
 import retrofit2.Response;
 import rx.Observable;

@@ -1,5 +1,8 @@
 package com.tianxing.model.communication.http.service;
 
+import com.tianxing.pojo.http.ResponseWrapper;
+
+import retrofit2.Response;
 import retrofit2.http.POST;
 import rx.Observable;
 
@@ -12,7 +15,7 @@ public interface AssignmentService extends Service{
 
 
     @POST("login")
-     <R> R get(R responseType, String s);
+     Observable<Response<ResponseWrapper>> login();
 
 
 
